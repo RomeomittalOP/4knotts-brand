@@ -44,7 +44,7 @@ function Customization() {
       }
 
       await axios.post(
-        "http://localhost:5000/api/customization",
+        "https://fourknotts-backend.onrender.com/api/customization",
         data
       );
 

@@ -27,7 +27,7 @@ function WholesalePage() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/wholesale",
+        "https://fourknotts-backend.onrender.com/api/wholesale",
         formData
       );
 
