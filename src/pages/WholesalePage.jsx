@@ -26,10 +26,10 @@ function WholesalePage() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://fourknotts-backend.onrender.com/api/wholesale",
-        formData
-      );
+     await axios.post(
+    "https://fourknotts-backend.onrender.com/api/wholesale",
+    formData
+  );
 
       setShowPopup(true);
 

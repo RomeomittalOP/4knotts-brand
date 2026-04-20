@@ -44,9 +44,9 @@ function Customization() {
       }
 
       await axios.post(
-        "https://fourknotts-backend.onrender.com/api/customization",
-        data
-      );
+    "https://fourknotts-backend.onrender.com/api/wholesale",
+    formData
+  );
 
       setShowPopup(true);
 
