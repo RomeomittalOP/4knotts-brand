@@ -23,7 +23,7 @@ app.use(
   })
 );
 
-app.options("*", cors());
+app.options(/.*/, cors());
 
 /* BODY PARSER */
 app.use(express.json());
@@ -41,7 +41,15 @@ app.use("/api/catalog", catalogRoutes);
 app.get("/", (req, res) => {
   res.send("4 KNOTTS Backend Running 🚀");
 });
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
+app.options(/.*/, cors());
 /* SERVER START */
 const PORT = process.env.PORT || 5000;
 
