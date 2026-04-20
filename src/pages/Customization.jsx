@@ -13,7 +13,7 @@ function Customization() {
     productType: "",
     quantity: "",
     size: "",
-    message: ""
+    message: "",
   });
 
   const [image, setImage] = useState(null);
@@ -21,7 +21,7 @@ function Customization() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -31,6 +31,8 @@ function Customization() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("CUSTOM FORM SUBMIT STARTED");
 
     try {
       const data = new FormData();
@@ -43,10 +45,17 @@ function Customization() {
         data.append("image", image);
       }
 
-      await axios.post(
-    "https://fourknotts-backend.onrender.com/api/wholesale",
-    formData
-  );
+      const res = await axios.post(
+        "https://fourknotts-backend.onrender.com/api/customization",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("SUCCESS:", res.data);
 
       setShowPopup(true);
 
@@ -62,12 +71,12 @@ function Customization() {
         productType: "",
         quantity: "",
         size: "",
-        message: ""
+        message: "",
       });
 
       setImage(null);
-
     } catch (error) {
+      console.log("ERROR:", error);
       alert("Submission Failed");
     }
   };
@@ -84,34 +93,32 @@ function Customization() {
         </h1>
 
         <div className="wholesale-grid">
-
-          {/* LEFT */}
+          {/* LEFT SIDE */}
           <div className="contact-side">
-
             <h4>CREATE YOUR IDEA</h4>
+
             <p>
               Premium custom notebooks,
+              <br />
               diaries, office stationery
+              <br />
               and branded packaging.
             </p>
 
             <h4>UPLOAD REFERENCE</h4>
+
             <p>
               Share logo, sample design,
+              <br />
               image or sketch.
             </p>
 
-            <div className="map-box">
-              CUSTOM MADE
-            </div>
-
+            <div className="map-box">CUSTOM MADE</div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDE */}
           <div className="form-side">
-
             <form onSubmit={handleSubmit}>
-
               <input
                 type="text"
                 name="name"
@@ -171,10 +178,7 @@ function Customization() {
                 onChange={handleChange}
               />
 
-              <input
-                type="file"
-                onChange={handleFile}
-              />
+              <input type="file" onChange={handleFile} />
 
               <textarea
                 name="message"
@@ -187,11 +191,8 @@ function Customization() {
               <button type="submit">
                 SUBMIT CUSTOM REQUEST →
               </button>
-
             </form>
-
           </div>
-
         </div>
       </section>
 
