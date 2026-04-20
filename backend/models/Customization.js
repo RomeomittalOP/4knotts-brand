@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const customizationSchema = new mongoose.Schema(
-{
+const customizationSchema = new mongoose.Schema({
   name: String,
   company: String,
   email: String,
@@ -11,11 +10,6 @@ const customizationSchema = new mongoose.Schema(
   size: String,
   message: String,
   image: String
-},
-{ timestamps: true }
-);
+}, { timestamps: true });
 
-module.exports = mongoose.model(
-  "Customization",
-  customizationSchema
-);
+module.exports = mongoose.model("Customization", customizationSchema);
