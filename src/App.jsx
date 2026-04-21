@@ -11,19 +11,25 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import WholesalePage from "./pages/WholesalePage";
 import Customization from "./pages/Customization";
+import ProductShowcase from "./components/ProductShowcase";
+import BrandStatement from "./components/BrandStatement";
 
-/* Premium Page Transition Wrapper */
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        {/* HOME PAGE */}
         <Route
           path="/"
           element={
             <PageTransition>
-              <Home />
+              <>
+                <Home />
+                <ProductShowcase />
+                <BrandStatement />
+              </>
             </PageTransition>
           }
         />
@@ -59,7 +65,6 @@ function AnimatedRoutes() {
   );
 }
 
-/* Animation Style */
 function PageTransition({ children }) {
   return (
     <motion.div

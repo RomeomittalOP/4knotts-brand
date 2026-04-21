@@ -836,3 +836,81 @@ a,button,div,img,input,textarea{
     transform: rotateY(360deg);
   }
 }
+@keyframes premiumWave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes goldShine {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===== PREMIUM HERO ANIMATIONS ===== */
+
+@keyframes heroWave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGlow {
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+@keyframes floatHero {
+  0%,100% {
+    transform: perspective(1200px) rotateY(-10deg) rotateX(5deg) translateY(0);
+  }
+
+  50% {
+    transform: perspective(1200px) rotateY(-6deg) rotateX(4deg) translateY(-18px);
+  }
+}

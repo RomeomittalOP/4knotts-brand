@@ -19,7 +19,8 @@
 
 .hero {
   position: relative;
-
+  background-image:
+  radial-gradient(circle at top right,#0d2a52 0%,#07111f 35%,#02060d 100%);
   .base,
   .framework,
   .vite {
