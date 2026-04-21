@@ -122,14 +122,13 @@ function Navbar() {
 }
 
 const styles = {
- header: {
+header: {
   position: "fixed",
   top: 0,
   left: 0,
   width: "100%",
   zIndex: 1000,
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
   padding: "16px 18px",
   backgroundColor: "rgba(2,4,11,0.92)",
@@ -137,7 +136,6 @@ const styles = {
   borderBottom: "1px solid rgba(255,255,255,0.06)",
   boxSizing: "border-box"
 },
-
   brandLink: {
     textDecoration: "none"
   },
@@ -227,9 +225,14 @@ menuBtn: {
   border: "none",
   fontSize: "34px",
   cursor: "pointer",
-  marginLeft: "auto",
   padding: "0",
-  lineHeight: "1"
+  lineHeight: "1",
+  width: "40px",
+  height: "40px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginLeft: "auto"
 },
 };
 
