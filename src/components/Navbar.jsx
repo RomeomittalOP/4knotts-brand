@@ -122,21 +122,21 @@ function Navbar() {
 }
 
 const styles = {
-  header: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: 1000,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 20px",
-    backgroundColor: "rgba(2,4,11,0.92)",
-    backdropFilter: "blur(10px)",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
-    boxSizing: "border-box"
-  },
+ header: {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  zIndex: 1000,
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "16px 18px",
+  backgroundColor: "rgba(2,4,11,0.92)",
+  backdropFilter: "blur(10px)",
+  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  boxSizing: "border-box"
+},
 
   brandLink: {
     textDecoration: "none"
@@ -221,14 +221,16 @@ const styles = {
     textAlign: "center"
   },
 
-  menuBtn: {
-    background: "transparent",
-    color: "white",
-    border: "none",
-    fontSize: "30px",
-    cursor: "pointer",
-    padding: 0
-  }
+menuBtn: {
+  background: "transparent",
+  color: "white",
+  border: "none",
+  fontSize: "34px",
+  cursor: "pointer",
+  marginLeft: "auto",
+  padding: "0",
+  lineHeight: "1"
+},
 };
 
 export default Navbar;
