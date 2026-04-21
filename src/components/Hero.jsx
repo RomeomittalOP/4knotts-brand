@@ -26,7 +26,7 @@ function Hero() {
 
         <h1 style={mobile ? styles.headingMobile : styles.heading}>
           Stationery <br />
-          <span style={styles.blue}>for life.</span>
+          <span style={styles.blueGlow}>for life.</span>
         </h1>
 
         <p style={mobile ? styles.descMobile : styles.desc}>
@@ -68,7 +68,8 @@ const styles = {
     alignItems: "center",
     gap: "40px",
     padding: "130px 60px 60px",
-    background: "#02040b",
+    background:
+"radial-gradient(circle at top left, rgba(95,126,255,.08), transparent 30%), linear-gradient(135deg,#02040b,#050913,#02040b)",
     color: "white"
   },
 
@@ -80,7 +81,8 @@ const styles = {
     alignItems: "center",
     gap: "40px",
     padding: "120px 22px 50px",
-    background: "#02040b",
+    background:
+"radial-gradient(circle at top left, rgba(95,126,255,.08), transparent 30%), linear-gradient(135deg,#02040b,#050913,#02040b)",
     color: "white",
     textAlign: "center",
     overflow: "hidden"
@@ -147,23 +149,25 @@ const styles = {
     width: "100%"
   },
 
-  primaryBtn: {
-    background: "#5f7eff",
-    color: "white",
-    textDecoration: "none",
-    padding: "16px 26px",
-    borderRadius: "4px",
-    textAlign: "center"
-  },
+  primaryBtn:{
+background:"linear-gradient(135deg,#6f8fff,#4d6fff)",
+color:"white",
+textDecoration:"none",
+padding:"16px 26px",
+borderRadius:"6px",
+textAlign:"center",
+boxShadow:"0 10px 25px rgba(95,126,255,.25)"
+},
 
-  outlineBtn: {
-    border: "1px solid rgba(255,255,255,.2)",
-    color: "white",
-    textDecoration: "none",
-    padding: "16px 26px",
-    borderRadius: "4px",
-    textAlign: "center"
-  },
+  outlineBtn:{
+border:"1px solid rgba(255,255,255,.18)",
+color:"white",
+textDecoration:"none",
+padding:"16px 26px",
+borderRadius:"6px",
+textAlign:"center",
+backdropFilter:"blur(8px)"
+},
 
   right: {
     position: "relative",
@@ -205,7 +209,12 @@ const styles = {
     position: "relative",
     zIndex: 2,
     objectFit: "contain"
-  }
+  },
+  blueGlow:{
+color:"#6f8fff",
+fontStyle:"italic",
+textShadow:"0 0 18px rgba(111,143,255,.35)"
+},
 };
 
 export default Hero;

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
 /* ===============================
    RESET + GLOBAL
 ================================= */
@@ -769,4 +771,55 @@ img{
 
 input,textarea,button{
   width:100%;
+}
+/* Google Fonts */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+  radial-gradient(circle at top left, rgba(111,143,255,.08), transparent 35%),
+  radial-gradient(circle at bottom right, rgba(255,255,255,.03), transparent 30%),
+  linear-gradient(135deg,#02040b,#050913,#02040b);
+
+  color:white;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+/* Premium grain texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+  repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255,255,255,.015) 2px, transparent 4px);
+  opacity:.35;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* Smooth transitions */
+a,button,div,img,input,textarea{
+  transition:all .35s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{
+  width:8px;
+}
+::-webkit-scrollbar-track{
+  background:#02040b;
+}
+::-webkit-scrollbar-thumb{
+  background:#5f7eff;
+  border-radius:20px;
 }
