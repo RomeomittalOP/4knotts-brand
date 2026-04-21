@@ -17,10 +17,14 @@ function Navbar() {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <header style={styles.header}>
       {/* Brand */}
-      <Link to="/" style={styles.brandLink}>
+      <Link to="/" style={styles.brandLink} onClick={closeMenu}>
         <div style={styles.brand}>
           <img
             src={logo}
@@ -48,34 +52,70 @@ function Navbar() {
         </button>
       )}
 
-      {/* Nav */}
-      {(!mobile || menuOpen) && (
-        <nav style={mobile ? styles.mobileNav : styles.nav}>
-          <Link to="/" style={styles.link}>Home</Link>
+      {/* Desktop Nav */}
+      {!mobile && (
+        <>
+          <nav style={styles.nav}>
+            <Link to="/" style={styles.link}>Home</Link>
 
-          <Link to="/catalog" style={styles.link}>
+            <Link to="/catalog" style={styles.link}>
+              Catalog
+            </Link>
+
+            <Link to="/wholesale" style={styles.link}>
+              Wholesale
+            </Link>
+
+            <Link to="/customization" style={styles.link}>
+              Customization
+            </Link>
+          </nav>
+
+          <Link to="/catalog" style={styles.btn}>
+            Request Catalogue →
+          </Link>
+        </>
+      )}
+
+      {/* Mobile Nav */}
+      {mobile && menuOpen && (
+        <nav style={styles.mobileNav}>
+          <Link to="/" style={styles.link} onClick={closeMenu}>
+            Home
+          </Link>
+
+          <Link
+            to="/catalog"
+            style={styles.link}
+            onClick={closeMenu}
+          >
             Catalog
           </Link>
 
-          <Link to="/wholesale" style={styles.link}>
+          <Link
+            to="/wholesale"
+            style={styles.link}
+            onClick={closeMenu}
+          >
             Wholesale
           </Link>
 
-          <Link to="/customization" style={styles.link}>
+          <Link
+            to="/customization"
+            style={styles.link}
+            onClick={closeMenu}
+          >
             Customization
           </Link>
 
-          <Link to="/catalog" style={styles.mobileBtn}>
+          <Link
+            to="/catalog"
+            style={styles.mobileBtn}
+            onClick={closeMenu}
+          >
             Request Catalogue
           </Link>
         </nav>
-      )}
-
-      {/* Desktop Button */}
-      {!mobile && (
-        <Link to="/catalog" style={styles.btn}>
-          Request Catalogue →
-        </Link>
       )}
     </header>
   );
@@ -95,8 +135,7 @@ const styles = {
     backgroundColor: "rgba(2,4,11,0.92)",
     backdropFilter: "blur(10px)",
     borderBottom: "1px solid rgba(255,255,255,0.06)",
-    boxSizing: "border-box",
-    flexWrap: "wrap"
+    boxSizing: "border-box"
   },
 
   brandLink: {
@@ -142,12 +181,18 @@ const styles = {
   },
 
   mobileNav: {
+    position: "absolute",
+    top: "78px",
+    left: 0,
     width: "100%",
+    backgroundColor: "rgba(2,4,11,0.97)",
     display: "flex",
     flexDirection: "column",
-    gap: "14px",
-    marginTop: "18px",
-    paddingBottom: "10px"
+    gap: "18px",
+    padding: "20px",
+    borderTop: "1px solid rgba(255,255,255,0.06)",
+    zIndex: 999,
+    boxSizing: "border-box"
   },
 
   link: {
@@ -180,8 +225,9 @@ const styles = {
     background: "transparent",
     color: "white",
     border: "none",
-    fontSize: "28px",
-    cursor: "pointer"
+    fontSize: "30px",
+    cursor: "pointer",
+    padding: 0
   }
 };
 
