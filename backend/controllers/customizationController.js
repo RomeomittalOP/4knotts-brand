@@ -1,4 +1,7 @@
+// backend/controllers/customizationController.js
+
 const Customization = require("../models/Customization");
+const sendEmail = require("../utils/sendEmail");
 
 const submitCustomization = async (req, res) => {
   try {
@@ -15,6 +18,18 @@ const submitCustomization = async (req, res) => {
     });
 
     await newCustomization.save();
+
+    await sendEmail(
+      req.body.email,
+      "Your Custom Request Has Been Received",
+      `
+      <h2>Thank You ${req.body.name}</h2>
+      <p>Your customization request has been received successfully.</p>
+      <p>Our team will review it and contact you soon.</p>
+      <br/>
+      <b>4 KNOTTS Stationery</b>
+      `
+    );
 
     res.status(200).json({
       success: true,
