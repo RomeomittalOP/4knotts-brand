@@ -1,11 +1,25 @@
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Navbar() {
+  const [mobile, setMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setMobile(window.innerWidth <= 768);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   return (
     <header style={styles.header}>
-
-      {/* Brand Click = Home */}
+      {/* Brand */}
       <Link to="/" style={styles.brandLink}>
         <div style={styles.brand}>
           <img
@@ -15,36 +29,54 @@ function Navbar() {
           />
 
           <div>
-            <h2 style={styles.title}>4 KNOTTS</h2>
+            <h2 style={mobile ? styles.titleMobile : styles.title}>
+              4 KNOTTS
+            </h2>
+
             <p style={styles.sub}>STATIONERY</p>
           </div>
         </div>
       </Link>
 
+      {/* Mobile Menu Button */}
+      {mobile && (
+        <button
+          style={styles.menuBtn}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+      )}
+
       {/* Nav */}
-      <nav style={styles.nav}>
-        <Link to="/" style={styles.link}>
-          Home
+      {(!mobile || menuOpen) && (
+        <nav style={mobile ? styles.mobileNav : styles.nav}>
+          <Link to="/" style={styles.link}>Home</Link>
+
+          <Link to="/catalog" style={styles.link}>
+            Catalog
+          </Link>
+
+          <Link to="/wholesale" style={styles.link}>
+            Wholesale
+          </Link>
+
+          <Link to="/customization" style={styles.link}>
+            Customization
+          </Link>
+
+          <Link to="/catalog" style={styles.mobileBtn}>
+            Request Catalogue
+          </Link>
+        </nav>
+      )}
+
+      {/* Desktop Button */}
+      {!mobile && (
+        <Link to="/catalog" style={styles.btn}>
+          Request Catalogue →
         </Link>
-
-        <Link to="/catalog" style={styles.link}>
-          Catalog
-        </Link>
-
-        <Link to="/wholesale" style={styles.link}>
-          Wholesale & Contact
-        </Link>
-
-        <Link to="/customization" style={styles.link}>
-          Customization
-        </Link>
-      </nav>
-
-      {/* Button */}
-      <Link to="/catalog" style={styles.btn}>
-        Request Catalogue →
-      </Link>
-
+      )}
     </header>
   );
 }
@@ -59,11 +91,12 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "18px 60px",
-    backgroundColor: "rgba(2,4,11,0.86)",
+    padding: "16px 20px",
+    backgroundColor: "rgba(2,4,11,0.92)",
     backdropFilter: "blur(10px)",
     borderBottom: "1px solid rgba(255,255,255,0.06)",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    flexWrap: "wrap"
   },
 
   brandLink: {
@@ -73,50 +106,82 @@ const styles = {
   brand: {
     display: "flex",
     alignItems: "center",
-    gap: "14px",
+    gap: "12px",
     cursor: "pointer"
   },
 
   title: {
     margin: 0,
     color: "#ffffff",
-    fontSize: "32px",
+    fontSize: "30px",
     fontWeight: "600",
     fontFamily: "'Cinzel', serif",
-    letterSpacing: "1px",
+    lineHeight: "1"
+  },
+
+  titleMobile: {
+    margin: 0,
+    color: "#ffffff",
+    fontSize: "22px",
+    fontWeight: "600",
+    fontFamily: "'Cinzel', serif",
     lineHeight: "1"
   },
 
   sub: {
     margin: "4px 0 0 0",
     color: "#9ca3af",
-    fontSize: "11px",
-    letterSpacing: "4px",
-    textTransform: "uppercase"
+    fontSize: "10px",
+    letterSpacing: "3px"
   },
 
   nav: {
     display: "flex",
-    gap: "28px",
+    gap: "24px",
     alignItems: "center"
+  },
+
+  mobileNav: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+    marginTop: "18px",
+    paddingBottom: "10px"
   },
 
   link: {
     color: "white",
     textDecoration: "none",
-    fontSize: "13px",
-    letterSpacing: "2px",
-    whiteSpace: "nowrap"
+    fontSize: "14px",
+    letterSpacing: "1px"
   },
 
   btn: {
     color: "white",
     textDecoration: "none",
     border: "1px solid rgba(255,255,255,0.15)",
-    padding: "12px 18px",
+    padding: "10px 16px",
     fontSize: "12px",
-    letterSpacing: "2px",
+    letterSpacing: "1px",
     whiteSpace: "nowrap"
+  },
+
+  mobileBtn: {
+    color: "white",
+    textDecoration: "none",
+    border: "1px solid rgba(255,255,255,0.15)",
+    padding: "10px 16px",
+    fontSize: "12px",
+    textAlign: "center"
+  },
+
+  menuBtn: {
+    background: "transparent",
+    color: "white",
+    border: "none",
+    fontSize: "28px",
+    cursor: "pointer"
   }
 };
 
