@@ -13,15 +13,15 @@ function Legacy() {
         </h2>
 
         <p>
-          Founded in Delhi, 4 KNOTTS began as a family-led
-          stationery business focused on quality notebooks,
-          registers and office essentials.
+          The Standard, Re-Engineered.4Knotts is a contemporary design house dedicated to the fusion
+           of high-performance utility and cultural identity. We specialize in the engineering of
+            premium 120 GSM registers and executive tools, delivering the definitive tactile medium
+             for the modern visionary. 
         </p>
 
         <p>
-          Today, we supply premium spiral notebooks,
-          executive diaries, A4 products and custom
-          stationery solutions across India.
+         Every product is a statement of precision, built to serve those who demand excellence in 
+         every layer.
         </p>
       </div>
 

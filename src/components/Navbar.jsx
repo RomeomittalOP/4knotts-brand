@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 function Navbar() {
   const [mobile, setMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState("");
 
   useEffect(() => {
     const checkScreen = () => {
@@ -22,14 +23,14 @@ function Navbar() {
   };
 
   return (
-    <header style={styles.header}>
+    <header style={mobile ? styles.headerMobile : styles.header}>
       {/* Brand */}
       <Link to="/" style={styles.brandLink} onClick={closeMenu}>
         <div style={styles.brand}>
           <img
             src={logo}
             alt="4 Knotts Logo"
-            className="brand-logo"
+            style={styles.logo}
           />
 
           <div>
@@ -56,17 +57,55 @@ function Navbar() {
       {!mobile && (
         <>
           <nav style={styles.nav}>
-            <Link to="/" style={styles.link}>Home</Link>
+            <Link
+              to="/"
+              style={
+                hovered === "home"
+                  ? styles.linkHover
+                  : styles.link
+              }
+              onMouseEnter={() => setHovered("home")}
+              onMouseLeave={() => setHovered("")}
+            >
+              Home
+            </Link>
 
-            <Link to="/catalog" style={styles.link}>
+            <Link
+              to="/catalog"
+              style={
+                hovered === "catalog"
+                  ? styles.linkHover
+                  : styles.link
+              }
+              onMouseEnter={() => setHovered("catalog")}
+              onMouseLeave={() => setHovered("")}
+            >
               Catalog
             </Link>
 
-            <Link to="/wholesale" style={styles.link}>
+            <Link
+              to="/wholesale"
+              style={
+                hovered === "wholesale"
+                  ? styles.linkHover
+                  : styles.link
+              }
+              onMouseEnter={() => setHovered("wholesale")}
+              onMouseLeave={() => setHovered("")}
+            >
               Wholesale
             </Link>
 
-            <Link to="/customization" style={styles.link}>
+            <Link
+              to="/customization"
+              style={
+                hovered === "custom"
+                  ? styles.linkHover
+                  : styles.link
+              }
+              onMouseEnter={() => setHovered("custom")}
+              onMouseLeave={() => setHovered("")}
+            >
               Customization
             </Link>
           </nav>
@@ -80,13 +119,17 @@ function Navbar() {
       {/* Mobile Nav */}
       {mobile && menuOpen && (
         <nav style={styles.mobileNav}>
-          <Link to="/" style={styles.link} onClick={closeMenu}>
+          <Link
+            to="/"
+            style={styles.mobileLink}
+            onClick={closeMenu}
+          >
             Home
           </Link>
 
           <Link
             to="/catalog"
-            style={styles.link}
+            style={styles.mobileLink}
             onClick={closeMenu}
           >
             Catalog
@@ -94,7 +137,7 @@ function Navbar() {
 
           <Link
             to="/wholesale"
-            style={styles.link}
+            style={styles.mobileLink}
             onClick={closeMenu}
           >
             Wholesale
@@ -102,7 +145,7 @@ function Navbar() {
 
           <Link
             to="/customization"
-            style={styles.link}
+            style={styles.mobileLink}
             onClick={closeMenu}
           >
             Customization
@@ -122,21 +165,38 @@ function Navbar() {
 }
 
 const styles = {
-header: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "100%",
-  zIndex: 1000,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "18px 60px",
-  backgroundColor: "rgba(2,4,11,0.92)",
-  backdropFilter: "blur(10px)",
-  borderBottom: "1px solid rgba(255,255,255,0.06)",
-  boxSizing: "border-box"
-},
+  header: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    zIndex: 1000,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "18px 60px",
+    background: "rgba(2,4,11,0.88)",
+    backdropFilter: "blur(14px)",
+    borderBottom: "1px solid rgba(255,255,255,0.05)",
+    boxSizing: "border-box"
+  },
+
+  headerMobile: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    zIndex: 1000,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px 20px",
+    background: "rgba(2,4,11,0.92)",
+    backdropFilter: "blur(14px)",
+    borderBottom: "1px solid rgba(255,255,255,0.05)",
+    boxSizing: "border-box"
+  },
+
   brandLink: {
     textDecoration: "none"
   },
@@ -144,8 +204,15 @@ header: {
   brand: {
     display: "flex",
     alignItems: "center",
-    gap: "12px",
-    cursor: "pointer"
+    gap: "12px"
+  },
+
+  logo: {
+    width: "52px",
+    height: "52px",
+    borderRadius: "12px",
+    animation: "logoFlip 10s ease-in-out infinite",
+    boxShadow: "0 0 18px rgba(95,126,255,.18)"
   },
 
   title: {
@@ -175,8 +242,36 @@ header: {
 
   nav: {
     display: "flex",
-    gap: "24px",
+    gap: "28px",
     alignItems: "center"
+  },
+
+  link: {
+    color: "white",
+    textDecoration: "none",
+    fontSize: "14px",
+    letterSpacing: "1px",
+    transition: "all .3s ease"
+  },
+
+  linkHover: {
+    color: "#6f8fff",
+    textDecoration: "none",
+    fontSize: "14px",
+    letterSpacing: "1px",
+    transform: "translateY(-2px)",
+    transition: "all .3s ease"
+  },
+
+  btn: {
+    color: "white",
+    textDecoration: "none",
+    border: "1px solid rgba(255,255,255,0.15)",
+    padding: "11px 18px",
+    fontSize: "12px",
+    borderRadius: "6px",
+    letterSpacing: "1px",
+    whiteSpace: "nowrap"
   },
 
   mobileNav: {
@@ -184,57 +279,45 @@ header: {
     top: "78px",
     left: 0,
     width: "100%",
-    backgroundColor: "rgba(2,4,11,0.97)",
+    background: "rgba(2,4,11,0.96)",
     display: "flex",
     flexDirection: "column",
     gap: "18px",
-    padding: "20px",
+    padding: "24px",
     borderTop: "1px solid rgba(255,255,255,0.06)",
     zIndex: 999,
     boxSizing: "border-box"
   },
 
-  link: {
+  mobileLink: {
     color: "white",
     textDecoration: "none",
-    fontSize: "14px",
-    letterSpacing: "1px"
-  },
-
-  btn: {
-    color: "white",
-    textDecoration: "none",
-    border: "1px solid rgba(255,255,255,0.15)",
-    padding: "10px 16px",
-    fontSize: "12px",
-    letterSpacing: "1px",
-    whiteSpace: "nowrap"
+    fontSize: "15px"
   },
 
   mobileBtn: {
     color: "white",
     textDecoration: "none",
     border: "1px solid rgba(255,255,255,0.15)",
-    padding: "10px 16px",
-    fontSize: "12px",
-    textAlign: "center"
+    padding: "12px 16px",
+    fontSize: "13px",
+    textAlign: "center",
+    borderRadius: "6px",
+    marginTop: "8px"
   },
 
-menuBtn: {
-  background: "transparent",
-  color: "white",
-  border: "none",
-  fontSize: "34px",
-  cursor: "pointer",
-  padding: "0",
-  lineHeight: "1",
-  width: "40px",
-  height: "40px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginLeft: "auto"
-},
+  menuBtn: {
+    background: "transparent",
+    color: "white",
+    border: "none",
+    fontSize: "34px",
+    cursor: "pointer",
+    width: "40px",
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 };
 
 export default Navbar;

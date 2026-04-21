@@ -823,3 +823,16 @@ a,button,div,img,input,textarea{
   background:#5f7eff;
   border-radius:20px;
 }
+@keyframes logoFlip {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  8% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}

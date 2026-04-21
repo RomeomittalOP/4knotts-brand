@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 function Hero() {
   const [mobile, setMobile] = useState(false);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     const checkScreen = () => {
@@ -21,7 +22,7 @@ function Hero() {
       {/* LEFT */}
       <div style={styles.left}>
         <p style={styles.tag}>
-          DELHI • PREMIUM STATIONERY • SINCE 1978
+          DELHI • PREMIUM STATIONERY • SINCE 2026
         </p>
 
         <h1 style={mobile ? styles.headingMobile : styles.heading}>
@@ -48,12 +49,20 @@ function Hero() {
 
       {/* RIGHT */}
       <div style={styles.right}>
-        <div style={mobile ? styles.boxMobile : styles.box}></div>
+        <div style={mobile ? styles.glowMobile : styles.glow}></div>
 
         <img
           src={heroImage}
-          alt="4 Knotts Products"
-          style={mobile ? styles.imageMobile : styles.image}
+          alt="4 Knotts Mascot"
+          style={
+            mobile
+              ? styles.imageMobile
+              : hover
+              ? styles.imageHover
+              : styles.image
+          }
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
         />
       </div>
     </section>
@@ -69,8 +78,9 @@ const styles = {
     gap: "40px",
     padding: "130px 60px 60px",
     background:
-"radial-gradient(circle at top left, rgba(95,126,255,.08), transparent 30%), linear-gradient(135deg,#02040b,#050913,#02040b)",
-    color: "white"
+      "radial-gradient(circle at top right,#0d2a52 0%,#07111f 35%,#02060d 100%)",
+    color: "white",
+    overflow: "hidden"
   },
 
   heroMobile: {
@@ -79,10 +89,10 @@ const styles = {
     flexDirection: "column-reverse",
     justifyContent: "center",
     alignItems: "center",
-    gap: "40px",
+    gap: "30px",
     padding: "120px 22px 50px",
     background:
-"radial-gradient(circle at top left, rgba(95,126,255,.08), transparent 30%), linear-gradient(135deg,#02040b,#050913,#02040b)",
+      "radial-gradient(circle at top right,#0d2a52 0%,#07111f 35%,#02060d 100%)",
     color: "white",
     textAlign: "center",
     overflow: "hidden"
@@ -115,11 +125,6 @@ const styles = {
     fontFamily: "Cormorant Garamond"
   },
 
-  blue: {
-    color: "#6f8fff",
-    fontStyle: "italic"
-  },
-
   desc: {
     marginTop: "28px",
     maxWidth: "620px",
@@ -149,25 +154,25 @@ const styles = {
     width: "100%"
   },
 
-  primaryBtn:{
-background:"linear-gradient(135deg,#6f8fff,#4d6fff)",
-color:"white",
-textDecoration:"none",
-padding:"16px 26px",
-borderRadius:"6px",
-textAlign:"center",
-boxShadow:"0 10px 25px rgba(95,126,255,.25)"
-},
+  primaryBtn: {
+    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
+    color: "white",
+    textDecoration: "none",
+    padding: "16px 26px",
+    borderRadius: "8px",
+    textAlign: "center",
+    boxShadow: "0 10px 25px rgba(95,126,255,.25)"
+  },
 
-  outlineBtn:{
-border:"1px solid rgba(255,255,255,.18)",
-color:"white",
-textDecoration:"none",
-padding:"16px 26px",
-borderRadius:"6px",
-textAlign:"center",
-backdropFilter:"blur(8px)"
-},
+  outlineBtn: {
+    border: "1px solid rgba(255,255,255,.18)",
+    color: "white",
+    textDecoration: "none",
+    padding: "16px 26px",
+    borderRadius: "8px",
+    textAlign: "center",
+    backdropFilter: "blur(8px)"
+  },
 
   right: {
     position: "relative",
@@ -177,29 +182,50 @@ backdropFilter:"blur(8px)"
     width: "100%"
   },
 
-  box: {
+  glow: {
     width: "520px",
     height: "520px",
-    background: "linear-gradient(135deg,#364055,#071120)",
+    borderRadius: "50%",
     position: "absolute",
-    borderRadius: "8px"
+    background:
+      "radial-gradient(circle, rgba(80,130,255,.25), transparent 65%)",
+    filter: "blur(25px)"
   },
 
-  boxMobile: {
+  glowMobile: {
     width: "280px",
     height: "280px",
-    background: "linear-gradient(135deg,#364055,#071120)",
+    borderRadius: "50%",
     position: "absolute",
-    borderRadius: "8px"
+    background:
+      "radial-gradient(circle, rgba(80,130,255,.25), transparent 65%)",
+    filter: "blur(25px)"
   },
 
   image: {
     width: "100%",
-    maxWidth: "620px",
+    maxWidth: "540px",
     height: "auto",
     position: "relative",
     zIndex: 2,
-    objectFit: "contain"
+    objectFit: "contain",
+    transform:
+      "perspective(1200px) rotateY(-12deg) rotateX(5deg)",
+    filter: "drop-shadow(0 30px 40px rgba(0,0,0,.45))",
+    transition: "all .4s ease"
+  },
+
+  imageHover: {
+    width: "100%",
+    maxWidth: "540px",
+    height: "auto",
+    position: "relative",
+    zIndex: 2,
+    objectFit: "contain",
+    transform:
+      "perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.03)",
+    filter: "drop-shadow(0 35px 50px rgba(0,0,0,.5))",
+    transition: "all .4s ease"
   },
 
   imageMobile: {
@@ -208,13 +234,15 @@ backdropFilter:"blur(8px)"
     height: "auto",
     position: "relative",
     zIndex: 2,
-    objectFit: "contain"
+    objectFit: "contain",
+    filter: "drop-shadow(0 20px 30px rgba(0,0,0,.4))"
   },
-  blueGlow:{
-color:"#6f8fff",
-fontStyle:"italic",
-textShadow:"0 0 18px rgba(111,143,255,.35)"
-},
+
+  blueGlow: {
+    color: "#6f8fff",
+    fontStyle: "italic",
+    textShadow: "0 0 18px rgba(111,143,255,.35)"
+  }
 };
 
 export default Hero;

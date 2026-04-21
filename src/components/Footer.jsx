@@ -9,7 +9,7 @@ function Footer() {
         <p>
           Premium stationery manufacturer delivering notebooks,
           spirals, executive diaries and office essentials
-          since 1978.
+          since 2026.
         </p>
 
       </div>
