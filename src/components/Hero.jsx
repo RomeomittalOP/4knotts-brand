@@ -1,85 +1,137 @@
 import heroImage from "../assets/products/hero.png";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 function Hero() {
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setMobile(window.innerWidth <= 768);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   return (
-    <section style={styles.hero}>
+    <section style={mobile ? styles.heroMobile : styles.hero}>
+      {/* LEFT */}
       <div style={styles.left}>
         <p style={styles.tag}>
           DELHI • PREMIUM STATIONERY • SINCE 1978
         </p>
 
-        <h1 style={styles.heading}>
+        <h1 style={mobile ? styles.headingMobile : styles.heading}>
           Stationery <br />
           <span style={styles.blue}>for life.</span>
         </h1>
 
-        <p style={styles.desc}>
+        <p style={mobile ? styles.descMobile : styles.desc}>
           Premium spiral notebooks, executive collections,
           A4 designs and office essentials crafted for
           schools, corporates and serious brands.
         </p>
 
-        <div style={styles.buttons}>
-          <a href="#" style={styles.primaryBtn}>
+        <div style={mobile ? styles.buttonsMobile : styles.buttons}>
+          <Link to="/catalog" style={styles.primaryBtn}>
             Explore Catalog
-          </a>
+          </Link>
 
-          <a href="#" style={styles.outlineBtn}>
+          <Link to="/wholesale" style={styles.outlineBtn}>
             Start Enquiry
-          </a>
+          </Link>
         </div>
       </div>
 
+      {/* RIGHT */}
       <div style={styles.right}>
-        <div style={styles.box}></div>
+        <div style={mobile ? styles.boxMobile : styles.box}></div>
 
-        <img src={heroImage} style={styles.image} />
+        <img
+          src={heroImage}
+          alt="4 Knotts Products"
+          style={mobile ? styles.imageMobile : styles.image}
+        />
       </div>
     </section>
   );
 }
 
 const styles = {
-  hero:{
-minHeight:"100vh",
-display:"grid",
-gridTemplateColumns:"1.1fr .9fr",
-alignItems:"center",
-gap:"40px",
-padding:"130px 60px 60px",
-background:"#02040b",
-color:"white"
-},
+  hero: {
+    minHeight: "100vh",
+    display: "grid",
+    gridTemplateColumns: "1.1fr .9fr",
+    alignItems: "center",
+    gap: "40px",
+    padding: "130px 60px 60px",
+    background: "#02040b",
+    color: "white"
+  },
 
-  left: {},
+  heroMobile: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column-reverse",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "40px",
+    padding: "120px 22px 50px",
+    background: "#02040b",
+    color: "white",
+    textAlign: "center",
+    overflow: "hidden"
+  },
+
+  left: {
+    width: "100%"
+  },
 
   tag: {
     color: "#6f8fff",
-    letterSpacing: "4px",
+    letterSpacing: "3px",
     fontSize: "12px",
-    marginBottom: "25px"
+    marginBottom: "22px"
   },
 
-  heading:{
-fontSize:"clamp(62px, 9vw, 128px)",
-lineHeight:".9",
-fontWeight:"300",
-margin:0,
-fontFamily:"Cormorant Garamond"
-},
+  heading: {
+    fontSize: "clamp(62px, 9vw, 128px)",
+    lineHeight: ".9",
+    fontWeight: "300",
+    margin: 0,
+    fontFamily: "Cormorant Garamond"
+  },
+
+  headingMobile: {
+    fontSize: "58px",
+    lineHeight: "0.95",
+    fontWeight: "300",
+    margin: 0,
+    fontFamily: "Cormorant Garamond"
+  },
 
   blue: {
     color: "#6f8fff",
     fontStyle: "italic"
   },
 
-  desc:{
-marginTop:"28px",
-maxWidth:"620px",
-color:"#b8b8b8",
-fontSize:"clamp(16px,2vw,21px)",
-lineHeight:"1.8",
-fontFamily:"Inter"
-},
+  desc: {
+    marginTop: "28px",
+    maxWidth: "620px",
+    color: "#b8b8b8",
+    fontSize: "20px",
+    lineHeight: "1.8"
+  },
+
+  descMobile: {
+    marginTop: "22px",
+    color: "#b8b8b8",
+    fontSize: "15px",
+    lineHeight: "1.8"
+  },
 
   buttons: {
     display: "flex",
@@ -87,59 +139,73 @@ fontFamily:"Inter"
     marginTop: "40px"
   },
 
+  buttonsMobile: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+    marginTop: "28px",
+    width: "100%"
+  },
+
   primaryBtn: {
     background: "#5f7eff",
-    padding: "18px 28px"
+    color: "white",
+    textDecoration: "none",
+    padding: "16px 26px",
+    borderRadius: "4px",
+    textAlign: "center"
   },
 
   outlineBtn: {
     border: "1px solid rgba(255,255,255,.2)",
-    padding: "18px 28px"
+    color: "white",
+    textDecoration: "none",
+    padding: "16px 26px",
+    borderRadius: "4px",
+    textAlign: "center"
   },
 
   right: {
     position: "relative",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%"
   },
 
   box: {
     width: "520px",
     height: "520px",
-    background:
-      "linear-gradient(135deg,#364055,#071120)",
-    position: "absolute"
+    background: "linear-gradient(135deg,#364055,#071120)",
+    position: "absolute",
+    borderRadius: "8px"
+  },
+
+  boxMobile: {
+    width: "280px",
+    height: "280px",
+    background: "linear-gradient(135deg,#364055,#071120)",
+    position: "absolute",
+    borderRadius: "8px"
   },
 
   image: {
-    width: "620px",
+    width: "100%",
+    maxWidth: "620px",
+    height: "auto",
     position: "relative",
-    zIndex: 2
+    zIndex: 2,
+    objectFit: "contain"
   },
-  bg:{
-width:"100%",
-maxWidth:"540px",
-aspectRatio:"1/1",
-background:"linear-gradient(135deg,#3a465d,#07111e)",
-position:"absolute"
-},
-image:{
-width:"100%",
-maxWidth:"620px",
-height:"auto",
-position:"relative",
-zIndex:2,
-objectFit:"contain",
-filter:"drop-shadow(0 30px 40px rgba(0,0,0,.45))"
-},
-right:{
-position:"relative",
-display:"flex",
-justifyContent:"center",
-alignItems:"center",
-minWidth:"0"
-}
 
+  imageMobile: {
+    width: "100%",
+    maxWidth: "320px",
+    height: "auto",
+    position: "relative",
+    zIndex: 2,
+    objectFit: "contain"
+  }
 };
 
 export default Hero;
