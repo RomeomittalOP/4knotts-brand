@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function Catalog() {
   const [active, setActive] = useState("ALL");
@@ -40,53 +42,59 @@ function Catalog() {
       : products.filter((item) => item.category === active);
 
   return (
-    <section className="catalog-page">
-      {/* Back Home Button */}
-      <Link to="/" style={styles.backBtn}>
-        ← Home
-      </Link>
+    <>
+      <Navbar />
 
-      <p className="mini">WHOLESALE CATALOGUE • 2026</p>
+      <section className="catalog-page">
+        {/* Back Home Button */}
+        <Link to="/" style={styles.backBtn}>
+          ← Home
+        </Link>
 
-      <h1>
-        The <span>complete</span>
-        <br />
-        collection.
-      </h1>
+        <p className="mini">WHOLESALE CATALOGUE • 2026</p>
 
-      <div className="filters">
-        {filters.map((item, index) => (
-          <button
-            key={index}
-            className={active === item ? "active-filter" : ""}
-            onClick={() => setActive(item)}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
+        <h1>
+          The <span>complete</span>
+          <br />
+          collection.
+        </h1>
 
-      <div className="catalog-grid">
-        {filteredProducts.map((item, index) => (
-          <div className="product-card" key={index}>
-            <div className="product-image"></div>
+        <div className="filters">
+          {filters.map((item, index) => (
+            <button
+              key={index}
+              className={active === item ? "active-filter" : ""}
+              onClick={() => setActive(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
 
-            <h3>{item.title}</h3>
+        <div className="catalog-grid">
+          {filteredProducts.map((item, index) => (
+            <div className="product-card" key={index}>
+              <div className="product-image"></div>
 
-            <p>{item.category}</p>
+              <h3>{item.title}</h3>
 
-            <h4>$XXXX</h4>
-          </div>
-        ))}
-      </div>
-    </section>
+              <p>{item.category}</p>
+
+              <h4>₹XXXX</h4>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Footer />
+    </>
   );
 }
 
 const styles = {
   backBtn: {
     position: "fixed",
-    top: "18px",
+    top: "90px",
     left: "18px",
     zIndex: 999,
     color: "white",
@@ -97,7 +105,7 @@ const styles = {
     letterSpacing: "1px",
     background: "rgba(2,4,11,0.88)",
     backdropFilter: "blur(8px)",
-    borderRadius: "4px"
+    borderRadius: "6px"
   }
 };
 

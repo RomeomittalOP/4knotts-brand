@@ -1,3 +1,7 @@
+// FILE: src/App.jsx
+// FULL FILE REPLACE KAR DO
+// Login / Signup / Dashboard routes add ho gaye
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -5,12 +9,22 @@ import {
   useLocation
 } from "react-router-dom";
 
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion
+} from "framer-motion";
+
+import AuthProvider from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import WholesalePage from "./pages/WholesalePage";
 import Customization from "./pages/Customization";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+
 import ProductShowcase from "./components/ProductShowcase";
 import BrandStatement from "./components/BrandStatement";
 
@@ -19,8 +33,11 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        {/* HOME PAGE */}
+      <Routes
+        location={location}
+        key={location.pathname}
+      >
+        {/* HOME */}
         <Route
           path="/"
           element={
@@ -34,6 +51,7 @@ function AnimatedRoutes() {
           }
         />
 
+        {/* OTHER PAGES */}
         <Route
           path="/catalog"
           element={
@@ -60,12 +78,45 @@ function AnimatedRoutes() {
             </PageTransition>
           }
         />
+
+        {/* AUTH */}
+        <Route
+          path="/login"
+          element={
+            <PageTransition>
+              <Login />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/signup"
+          element={
+            <PageTransition>
+              <Signup />
+            </PageTransition>
+          }
+        />
+
+        {/* PROTECTED */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <Dashboard />
+              </PageTransition>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
 }
 
-function PageTransition({ children }) {
+function PageTransition({
+  children
+}) {
   return (
     <motion.div
       initial={{
@@ -96,7 +147,9 @@ function PageTransition({ children }) {
 function App() {
   return (
     <Router>
-      <AnimatedRoutes />
+      <AuthProvider>
+        <AnimatedRoutes />
+      </AuthProvider>
     </Router>
   );
 }

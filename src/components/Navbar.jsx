@@ -1,164 +1,215 @@
+// FILE: src/components/Navbar.jsx
+// FULL FILE REPLACE KAR DO
+// ✅ User login ke baad Gmail DP show hogi
+// ✅ Click = Dashboard
+// ✅ Logout
+// ✅ Existing Home screen same rahegi
+
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { signOut } from "firebase/auth";
+
+import { auth } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const [mobile, setMobile] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [hovered, setHovered] = useState("");
+  const [mobile, setMobile] =
+    useState(false);
+
+  const [menuOpen, setMenuOpen] =
+    useState(false);
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkScreen = () => {
-      setMobile(window.innerWidth <= 768);
+      setMobile(
+        window.innerWidth <= 768
+      );
     };
 
     checkScreen();
-    window.addEventListener("resize", checkScreen);
 
-    return () => window.removeEventListener("resize", checkScreen);
+    window.addEventListener(
+      "resize",
+      checkScreen
+    );
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        checkScreen
+      );
   }, []);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
+  const logoutUser = async () => {
+    await signOut(auth);
+    navigate("/login");
   };
 
   return (
-    <header style={mobile ? styles.headerMobile : styles.header}>
-      {/* Brand */}
-      <Link to="/" style={styles.brandLink} onClick={closeMenu}>
+    <header
+      style={
+        mobile
+          ? styles.headerMobile
+          : styles.header
+      }
+    >
+      {/* LEFT */}
+      <Link
+        to="/"
+        style={styles.brandLink}
+      >
         <div style={styles.brand}>
           <img
             src={logo}
-            alt="4 Knotts Logo"
+            alt="logo"
             style={styles.logo}
           />
 
           <div>
-            <h2 style={mobile ? styles.titleMobile : styles.title}>
+            <h2 style={styles.title}>
               4 KNOTTS
             </h2>
 
-            <p style={styles.sub}>STATIONERY</p>
+            <p style={styles.sub}>
+              STATIONERY
+            </p>
           </div>
         </div>
       </Link>
 
-      {/* Mobile Menu Button */}
-      {mobile && (
-        <button
-          style={styles.menuBtn}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-      )}
-
-      {/* Desktop Nav */}
+      {/* RIGHT */}
       {!mobile && (
-        <>
+        <div style={styles.right}>
           <nav style={styles.nav}>
             <Link
               to="/"
-              style={
-                hovered === "home"
-                  ? styles.linkHover
-                  : styles.link
-              }
-              onMouseEnter={() => setHovered("home")}
-              onMouseLeave={() => setHovered("")}
+              style={styles.link}
             >
               Home
             </Link>
 
             <Link
               to="/catalog"
-              style={
-                hovered === "catalog"
-                  ? styles.linkHover
-                  : styles.link
-              }
-              onMouseEnter={() => setHovered("catalog")}
-              onMouseLeave={() => setHovered("")}
+              style={styles.link}
             >
               Catalog
             </Link>
 
             <Link
               to="/wholesale"
-              style={
-                hovered === "wholesale"
-                  ? styles.linkHover
-                  : styles.link
-              }
-              onMouseEnter={() => setHovered("wholesale")}
-              onMouseLeave={() => setHovered("")}
+              style={styles.link}
             >
               Wholesale
             </Link>
 
             <Link
               to="/customization"
-              style={
-                hovered === "custom"
-                  ? styles.linkHover
-                  : styles.link
-              }
-              onMouseEnter={() => setHovered("custom")}
-              onMouseLeave={() => setHovered("")}
+              style={styles.link}
             >
               Customization
             </Link>
           </nav>
 
-          <Link to="/catalog" style={styles.btn}>
-            Request Catalogue →
-          </Link>
-        </>
+          {!user ? (
+            <div style={styles.authBtns}>
+              <Link
+                to="/login"
+                style={styles.outlineBtn}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/signup"
+                style={styles.btn}
+              >
+                Sign Up
+              </Link>
+            </div>
+          ) : (
+            <div style={styles.userBox}>
+              <Link to="/dashboard">
+                <img
+                  src={
+                    user.photoURL ||
+                    "https://ui-avatars.com/api/?name=" +
+                      user.email
+                  }
+                  alt="dp"
+                  style={styles.dp}
+                />
+              </Link>
+
+              <button
+                onClick={logoutUser}
+                style={styles.btn}
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
-      {/* Mobile Nav */}
+      {/* MOBILE */}
+      {mobile && (
+        <button
+          style={styles.menuBtn}
+          onClick={() =>
+            setMenuOpen(!menuOpen)
+          }
+        >
+          ☰
+        </button>
+      )}
+
       {mobile && menuOpen && (
-        <nav style={styles.mobileNav}>
+        <div style={styles.mobileNav}>
           <Link
             to="/"
             style={styles.mobileLink}
-            onClick={closeMenu}
           >
             Home
           </Link>
 
-          <Link
-            to="/catalog"
-            style={styles.mobileLink}
-            onClick={closeMenu}
-          >
-            Catalog
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/login"
+                style={styles.mobileBtn}
+              >
+                Login
+              </Link>
 
-          <Link
-            to="/wholesale"
-            style={styles.mobileLink}
-            onClick={closeMenu}
-          >
-            Wholesale
-          </Link>
+              <Link
+                to="/signup"
+                style={styles.mobileBtn}
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/dashboard"
+                style={styles.mobileBtn}
+              >
+                Dashboard
+              </Link>
 
-          <Link
-            to="/customization"
-            style={styles.mobileLink}
-            onClick={closeMenu}
-          >
-            Customization
-          </Link>
-
-          <Link
-            to="/catalog"
-            style={styles.mobileBtn}
-            onClick={closeMenu}
-          >
-            Request Catalogue
-          </Link>
-        </nav>
+              <button
+                onClick={logoutUser}
+                style={styles.mobileBtn}
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       )}
     </header>
   );
@@ -172,13 +223,14 @@ const styles = {
     width: "100%",
     zIndex: 1000,
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent:
+      "space-between",
     alignItems: "center",
     padding: "18px 60px",
-    background: "rgba(2,4,11,0.88)",
-    backdropFilter: "blur(14px)",
-    borderBottom: "1px solid rgba(255,255,255,0.05)",
-    boxSizing: "border-box"
+    background:
+      "rgba(2,4,11,.88)",
+    backdropFilter:
+      "blur(14px)"
   },
 
   headerMobile: {
@@ -188,13 +240,12 @@ const styles = {
     width: "100%",
     zIndex: 1000,
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent:
+      "space-between",
     alignItems: "center",
     padding: "16px 20px",
-    background: "rgba(2,4,11,0.92)",
-    backdropFilter: "blur(14px)",
-    borderBottom: "1px solid rgba(255,255,255,0.05)",
-    boxSizing: "border-box"
+    background:
+      "rgba(2,4,11,.92)"
   },
 
   brandLink: {
@@ -203,75 +254,88 @@ const styles = {
 
   brand: {
     display: "flex",
-    alignItems: "center",
-    gap: "12px"
+    gap: "12px",
+    alignItems: "center"
   },
 
   logo: {
     width: "52px",
     height: "52px",
-    borderRadius: "12px",
-    animation: "logoFlip 10s ease-in-out infinite",
-    boxShadow: "0 0 18px rgba(95,126,255,.18)"
+    borderRadius: "12px"
   },
 
   title: {
     margin: 0,
-    color: "#ffffff",
-    fontSize: "30px",
-    fontWeight: "600",
-    fontFamily: "'Cinzel', serif",
-    lineHeight: "1"
-  },
-
-  titleMobile: {
-    margin: 0,
-    color: "#ffffff",
-    fontSize: "22px",
-    fontWeight: "600",
-    fontFamily: "'Cinzel', serif",
-    lineHeight: "1"
+    color: "white"
   },
 
   sub: {
-    margin: "4px 0 0 0",
+    margin: 0,
     color: "#9ca3af",
     fontSize: "10px",
     letterSpacing: "3px"
   },
 
+  right: {
+    display: "flex",
+    alignItems: "center",
+    gap: "26px"
+  },
+
   nav: {
     display: "flex",
-    gap: "28px",
-    alignItems: "center"
+    gap: "22px"
   },
 
   link: {
     color: "white",
-    textDecoration: "none",
-    fontSize: "14px",
-    letterSpacing: "1px",
-    transition: "all .3s ease"
+    textDecoration: "none"
   },
 
-  linkHover: {
-    color: "#6f8fff",
-    textDecoration: "none",
-    fontSize: "14px",
-    letterSpacing: "1px",
-    transform: "translateY(-2px)",
-    transition: "all .3s ease"
+  authBtns: {
+    display: "flex",
+    gap: "12px"
+  },
+
+  userBox: {
+    display: "flex",
+    gap: "12px",
+    alignItems: "center"
+  },
+
+  dp: {
+    width: "42px",
+    height: "42px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    border:
+      "2px solid #6f8fff"
   },
 
   btn: {
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: "8px",
+    background:
+      "linear-gradient(135deg,#6f8fff,#4d6fff)",
     color: "white",
-    textDecoration: "none",
-    border: "1px solid rgba(255,255,255,0.15)",
-    padding: "11px 18px",
-    fontSize: "12px",
-    borderRadius: "6px",
-    letterSpacing: "1px",
-    whiteSpace: "nowrap"
+    cursor: "pointer"
+  },
+
+  outlineBtn: {
+    padding: "10px 16px",
+    border:
+      "1px solid rgba(255,255,255,.15)",
+    borderRadius: "8px",
+    color: "white",
+    textDecoration: "none"
+  },
+
+  menuBtn: {
+    background: "none",
+    border: "none",
+    color: "white",
+    fontSize: "28px"
   },
 
   mobileNav: {
@@ -279,44 +343,28 @@ const styles = {
     top: "78px",
     left: 0,
     width: "100%",
-    background: "rgba(2,4,11,0.96)",
+    background:
+      "rgba(2,4,11,.97)",
     display: "flex",
-    flexDirection: "column",
-    gap: "18px",
-    padding: "24px",
-    borderTop: "1px solid rgba(255,255,255,0.06)",
-    zIndex: 999,
-    boxSizing: "border-box"
+    flexDirection:
+      "column",
+    gap: "14px",
+    padding: "24px"
   },
 
   mobileLink: {
     color: "white",
-    textDecoration: "none",
-    fontSize: "15px"
+    textDecoration: "none"
   },
 
   mobileBtn: {
-    color: "white",
-    textDecoration: "none",
-    border: "1px solid rgba(255,255,255,0.15)",
-    padding: "12px 16px",
-    fontSize: "13px",
-    textAlign: "center",
-    borderRadius: "6px",
-    marginTop: "8px"
-  },
-
-  menuBtn: {
-    background: "transparent",
-    color: "white",
+    padding: "12px",
+    borderRadius: "8px",
     border: "none",
-    fontSize: "34px",
-    cursor: "pointer",
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    background:
+      "linear-gradient(135deg,#6f8fff,#4d6fff)",
+    color: "white",
+    textDecoration: "none"
   }
 };
 

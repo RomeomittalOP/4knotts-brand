@@ -1,48 +1,51 @@
 import wholesaleImg from "../assets/products/wholesale.png";
+import Footer from "../components/Footer";
 
 function Wholesale() {
   return (
-    <section className="wholesale">
+    <>
+      <section className="wholesale">
+        <div className="wholesale-left">
+          <p className="mini">WHOLESALE</p>
 
-      <div className="wholesale-left">
+          <h2>
+            Built for <span>volume.</span>
+            <br />
+            Finished with care.
+          </h2>
 
-        <p className="mini">WHOLESALE</p>
+          <div className="stats-row">
+            <div>
+              <h3>25+</h3>
+              <p>UNITS MOQ</p>
+            </div>
 
-        <h2>
-          Built for <span>volume.</span><br />
-          Finished with care.
-        </h2>
+            <div>
+              <h3>7 Days</h3>
+              <p>LEAD TIME</p>
+            </div>
 
-        <div className="stats-row">
-
-          <div>
-            <h3>25+</h3>
-            <p>UNITS MOQ</p>
+            <div>
+              <h3>Free</h3>
+              <p>BRAND PRINTING</p>
+            </div>
           </div>
 
-          <div>
-            <h3>7 Days</h3>
-            <p>LEAD TIME</p>
-          </div>
-
-          <div>
-            <h3>Free</h3>
-            <p>BRAND PRINTING</p>
-          </div>
-
+          <a href="#" className="quote-btn">
+            REQUEST A QUOTE →
+          </a>
         </div>
 
-        <a href="#" className="quote-btn">
-          REQUEST A QUOTE →
-        </a>
+        <div className="wholesale-right">
+          <img
+            src={wholesaleImg}
+            alt="Wholesale Product"
+          />
+        </div>
+      </section>
 
-      </div>
-
-      <div className="wholesale-right">
-        <img src={wholesaleImg} alt="Wholesale Product" />
-      </div>
-
-    </section>
+      <Footer />
+    </>
   );
 }
 

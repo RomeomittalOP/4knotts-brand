@@ -19,7 +19,7 @@ function Ticker() {
 "EXPORT QUALITY PRODUCTS",
 "TRUSTED SINCE 2026",
   ];
-
+      
   return (
     <section className="ticker-section">
       <div className="ticker-track">
