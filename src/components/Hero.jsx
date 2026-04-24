@@ -1,7 +1,3 @@
-// FILE: src/components/Hero.jsx
-// FULL FILE REPLACE KAR DO
-// Isme visible moving blue background + premium glow + text reveal + mascot 3D tilt hai
-
 import heroImage from "../assets/products/hero.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -17,50 +13,68 @@ function Hero() {
     checkScreen();
     window.addEventListener("resize", checkScreen);
 
-    return () => window.removeEventListener("resize", checkScreen);
+    return () =>
+      window.removeEventListener("resize", checkScreen);
   }, []);
 
   return (
     <section style={mobile ? styles.heroMobile : styles.hero}>
-      {/* moving glow blob */}
+      {/* Animated Glow */}
       <div style={mobile ? styles.glowMobile : styles.glow}></div>
 
-      {/* LEFT */}
+      {/* LEFT SIDE */}
       <div style={styles.left}>
         <p style={styles.tag}>
           DELHI • PREMIUM STATIONERY • SINCE 2026
         </p>
 
         <h1 style={mobile ? styles.headingMobile : styles.heading}>
-          Stationery <br />
-          <span style={styles.blueGlow}>for life.</span>
+          THIS IS NEW HERO
+          <br />
+          <span style={styles.blueGlow}>
+            masterpieces.
+          </span>
         </h1>
 
         <p style={mobile ? styles.descMobile : styles.desc}>
-          Premium spiral notebooks, executive collections,
-          A4 designs and office essentials crafted for
-          schools, corporates and serious brands.
+          Premium notebooks, executive collections,
+          A4 designs and office essentials crafted
+          for schools, corporates and serious brands.
         </p>
 
-        <div style={mobile ? styles.buttonsMobile : styles.buttons}>
+        <div
+          style={
+            mobile
+              ? styles.buttonsMobile
+              : styles.buttons
+          }
+        >
           <Link to="/catalog" style={styles.primaryBtn}>
-            Explore Catalog
+            TEST BUTTON
           </Link>
 
           <Link to="/wholesale" style={styles.outlineBtn}>
-            Start Enquiry
+            Contact Us
           </Link>
         </div>
       </div>
 
-      {/* RIGHT */}
+      {/* RIGHT SIDE */}
       <div style={styles.right}>
-        <div style={mobile ? styles.boxMobile : styles.box}></div>
+        <div
+          style={
+            mobile ? styles.boxMobile : styles.box
+          }
+        ></div>
 
         <img
           src={heroImage}
-          alt="4 Knotts Products"
-          style={mobile ? styles.imageMobile : styles.image}
+          alt="4 Knotts"
+          style={
+            mobile
+              ? styles.imageMobile
+              : styles.image
+          }
         />
       </div>
     </section>
@@ -90,7 +104,7 @@ const styles = {
     flexDirection: "column-reverse",
     justifyContent: "center",
     alignItems: "center",
-    gap: "35px",
+    gap: "30px",
     padding: "120px 22px 50px",
     background:
       "linear-gradient(-45deg,#02040b,#07162f,#0d2a52,#02040b)",
@@ -107,10 +121,10 @@ const styles = {
     width: "520px",
     height: "520px",
     borderRadius: "50%",
-    top: "12%",
-    right: "10%",
+    top: "10%",
+    right: "8%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.28), transparent 65%)",
+      "radial-gradient(circle, rgba(95,126,255,.30), transparent 65%)",
     filter: "blur(35px)",
     animation: "floatGlow 6s ease-in-out infinite"
   },
@@ -120,16 +134,15 @@ const styles = {
     width: "260px",
     height: "260px",
     borderRadius: "50%",
-    top: "16%",
+    top: "14%",
     right: "12%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.28), transparent 65%)",
+      "radial-gradient(circle, rgba(95,126,255,.30), transparent 65%)",
     filter: "blur(25px)",
     animation: "floatGlow 6s ease-in-out infinite"
   },
 
   left: {
-    width: "100%",
     position: "relative",
     zIndex: 2
   },
@@ -143,21 +156,27 @@ const styles = {
   },
 
   heading: {
-    fontSize: "clamp(62px, 9vw, 128px)",
-    lineHeight: ".9",
-    fontWeight: "300",
+    fontSize: "clamp(70px, 9vw, 130px)",
+    lineHeight: ".95",
+    fontWeight: "700",
     margin: 0,
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Inter, sans-serif",
     animation: "fadeUp 1.2s ease"
   },
 
   headingMobile: {
-    fontSize: "58px",
-    lineHeight: "0.95",
-    fontWeight: "300",
+    fontSize: "54px",
+    lineHeight: "1",
+    fontWeight: "700",
     margin: 0,
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Inter, sans-serif",
     animation: "fadeUp 1.2s ease"
+  },
+
+  blueGlow: {
+    color: "#8db0ff",
+    textShadow:
+      "0 0 25px rgba(111,143,255,.45)"
   },
 
   desc: {
@@ -198,11 +217,11 @@ const styles = {
       "linear-gradient(135deg,#6f8fff,#4d6fff)",
     color: "white",
     textDecoration: "none",
-    padding: "16px 26px",
+    padding: "16px 28px",
     borderRadius: "8px",
     textAlign: "center",
     boxShadow:
-      "0 10px 25px rgba(95,126,255,.25)"
+      "0 12px 28px rgba(95,126,255,.28)"
   },
 
   outlineBtn: {
@@ -210,7 +229,7 @@ const styles = {
       "1px solid rgba(255,255,255,.18)",
     color: "white",
     textDecoration: "none",
-    padding: "16px 26px",
+    padding: "16px 28px",
     borderRadius: "8px",
     textAlign: "center",
     backdropFilter: "blur(8px)"
@@ -221,39 +240,37 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
     zIndex: 2
   },
 
   box: {
     width: "520px",
     height: "520px",
+    borderRadius: "22px",
     background:
       "linear-gradient(135deg,#1c2948,#071120)",
-    position: "absolute",
-    borderRadius: "22px",
     boxShadow:
-      "0 20px 60px rgba(0,0,0,.35)"
+      "0 25px 70px rgba(0,0,0,.40)",
+    position: "absolute"
   },
 
   boxMobile: {
     width: "280px",
     height: "280px",
+    borderRadius: "18px",
     background:
       "linear-gradient(135deg,#1c2948,#071120)",
-    position: "absolute",
-    borderRadius: "18px"
+    position: "absolute"
   },
 
   image: {
     width: "100%",
     maxWidth: "620px",
-    height: "auto",
     position: "relative",
     zIndex: 2,
     objectFit: "contain",
     transform:
-      "perspective(1200px) rotateY(-10deg) rotateX(5deg)",
+      "perspective(1200px) rotateY(-10deg)",
     filter:
       "drop-shadow(0 30px 40px rgba(0,0,0,.45))",
     animation: "floatHero 4s ease-in-out infinite"
@@ -262,20 +279,10 @@ const styles = {
   imageMobile: {
     width: "100%",
     maxWidth: "320px",
-    height: "auto",
     position: "relative",
     zIndex: 2,
     objectFit: "contain",
-    filter:
-      "drop-shadow(0 20px 30px rgba(0,0,0,.4))",
     animation: "floatHero 4s ease-in-out infinite"
-  },
-
-  blueGlow: {
-    color: "#6f8fff",
-    fontStyle: "italic",
-    textShadow:
-      "0 0 18px rgba(111,143,255,.35)"
   }
 };
 

@@ -86,7 +86,7 @@ function Catalog() {
         </div>
       </section>
 
-      <Footer />
+     
     </>
   );
 }

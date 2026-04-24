@@ -44,7 +44,7 @@ function Wholesale() {
         </div>
       </section>
 
-      <Footer />
+    
     </>
   );
 }
