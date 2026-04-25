@@ -1,22 +1,4 @@
 function BrandStatement() {
-  return (
-    <section style={styles.section}>
-      <div style={styles.overlay}></div>
-
-      <div style={styles.content}>
-        <p style={styles.tag}>4 KNOTTS PREMIUM</p>
-
-        <h2 style={styles.heading}>
-          Crafted For Bigger Ideas
-        </h2>
-
-        <p style={styles.desc}>
-          Premium notebooks, office essentials and custom
-          stationery built for brands that want more.
-        </p>
-      </div>
-    </section>
-  );
 }
 
 const styles = {

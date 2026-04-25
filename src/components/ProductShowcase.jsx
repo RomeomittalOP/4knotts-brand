@@ -21,28 +21,6 @@ function ProductShowcase() {
       emoji: "🎁"
     }
   ];
-
-  return (
-    <section style={styles.section}>
-      <p style={styles.tag}>OUR COLLECTION</p>
-
-      <h2 style={styles.heading}>
-        Crafted for Every Need
-      </h2>
-
-      <div style={styles.grid}>
-        {products.map((item, index) => (
-          <div key={index} style={styles.card}>
-            <div style={styles.icon}>{item.emoji}</div>
-
-            <h3 style={styles.title}>{item.title}</h3>
-
-            <p style={styles.desc}>{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
 }
 
 const styles = {

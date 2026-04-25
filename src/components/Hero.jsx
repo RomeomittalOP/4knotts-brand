@@ -28,12 +28,14 @@ function Hero() {
           DELHI • PREMIUM STATIONERY • SINCE 2026
         </p>
 
-        <h1 style={mobile ? styles.headingMobile : styles.heading}>
-          THIS IS NEW HERO
-          <br />
+       <h1 style={styles.heading}>
+  Stationery
+  <br />
+  <span style={styles.life}>for life.</span>
           <span style={styles.blueGlow}>
-            masterpieces.
+            
           </span>
+
         </h1>
 
         <p style={mobile ? styles.descMobile : styles.desc}>
