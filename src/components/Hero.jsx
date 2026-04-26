@@ -1,9 +1,11 @@
 import heroImage from "../assets/products/hero.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 function Hero() {
   const [mobile, setMobile] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const checkScreen = () => {
@@ -17,25 +19,53 @@ function Hero() {
       window.removeEventListener("resize", checkScreen);
   }, []);
 
+  const handleMove = (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    setMouse({ x, y });
+  };
+
   return (
-    <section style={mobile ? styles.heroMobile : styles.hero}>
-      {/* Animated Glow */}
+    <section
+      onMouseMove={handleMove}
+      style={mobile ? styles.heroMobile : styles.hero}
+    >
+      {/* Glow */}
       <div style={mobile ? styles.glowMobile : styles.glow}></div>
 
-      {/* LEFT SIDE */}
-      <div style={styles.left}>
+      {/* Floating particles */}
+      <div style={styles.p1}></div>
+      <div style={styles.p2}></div>
+      <div style={styles.p3}></div>
+
+      {/* LEFT */}
+      <motion.div
+        style={{
+          ...styles.left,
+          transform: `translate(${mouse.x * 0.4}px,${
+            mouse.y * 0.4
+          }px)`
+        }}
+        initial={{ opacity: 0, y: 70 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <p style={styles.tag}>
           DELHI • PREMIUM STATIONERY • SINCE 2026
         </p>
 
-       <h1 style={styles.heading}>
-  Stationery
-  <br />
-  <span style={styles.life}>for life.</span>
-          <span style={styles.blueGlow}>
-            
+        <h1
+          style={
+            mobile
+              ? styles.headingMobile
+              : styles.heading
+          }
+        >
+          Stationery
+          <br />
+          <span style={styles.life}>
+            for life.
           </span>
-
         </h1>
 
         <p style={mobile ? styles.descMobile : styles.desc}>
@@ -52,24 +82,39 @@ function Hero() {
           }
         >
           <Link to="/catalog" style={styles.primaryBtn}>
-            TEST BUTTON
+            Explore Catalog
           </Link>
 
-          <Link to="/wholesale" style={styles.outlineBtn}>
+          <Link
+            to="/wholesale"
+            style={styles.outlineBtn}
+          >
             Contact Us
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-      {/* RIGHT SIDE */}
-      <div style={styles.right}>
+      {/* RIGHT */}
+      <motion.div
+        style={{
+          ...styles.right,
+          transform: `translate(${-mouse.x * 0.7}px,${
+            -mouse.y * 0.7
+          }px)`
+        }}
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2 }}
+      >
         <div
           style={
-            mobile ? styles.boxMobile : styles.box
+            mobile
+              ? styles.boxMobile
+              : styles.box
           }
         ></div>
 
-        <img
+        <motion.img
           src={heroImage}
           alt="4 Knotts"
           style={
@@ -77,8 +122,22 @@ function Hero() {
               ? styles.imageMobile
               : styles.image
           }
+          animate={{
+            rotateY: [0, -8, 0],
+            rotateX: [0, 4, 0],
+            y: [0, -15, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 5,
+            ease: "easeInOut"
+          }}
+          whileHover={{
+            rotateY: -15,
+            scale: 1.05
+          }}
         />
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -92,9 +151,7 @@ const styles = {
     gap: "40px",
     padding: "130px 60px 60px",
     background:
-      "linear-gradient(-45deg,#02040b,#07162f,#0d2a52,#02040b)",
-    backgroundSize: "400% 400%",
-    animation: "heroWave 10s ease infinite",
+      "linear-gradient(135deg,#02040b,#07162f,#0d2a52,#02040b)",
     color: "white",
     overflow: "hidden",
     position: "relative"
@@ -109,9 +166,7 @@ const styles = {
     gap: "30px",
     padding: "120px 22px 50px",
     background:
-      "linear-gradient(-45deg,#02040b,#07162f,#0d2a52,#02040b)",
-    backgroundSize: "400% 400%",
-    animation: "heroWave 10s ease infinite",
+      "linear-gradient(135deg,#02040b,#07162f,#0d2a52,#02040b)",
     color: "white",
     textAlign: "center",
     overflow: "hidden",
@@ -126,9 +181,8 @@ const styles = {
     top: "10%",
     right: "8%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.30), transparent 65%)",
-    filter: "blur(35px)",
-    animation: "floatGlow 6s ease-in-out infinite"
+      "radial-gradient(circle, rgba(95,126,255,.35), transparent 65%)",
+    filter: "blur(35px)"
   },
 
   glowMobile: {
@@ -139,13 +193,44 @@ const styles = {
     top: "14%",
     right: "12%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.30), transparent 65%)",
-    filter: "blur(25px)",
-    animation: "floatGlow 6s ease-in-out infinite"
+      "radial-gradient(circle, rgba(95,126,255,.35), transparent 65%)",
+    filter: "blur(25px)"
+  },
+
+  p1: {
+    position: "absolute",
+    top: "20%",
+    left: "10%",
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "#d4af37",
+    animation: "floatHero 4s infinite"
+  },
+
+  p2: {
+    position: "absolute",
+    bottom: "18%",
+    left: "20%",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    background: "#fff",
+    animation: "floatHero 5s infinite"
+  },
+
+  p3: {
+    position: "absolute",
+    top: "28%",
+    right: "25%",
+    width: "7px",
+    height: "7px",
+    borderRadius: "50%",
+    background: "#6f8fff",
+    animation: "floatHero 6s infinite"
   },
 
   left: {
-    position: "relative",
     zIndex: 2
   },
 
@@ -153,32 +238,27 @@ const styles = {
     color: "#6f8fff",
     letterSpacing: "3px",
     fontSize: "12px",
-    marginBottom: "22px",
-    animation: "fadeUp 1s ease"
+    marginBottom: "22px"
   },
 
   heading: {
-    fontSize: "clamp(70px, 9vw, 130px)",
-    lineHeight: ".95",
+    fontSize: "clamp(72px,9vw,130px)",
+    lineHeight: ".92",
     fontWeight: "700",
     margin: 0,
-    fontFamily: "Inter, sans-serif",
-    animation: "fadeUp 1.2s ease"
+    fontFamily: "Cormorant Garamond"
   },
 
   headingMobile: {
     fontSize: "54px",
     lineHeight: "1",
     fontWeight: "700",
-    margin: 0,
-    fontFamily: "Inter, sans-serif",
-    animation: "fadeUp 1.2s ease"
+    fontFamily: "Cormorant Garamond"
   },
 
-  blueGlow: {
-    color: "#8db0ff",
-    textShadow:
-      "0 0 25px rgba(111,143,255,.45)"
+  life: {
+    color: "#d4af37",
+    fontStyle: "italic"
   },
 
   desc: {
@@ -186,23 +266,20 @@ const styles = {
     maxWidth: "620px",
     color: "#b8b8b8",
     fontSize: "20px",
-    lineHeight: "1.8",
-    animation: "fadeUp 1.6s ease"
+    lineHeight: "1.8"
   },
 
   descMobile: {
     marginTop: "22px",
     color: "#b8b8b8",
     fontSize: "15px",
-    lineHeight: "1.8",
-    animation: "fadeUp 1.6s ease"
+    lineHeight: "1.8"
   },
 
   buttons: {
     display: "flex",
     gap: "20px",
-    marginTop: "40px",
-    animation: "fadeUp 2s ease"
+    marginTop: "40px"
   },
 
   buttonsMobile: {
@@ -210,31 +287,24 @@ const styles = {
     flexDirection: "column",
     gap: "14px",
     marginTop: "28px",
-    width: "100%",
-    animation: "fadeUp 2s ease"
+    width: "100%"
   },
 
   primaryBtn: {
     background:
-      "linear-gradient(135deg,#6f8fff,#4d6fff)",
-    color: "white",
-    textDecoration: "none",
+      "linear-gradient(135deg,#d4af37,#b99118)",
+    color: "#111",
     padding: "16px 28px",
-    borderRadius: "8px",
-    textAlign: "center",
-    boxShadow:
-      "0 12px 28px rgba(95,126,255,.28)"
+    borderRadius: "10px",
+    fontWeight: "700"
   },
 
   outlineBtn: {
     border:
       "1px solid rgba(255,255,255,.18)",
     color: "white",
-    textDecoration: "none",
     padding: "16px 28px",
-    borderRadius: "8px",
-    textAlign: "center",
-    backdropFilter: "blur(8px)"
+    borderRadius: "10px"
   },
 
   right: {
@@ -248,12 +318,12 @@ const styles = {
   box: {
     width: "520px",
     height: "520px",
-    borderRadius: "22px",
+    borderRadius: "24px",
     background:
       "linear-gradient(135deg,#1c2948,#071120)",
+    position: "absolute",
     boxShadow:
-      "0 25px 70px rgba(0,0,0,.40)",
-    position: "absolute"
+      "0 30px 80px rgba(0,0,0,.45)"
   },
 
   boxMobile: {
@@ -271,20 +341,15 @@ const styles = {
     position: "relative",
     zIndex: 2,
     objectFit: "contain",
-    transform:
-      "perspective(1200px) rotateY(-10deg)",
     filter:
-      "drop-shadow(0 30px 40px rgba(0,0,0,.45))",
-    animation: "floatHero 4s ease-in-out infinite"
+      "drop-shadow(0 30px 40px rgba(0,0,0,.45))"
   },
 
   imageMobile: {
     width: "100%",
     maxWidth: "320px",
     position: "relative",
-    zIndex: 2,
-    objectFit: "contain",
-    animation: "floatHero 4s ease-in-out infinite"
+    zIndex: 2
   }
 };
 
