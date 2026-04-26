@@ -4,41 +4,32 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 function Hero() {
-  const [mobile, setMobile] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const checkScreen = () => {
-      setMobile(window.innerWidth <= 768);
-    };
-
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    return () =>
-      window.removeEventListener("resize", checkScreen);
-  }, []);
-
   const handleMove = (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    const x =
+      (e.clientX / window.innerWidth - 0.5) * 30;
+    const y =
+      (e.clientY / window.innerHeight - 0.5) * 30;
+
     setMouse({ x, y });
   };
 
   return (
     <section
+      style={styles.hero}
       onMouseMove={handleMove}
-      style={mobile ? styles.heroMobile : styles.hero}
     >
-      {/* Glow */}
-      <div style={mobile ? styles.glowMobile : styles.glow}></div>
+      {/* BACKGROUND GLOW */}
+      <div style={styles.glow1}></div>
+      <div style={styles.glow2}></div>
 
-      {/* Floating particles */}
+      {/* PARTICLES */}
       <div style={styles.p1}></div>
       <div style={styles.p2}></div>
       <div style={styles.p3}></div>
 
-      {/* LEFT */}
+      {/* LEFT SIDE */}
       <motion.div
         style={{
           ...styles.left,
@@ -46,97 +37,87 @@ function Hero() {
             mouse.y * 0.4
           }px)`
         }}
-        initial={{ opacity: 0, y: 70 }}
+        initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
         <p style={styles.tag}>
-          DELHI • PREMIUM STATIONERY • SINCE 2026
+          DELHI • PREMIUM STATIONERY • SINCE
+          2026
         </p>
 
-        <h1
-          style={
-            mobile
-              ? styles.headingMobile
-              : styles.heading
-          }
-        >
+        <h1 style={styles.heading}>
           Stationery
           <br />
-          <span style={styles.life}>
+          <span style={styles.gold}>
             for life.
           </span>
         </h1>
 
-        <p style={mobile ? styles.descMobile : styles.desc}>
-          Premium notebooks, executive collections,
-          A4 designs and office essentials crafted
-          for schools, corporates and serious brands.
+        <p style={styles.desc}>
+          Premium notebooks, executive
+          collections, A4 designs and office
+          essentials crafted for schools,
+          corporates and serious brands.
         </p>
 
-        <div
-          style={
-            mobile
-              ? styles.buttonsMobile
-              : styles.buttons
-          }
-        >
-          <Link to="/catalog" style={styles.primaryBtn}>
+        <div style={styles.btnWrap}>
+          <Link
+            to="/catalog"
+            style={styles.goldBtn}
+          >
             Explore Catalog
           </Link>
 
           <Link
             to="/wholesale"
-            style={styles.outlineBtn}
+            style={styles.darkBtn}
           >
             Contact Us
           </Link>
         </div>
       </motion.div>
 
-      {/* RIGHT */}
+      {/* RIGHT SIDE */}
       <motion.div
         style={{
           ...styles.right,
-          transform: `translate(${-mouse.x * 0.7}px,${
-            -mouse.y * 0.7
-          }px)`
+          transform: `translate(${-mouse.x *
+            0.6}px,${-mouse.y * 0.6}px)`
         }}
-        initial={{ opacity: 0, scale: 0.7 }}
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2 }}
       >
-        <div
-          style={
-            mobile
-              ? styles.boxMobile
-              : styles.box
-          }
-        ></div>
+        {/* BACK CARD */}
+        <div style={styles.layer1}></div>
+        <div style={styles.layer2}></div>
 
-        <motion.img
-          src={heroImage}
-          alt="4 Knotts"
-          style={
-            mobile
-              ? styles.imageMobile
-              : styles.image
-          }
+        {/* MAIN CARD */}
+        <motion.div
+          style={styles.card}
           animate={{
-            rotateY: [0, -8, 0],
-            rotateX: [0, 4, 0],
-            y: [0, -15, 0]
+            rotateY: [0, -10, 0],
+            rotateX: [0, 5, 0],
+            y: [0, -12, 0]
           }}
           transition={{
-            repeat: Infinity,
-            duration: 5,
-            ease: "easeInOut"
+            duration: 6,
+            repeat: Infinity
           }}
           whileHover={{
-            rotateY: -15,
-            scale: 1.05
+            scale: 1.05,
+            rotateY: -18
           }}
-        />
+        >
+          <img
+            src={heroImage}
+            alt="Hero"
+            style={styles.image}
+          />
+
+          <div style={styles.shine}></div>
+        </motion.div>
       </motion.div>
     </section>
   );
@@ -146,211 +127,167 @@ const styles = {
   hero: {
     minHeight: "100vh",
     display: "grid",
-    gridTemplateColumns: "1.1fr .9fr",
+    gridTemplateColumns: "1fr 1fr",
     alignItems: "center",
-    gap: "40px",
-    padding: "130px 60px 60px",
-    background:
-      "linear-gradient(135deg,#02040b,#07162f,#0d2a52,#02040b)",
-    color: "white",
+    padding: "90px 60px",
+    position: "relative",
     overflow: "hidden",
-    position: "relative"
-  },
-
-  heroMobile: {
-    minHeight: "100vh",
-    display: "flex",
-    flexDirection: "column-reverse",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "30px",
-    padding: "120px 22px 50px",
     background:
-      "linear-gradient(135deg,#02040b,#07162f,#0d2a52,#02040b)",
-    color: "white",
-    textAlign: "center",
-    overflow: "hidden",
-    position: "relative"
+      "linear-gradient(135deg,#061226,#08182f,#02040b)"
   },
 
-  glow: {
+  glow1: {
     position: "absolute",
-    width: "520px",
-    height: "520px",
+    top: "-180px",
+    left: "-180px",
+    width: "420px",
+    height: "420px",
     borderRadius: "50%",
-    top: "10%",
-    right: "8%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.35), transparent 65%)",
-    filter: "blur(35px)"
+      "radial-gradient(circle,rgba(255,215,0,.18),transparent 70%)",
+    filter: "blur(50px)"
   },
 
-  glowMobile: {
+  glow2: {
     position: "absolute",
-    width: "260px",
-    height: "260px",
+    right: "-180px",
+    bottom: "-180px",
+    width: "420px",
+    height: "420px",
     borderRadius: "50%",
-    top: "14%",
-    right: "12%",
     background:
-      "radial-gradient(circle, rgba(95,126,255,.35), transparent 65%)",
-    filter: "blur(25px)"
+      "radial-gradient(circle,rgba(92,138,255,.18),transparent 70%)",
+    filter: "blur(50px)"
   },
 
-  p1: {
-    position: "absolute",
-    top: "20%",
-    left: "10%",
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
-    background: "#d4af37",
-    animation: "floatHero 4s infinite"
-  },
-
-  p2: {
-    position: "absolute",
-    bottom: "18%",
-    left: "20%",
-    width: "6px",
-    height: "6px",
-    borderRadius: "50%",
-    background: "#fff",
-    animation: "floatHero 5s infinite"
-  },
-
-  p3: {
-    position: "absolute",
-    top: "28%",
-    right: "25%",
-    width: "7px",
-    height: "7px",
-    borderRadius: "50%",
-    background: "#6f8fff",
-    animation: "floatHero 6s infinite"
-  },
+  p1: particle("18%", "10%"),
+  p2: particle("65%", "14%"),
+  p3: particle("28%", "74%"),
 
   left: {
-    zIndex: 2
+    position: "relative",
+    zIndex: 5
   },
 
   tag: {
-    color: "#6f8fff",
-    letterSpacing: "3px",
+    color: "#7da4ff",
     fontSize: "12px",
+    letterSpacing: "4px",
     marginBottom: "22px"
   },
 
   heading: {
-    fontSize: "clamp(72px,9vw,130px)",
-    lineHeight: ".92",
-    fontWeight: "700",
-    margin: 0,
-    fontFamily: "Cormorant Garamond"
+    color: "white",
+    fontSize: "112px",
+    lineHeight: ".88",
+    fontFamily: "Cormorant Garamond",
+    fontWeight: "600",
+    marginBottom: "28px"
   },
 
-  headingMobile: {
-    fontSize: "54px",
-    lineHeight: "1",
-    fontWeight: "700",
-    fontFamily: "Cormorant Garamond"
-  },
-
-  life: {
+  gold: {
     color: "#d4af37",
     fontStyle: "italic"
   },
 
   desc: {
-    marginTop: "28px",
-    maxWidth: "620px",
-    color: "#b8b8b8",
-    fontSize: "20px",
-    lineHeight: "1.8"
+    color: "#d8deef",
+    fontSize: "22px",
+    lineHeight: "1.8",
+    maxWidth: "700px",
+    marginBottom: "36px"
   },
 
-  descMobile: {
-    marginTop: "22px",
-    color: "#b8b8b8",
-    fontSize: "15px",
-    lineHeight: "1.8"
-  },
-
-  buttons: {
+  btnWrap: {
     display: "flex",
-    gap: "20px",
-    marginTop: "40px"
+    gap: "18px"
   },
 
-  buttonsMobile: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "14px",
-    marginTop: "28px",
-    width: "100%"
-  },
-
-  primaryBtn: {
+  goldBtn: {
+    padding: "16px 34px",
+    borderRadius: "999px",
     background:
       "linear-gradient(135deg,#d4af37,#b99118)",
     color: "#111",
-    padding: "16px 28px",
-    borderRadius: "10px",
-    fontWeight: "700"
+    fontWeight: "700",
+    textDecoration: "none"
   },
 
-  outlineBtn: {
-    border:
-      "1px solid rgba(255,255,255,.18)",
+  darkBtn: {
+    padding: "16px 34px",
+    borderRadius: "999px",
+    border: "1px solid rgba(255,255,255,.15)",
     color: "white",
-    padding: "16px 28px",
-    borderRadius: "10px"
+    textDecoration: "none"
   },
 
   right: {
     position: "relative",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 2
+    justifyContent: "center"
   },
 
-  box: {
-    width: "520px",
-    height: "520px",
-    borderRadius: "24px",
-    background:
-      "linear-gradient(135deg,#1c2948,#071120)",
+  layer1: {
     position: "absolute",
-    boxShadow:
-      "0 30px 80px rgba(0,0,0,.45)"
+    width: "470px",
+    height: "560px",
+    borderRadius: "28px",
+    background: "rgba(255,255,255,.04)",
+    transform: "rotate(-8deg) translateX(-40px)",
+    filter: "blur(1px)"
   },
 
-  boxMobile: {
-    width: "280px",
-    height: "280px",
-    borderRadius: "18px",
+  layer2: {
+    position: "absolute",
+    width: "470px",
+    height: "560px",
+    borderRadius: "28px",
+    background: "rgba(255,255,255,.06)",
+    transform: "rotate(8deg) translateX(40px)"
+  },
+
+  card: {
+    position: "relative",
+    width: "500px",
+    height: "590px",
+    borderRadius: "28px",
+    overflow: "hidden",
     background:
-      "linear-gradient(135deg,#1c2948,#071120)",
-    position: "absolute"
+      "linear-gradient(135deg,#0f2146,#08152d)",
+    boxShadow:
+      "0 30px 70px rgba(0,0,0,.45)"
   },
 
   image: {
     width: "100%",
-    maxWidth: "620px",
-    position: "relative",
-    zIndex: 2,
-    objectFit: "contain",
-    filter:
-      "drop-shadow(0 30px 40px rgba(0,0,0,.45))"
+    height: "100%",
+    objectFit: "cover"
   },
 
-  imageMobile: {
-    width: "100%",
-    maxWidth: "320px",
-    position: "relative",
-    zIndex: 2
+  shine: {
+    position: "absolute",
+    top: 0,
+    left: "-50%",
+    width: "40%",
+    height: "100%",
+    background:
+      "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)",
+    transform: "skewX(-25deg)"
   }
 };
+
+function particle(top, left) {
+  return {
+    position: "absolute",
+    top,
+    left,
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "#d4af37",
+    boxShadow:
+      "0 0 18px rgba(212,175,55,.8)"
+  };
+}
 
 export default Hero;
