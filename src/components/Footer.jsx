@@ -81,7 +81,7 @@ function Footer() {
   );
 }
 
-const styles = {
+ const styles = {
   footer: {
     width: "100%",
     marginTop: "0",
@@ -92,22 +92,26 @@ const styles = {
     zIndex: 2
   },
 
-  /* CTA */
+  /* CTA WHITE PREMIUM */
   cta: {
     textAlign: "center",
     padding: "90px 20px 70px",
-    borderBottom: "1px solid rgba(255,255,255,.06)"
+    background:
+      "linear-gradient(135deg,#ffffff,#f7f7f7,#ececec)",
+    borderBottom:
+      "1px solid rgba(0,0,0,.06)"
   },
 
   ctaHeading: {
     fontSize: "62px",
     fontFamily: "Cormorant Garamond",
     marginBottom: "14px",
-    lineHeight: "1.1"
+    lineHeight: "1.1",
+    color: "#111"
   },
 
   ctaText: {
-    color: "#aab4cc",
+    color: "#555",
     fontSize: "18px",
     marginBottom: "28px"
   },
@@ -117,15 +121,15 @@ const styles = {
     padding: "16px 34px",
     borderRadius: "40px",
     background:
-      "linear-gradient(135deg,#5f7eff,#7da4ff)",
-    color: "white",
+      "linear-gradient(135deg,#d4af37,#b99118)",
+    color: "#111",
     textDecoration: "none",
     fontWeight: "600",
     boxShadow:
-      "0 10px 25px rgba(95,126,255,.25)"
+      "0 10px 25px rgba(212,175,55,.22)"
   },
 
-  /* MAIN */
+  /* MAIN FOOTER */
   main: {
     maxWidth: "1400px",
     margin: "0 auto",
@@ -144,7 +148,8 @@ const styles = {
     fontSize: "56px",
     fontFamily: "Cormorant Garamond",
     marginBottom: "24px",
-    lineHeight: "1.1"
+    lineHeight: "1.1",
+    color: "white"
   },
 
   desc: {
@@ -170,33 +175,35 @@ const styles = {
     border: "1px solid rgba(255,255,255,.08)",
     background: "rgba(255,255,255,.02)",
     cursor: "pointer",
-    fontSize: "18px"
+    fontSize: "18px",
+    transition: "0.3s"
   },
 
   head: {
     color: "#7da4ff",
     letterSpacing: "3px",
     fontSize: "14px",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    textTransform: "uppercase"
   },
 
   link: {
     color: "#d5def5",
     marginBottom: "14px",
     fontSize: "17px",
-    cursor: "pointer"
+    cursor: "pointer",
+    transition: "0.3s"
   },
 
   bottom: {
     marginTop: "55px",
     paddingTop: "24px",
+    paddingBottom: "80px",
     borderTop: "1px solid rgba(255,255,255,.06)",
     textAlign: "center",
     color: "#7c859d",
     fontSize: "14px"
-  },
-  marginBottom: "0",
-paddingBottom: "80px"
+  }
 };
 
 export default Footer;

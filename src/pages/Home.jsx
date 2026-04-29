@@ -20,21 +20,21 @@ function Home() {
       <ProductShowcase />
 
       {/* DARK SECTION */}
-      <section style={styles.darkSection}>
-        <div style={styles.container}>
-          <p style={styles.tagBlue}>WHY CHOOSE US</p>
+      {/* WHITE */}
+<section style={styles.whiteSection}>
+  <div style={styles.container}>
+    <p style={styles.tagGold}>WHY CHOOSE US</p>
 
-          <h2 style={styles.headingDark}>
-            Trusted By Smart Brands
-          </h2>
+    <h2 style={styles.headingWhite}>
+      Trusted By Smart Brands
+    </h2>
 
-          <p style={styles.descDark}>
-            Premium quality, fast delivery and memorable
-            custom branding solutions across India.
-          </p>
-        </div>
-      </section>
-
+    <p style={styles.descWhite}>
+      Premium quality, fast delivery and memorable
+      custom branding solutions across India.
+    </p>
+  </div>
+</section>
       <Legacy />
 
       {/* WHITE SECTION */}
@@ -82,7 +82,7 @@ const styles = {
   },
 
   tagBlue: {
-    color: "#7da4ff",
+    color: "#c7d0e6",
     fontSize: "12px",
     letterSpacing: "4px",
     marginBottom: "16px"
