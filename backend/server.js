@@ -10,6 +10,7 @@ const customizationRoutes = require("./routes/customizationRoutes");
 const catalogRoutes = require("./routes/catalogRoutes");
 
 const app = express();
+const orderRoutes = require("./routes/orderRoutes");
 
 connectDB();
 
@@ -28,7 +29,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/wholesale", wholesaleRoutes);
 app.use("/api/customization", customizationRoutes);
 app.use("/api/catalog", catalogRoutes);
-
+app.use("/api/order", orderRoutes);
 app.get("/", (req, res) => {
   res.send("4 KNOTTS Backend Running 🚀");
 });

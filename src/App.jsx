@@ -27,7 +27,7 @@ import Dashboard from "./pages/Dashboard";
 
 import ProductShowcase from "./components/ProductShowcase";
 import BrandStatement from "./components/BrandStatement";
-
+import Cart from "./pages/Cart";
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -109,6 +109,14 @@ function AnimatedRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/cart"
+  element={
+    <PageTransition>
+      <Cart />
+    </PageTransition>
+  }
+/>
       </Routes>
     </AnimatePresence>
   );

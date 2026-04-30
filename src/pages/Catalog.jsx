@@ -3,7 +3,8 @@
   import { motion } from "framer-motion";
   import Navbar from "../components/Navbar";
   import Footer from "../components/Footer";
-
+  import { useContext } from "react";
+  import { CartContext } from "../context/CartContext";
   /* AUTO IMPORT ALL PRODUCTS */
   const a4Front = Object.values(
     import.meta.glob(
@@ -48,19 +49,15 @@
   );
 
   /* CREATE PRODUCT ARRAYS */
-  const makeProducts = (
-    frontArr,
-    backArr,
+  const makeProducts = (frontArr, backArr, category, title) =>
+  frontArr.map((img, i) => ({
+    id: `${category}-${i}`,
+    title: `${title} ${i + 1}`,
     category,
-    title
-  ) =>
-    frontArr.map((img, i) => ({
-      title: `${title} ${i + 1}`,
-      category,
-      front: img,
-      back: backArr[i]
-    }));
-
+    front: img,
+    back: backArr[i],
+    price: 199 + i * 20   // 👉 tu yaha custom price bhi daal sakta hai
+  }));
   function Catalog() {
     const [active, setActive] = useState("ALL");
     const [popup, setPopup] = useState(false);
@@ -189,8 +186,9 @@
     );
   }
 
-  function Card({ product }) {
-    const [flip, setFlip] = useState(false);
+ function Card({ product }) {
+  const [flip, setFlip] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
     return (
       <motion.div
@@ -224,6 +222,17 @@
         <p style={styles.cat}>
           {product.category}
         </p>
+        <p style={styles.price}>₹{product.price}</p>
+
+<button
+  onClick={(e) => {
+    e.stopPropagation();
+    addToCart(product);
+  }}
+  style={styles.cartBtn}
+>
+  Add to Cart
+</button>
       </motion.div>
     );
   }

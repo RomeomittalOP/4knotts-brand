@@ -1,47 +1,30 @@
-// FILE: src/components/Navbar.jsx
-// FULL FILE REPLACE KAR DO
-// ✅ User login ke baad Gmail DP show hogi
-// ✅ Click = Dashboard
-// ✅ Logout
-// ✅ Existing Home screen same rahegi
-
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { signOut } from "firebase/auth";
 
 import { auth } from "../firebase";
 import { useAuth } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext"; // ✅ IMPORTANT
 
 function Navbar() {
-  const [mobile, setMobile] =
-    useState(false);
-
-  const [menuOpen, setMenuOpen] =
-    useState(false);
+  const [mobile, setMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { user } = useAuth();
+  const { cart } = useContext(CartContext); // ✅ CART CONNECT
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkScreen = () => {
-      setMobile(
-        window.innerWidth <= 768
-      );
+      setMobile(window.innerWidth <= 768);
     };
 
     checkScreen();
-
-    window.addEventListener(
-      "resize",
-      checkScreen
-    );
+    window.addEventListener("resize", checkScreen);
 
     return () =>
-      window.removeEventListener(
-        "resize",
-        checkScreen
-      );
+      window.removeEventListener("resize", checkScreen);
   }, []);
 
   const logoutUser = async () => {
@@ -50,33 +33,16 @@ function Navbar() {
   };
 
   return (
-    <header
-      style={
-        mobile
-          ? styles.headerMobile
-          : styles.header
-      }
-    >
+    <header style={mobile ? styles.headerMobile : styles.header}>
+      
       {/* LEFT */}
-      <Link
-        to="/"
-        style={styles.brandLink}
-      >
+      <Link to="/" style={styles.brandLink}>
         <div style={styles.brand}>
-          <img
-            src={logo}
-            alt="logo"
-            style={styles.logo}
-          />
+          <img src={logo} alt="logo" style={styles.logo} />
 
           <div>
-            <h2 style={styles.title}>
-              4 KNOTTS
-            </h2>
-
-            <p style={styles.sub}>
-              STATIONERY
-            </p>
+            <h2 style={styles.title}>4 KNOTTS</h2>
+            <p style={styles.sub}>STATIONERY</p>
           </div>
         </div>
       </Link>
@@ -84,70 +50,40 @@ function Navbar() {
       {/* RIGHT */}
       {!mobile && (
         <div style={styles.right}>
+          
           <nav style={styles.nav}>
-            <Link
-              to="/"
-              style={styles.link}
-            >
-              Home
-            </Link>
-
-            <Link
-              to="/catalog"
-              style={styles.link}
-            >
-              Catalog
-            </Link>
-
-            <Link
-              to="/wholesale"
-              style={styles.link}
-            >
-              Wholesale
-            </Link>
-
-            <Link
-              to="/customization"
-              style={styles.link}
-            >
-              Customization
-            </Link>
+            <Link to="/" style={styles.link}>Home</Link>
+            <Link to="/catalog" style={styles.link}>Catalog</Link>
+            <Link to="/wholesale" style={styles.link}>Wholesale</Link>
+            <Link to="/customization" style={styles.link}>Customization</Link>
           </nav>
 
           {!user ? (
             <div style={styles.authBtns}>
-              <Link
-                to="/login"
-                style={styles.outlineBtn}
-              >
-                Login
-              </Link>
-
-              <Link
-                to="/signup"
-                style={styles.btn}
-              >
-                Sign Up
-              </Link>
+              <Link to="/login" style={styles.outlineBtn}>Login</Link>
+              <Link to="/signup" style={styles.btn}>Sign Up</Link>
             </div>
           ) : (
             <div style={styles.userBox}>
+              
+              {/* USER DP */}
               <Link to="/dashboard">
                 <img
                   src={
                     user.photoURL ||
-                    "https://ui-avatars.com/api/?name=" +
-                      user.email
+                    "https://ui-avatars.com/api/?name=" + user.email
                   }
                   alt="dp"
                   style={styles.dp}
                 />
               </Link>
 
-              <button
-                onClick={logoutUser}
-                style={styles.btn}
-              >
+              {/* ✅ CART WITH COUNT */}
+              <Link to="/cart" style={styles.cart}>
+                🛒 {cart.length}
+              </Link>
+
+              <button onClick={logoutUser} style={styles.btn}>
                 Logout
               </button>
             </div>
@@ -159,9 +95,7 @@ function Navbar() {
       {mobile && (
         <button
           style={styles.menuBtn}
-          onClick={() =>
-            setMenuOpen(!menuOpen)
-          }
+          onClick={() => setMenuOpen(!menuOpen)}
         >
           ☰
         </button>
@@ -169,42 +103,22 @@ function Navbar() {
 
       {mobile && menuOpen && (
         <div style={styles.mobileNav}>
-          <Link
-            to="/"
-            style={styles.mobileLink}
-          >
-            Home
-          </Link>
+          <Link to="/" style={styles.mobileLink}>Home</Link>
+          <Link to="/catalog" style={styles.mobileLink}>Catalog</Link>
 
           {!user ? (
             <>
-              <Link
-                to="/login"
-                style={styles.mobileBtn}
-              >
-                Login
-              </Link>
-
-              <Link
-                to="/signup"
-                style={styles.mobileBtn}
-              >
-                Sign Up
-              </Link>
+              <Link to="/login" style={styles.mobileBtn}>Login</Link>
+              <Link to="/signup" style={styles.mobileBtn}>Sign Up</Link>
             </>
           ) : (
             <>
-              <Link
-                to="/dashboard"
-                style={styles.mobileBtn}
-              >
-                Dashboard
+              <Link to="/dashboard" style={styles.mobileBtn}>Dashboard</Link>
+              <Link to="/cart" style={styles.mobileBtn}>
+                🛒 Cart ({cart.length})
               </Link>
 
-              <button
-                onClick={logoutUser}
-                style={styles.mobileBtn}
-              >
+              <button onClick={logoutUser} style={styles.mobileBtn}>
                 Logout
               </button>
             </>
@@ -223,14 +137,11 @@ const styles = {
     width: "100%",
     zIndex: 1000,
     display: "flex",
-    justifyContent:
-      "space-between",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: "18px 60px",
-    background:
-      "rgba(2,4,11,.88)",
-    backdropFilter:
-      "blur(14px)"
+    background: "rgba(2,4,11,.88)",
+    backdropFilter: "blur(14px)"
   },
 
   headerMobile: {
@@ -240,17 +151,13 @@ const styles = {
     width: "100%",
     zIndex: 1000,
     display: "flex",
-    justifyContent:
-      "space-between",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: "16px 20px",
-    background:
-      "rgba(2,4,11,.92)"
+    background: "rgba(2,4,11,.92)"
   },
 
-  brandLink: {
-    textDecoration: "none"
-  },
+  brandLink: { textDecoration: "none" },
 
   brand: {
     display: "flex",
@@ -264,10 +171,7 @@ const styles = {
     borderRadius: "12px"
   },
 
-  title: {
-    margin: 0,
-    color: "white"
-  },
+  title: { margin: 0, color: "white" },
 
   sub: {
     margin: 0,
@@ -299,7 +203,7 @@ const styles = {
 
   userBox: {
     display: "flex",
-    gap: "12px",
+    gap: "16px",
     alignItems: "center"
   },
 
@@ -308,24 +212,27 @@ const styles = {
     height: "42px",
     borderRadius: "50%",
     objectFit: "cover",
-    border:
-      "2px solid #6f8fff"
+    border: "2px solid #6f8fff"
+  },
+
+  cart: {
+    color: "white",
+    textDecoration: "none",
+    fontSize: "16px"
   },
 
   btn: {
     padding: "10px 16px",
     border: "none",
     borderRadius: "8px",
-    background:
-      "linear-gradient(135deg,#6f8fff,#4d6fff)",
+    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
     color: "white",
     cursor: "pointer"
   },
 
   outlineBtn: {
     padding: "10px 16px",
-    border:
-      "1px solid rgba(255,255,255,.15)",
+    border: "1px solid rgba(255,255,255,.15)",
     borderRadius: "8px",
     color: "white",
     textDecoration: "none"
@@ -343,11 +250,9 @@ const styles = {
     top: "78px",
     left: 0,
     width: "100%",
-    background:
-      "rgba(2,4,11,.97)",
+    background: "rgba(2,4,11,.97)",
     display: "flex",
-    flexDirection:
-      "column",
+    flexDirection: "column",
     gap: "14px",
     padding: "24px"
   },
@@ -361,8 +266,7 @@ const styles = {
     padding: "12px",
     borderRadius: "8px",
     border: "none",
-    background:
-      "linear-gradient(135deg,#6f8fff,#4d6fff)",
+    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
     color: "white",
     textDecoration: "none"
   }

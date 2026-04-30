@@ -13,10 +13,13 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.0",
     "axios": "^1.15.1",
+    "cors": "^2.8.6",
     "emailjs-com": "^3.2.0",
+    "express": "^5.2.1",
     "firebase": "^12.12.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.9.0",
+    "mongoose": "^9.6.1",
     "nodemailer": "^8.0.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -36,5 +39,18 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "vite": "^8.0.4"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomeomittalOP/4knotts-brand.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RomeomittalOP/4knotts-brand/issues"
+  },
+  "homepage": "https://github.com/RomeomittalOP/4knotts-brand#readme"
 }
