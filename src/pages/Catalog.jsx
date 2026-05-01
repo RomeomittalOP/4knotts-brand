@@ -74,7 +74,7 @@ function Catalog() {
     )
   ];
 
-  const filters = ["ALL", "A4", "A5", "EXECUTIVE", "SPIRAL", "OFFICE", "PENS"];
+  const filters = ["ALL", "A4", "A5", "EXECUTIVE", "SPIRAL", "PENS"];
 
   const filtered =
     active === "ALL"

@@ -32,7 +32,6 @@ const filters = [
 "PENS",
 "A4",
 "SPIRAL",
-"OFFICE",
 "EXECUTIVE"
 ];
 
