@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
-import emailjs from "emailjs-com";
+import { auth } from "../firebase"; // 🔥 ADD
 
 export default function Cart() {
   const {
@@ -20,44 +20,41 @@ export default function Cart() {
     0
   );
 
-  // 🔥 FINAL ORDER FUNCTION
+  // 🔥 FINAL ORDER FUNCTION (UPDATED)
   const handleOrder = async () => {
     try {
-      const userEmail = "test@gmail.com"; // 🔁 baad me dynamic kar lena
+      const user = auth.currentUser;
 
-      // ✅ SAVE TO MONGODB
-      await fetch("http://localhost:5000/api/order", {
+      if (!user) {
+        alert("Please login first ❌");
+        return;
+      }
+
+      const res = await fetch("http://localhost:5000/api/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          email: userEmail,
+          name: user.displayName || "User",
+          email: user.email,
           items: cart,
           total: total
         })
       });
 
-      // ✅ SEND EMAIL
-      await emailjs.send(
-        "YOUR_SERVICE_ID",   // 🔁 replace karna
-        "YOUR_TEMPLATE_ID",  // 🔁 replace karna
-        {
-          user_email: userEmail,
-          order_details: cart.map(i => i.title).join(", "),
-          total: total
-        },
-        "YOUR_PUBLIC_KEY"    // 🔁 replace karna
-      );
+      const data = await res.json();
 
-      alert("Order Confirmed ✅");
-
-      clearCart();
-      setShowPayment(false);
+      if (res.ok) {
+        alert("Order placed successfully 🎉");
+        window.location.href = "/";
+      } else {
+        alert(data.error || "Something went wrong ❌");
+      }
 
     } catch (err) {
       console.log(err);
-      alert("Something went wrong ❌");
+      alert("Server error ❌");
     }
   };
 
@@ -150,7 +147,7 @@ export default function Cart() {
             )}
 
             <button style={styles.payBtn} onClick={handleOrder}>
-              Confirm Payment
+              Place Order (Demo)
             </button>
           </div>
         </div>

@@ -12,4 +12,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+// ✅ ONLY ONCE
 export const auth = getAuth(app);
