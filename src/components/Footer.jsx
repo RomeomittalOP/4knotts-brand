@@ -68,7 +68,9 @@ function Footer() {
             <p style={styles.link}>Track Order</p>
             <p style={styles.link}>Return Policy</p>
             <p style={styles.link}>Privacy Policy</p>
-            <p style={styles.link}>Terms of Service</p>
+           <Link to="/Terms" style={{ color: "#ccc", textDecoration: "none" }}>
+  Terms of Service
+</Link>
           </div>
         </div>
 

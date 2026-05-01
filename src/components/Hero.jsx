@@ -1,99 +1,71 @@
 import heroImage from "../assets/products/hero.png";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 function Hero() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   const handleMove = (e) => {
-    const x =
-      (e.clientX / window.innerWidth - 0.5) * 30;
-    const y =
-      (e.clientY / window.innerHeight - 0.5) * 30;
-
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
     setMouse({ x, y });
   };
 
   return (
-    <section
-      style={styles.hero}
-      onMouseMove={handleMove}
-    >
-      {/* BACKGROUND GLOW */}
+    <section style={styles.hero} onMouseMove={handleMove}>
+      {/* 🔥 BACKGROUND GLOW */}
       <div style={styles.glow1}></div>
       <div style={styles.glow2}></div>
 
-      {/* PARTICLES */}
-      <div style={styles.p1}></div>
-      <div style={styles.p2}></div>
-      <div style={styles.p3}></div>
-
-      {/* LEFT SIDE */}
+      {/* 🔥 LEFT */}
       <motion.div
         style={{
           ...styles.left,
-          transform: `translate(${mouse.x * 0.4}px,${
-            mouse.y * 0.4
-          }px)`
+          transform: `translate(${mouse.x * 0.4}px, ${mouse.y * 0.4}px)`
         }}
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
         <p style={styles.tag}>
-          DELHI • PREMIUM STATIONERY • SINCE
-          2026
+          DELHI • PREMIUM STATIONERY • SINCE 2026
         </p>
 
         <h1 style={styles.heading}>
-          Stationery
-          <br />
-          <span style={styles.gold}>
-            for life.
-          </span>
+          Stationery <br />
+          <span style={styles.gold}>for life.</span>
         </h1>
 
         <p style={styles.desc}>
-          Premium notebooks, executive
-          collections, A4 designs and office
-          essentials crafted for schools,
-          corporates and serious brands.
+          Premium notebooks, executive collections, A4 designs and office
+          essentials crafted for schools, corporates and serious brands.
         </p>
 
         <div style={styles.btnWrap}>
-          <Link
-            to="/catalog"
-            style={styles.goldBtn}
-          >
+          <Link to="/catalog" style={styles.goldBtn}>
             Explore Catalog
           </Link>
 
-          <Link
-            to="/wholesale"
-            style={styles.darkBtn}
-          >
+          <Link to="/wholesale" style={styles.darkBtn}>
             Contact Us
           </Link>
         </div>
       </motion.div>
 
-      {/* RIGHT SIDE */}
+      {/* 🔥 RIGHT */}
       <motion.div
         style={{
           ...styles.right,
-          transform: `translate(${-mouse.x *
-            0.6}px,${-mouse.y * 0.6}px)`
+          transform: `translate(${-mouse.x * 0.6}px, ${-mouse.y * 0.6}px)`
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2 }}
       >
-        {/* BACK CARD */}
         <div style={styles.layer1}></div>
         <div style={styles.layer2}></div>
 
-        {/* MAIN CARD */}
         <motion.div
           style={styles.card}
           animate={{
@@ -110,11 +82,7 @@ function Hero() {
             rotateY: -18
           }}
         >
-          <img
-            src={heroImage}
-            alt="Hero"
-            style={styles.image}
-          />
+          <img src={heroImage} alt="Hero" style={styles.image} />
 
           <div style={styles.shine}></div>
         </motion.div>
@@ -132,8 +100,7 @@ const styles = {
     padding: "90px 60px",
     position: "relative",
     overflow: "hidden",
-    background:
-      "linear-gradient(135deg,#061226,#08182f,#02040b)"
+    background: "linear-gradient(135deg,#061226,#08182f,#02040b)"
   },
 
   glow1: {
@@ -143,8 +110,7 @@ const styles = {
     width: "420px",
     height: "420px",
     borderRadius: "50%",
-    background:
-      "radial-gradient(circle,rgba(255,215,0,.18),transparent 70%)",
+    background: "radial-gradient(circle,rgba(255,215,0,.18),transparent 70%)",
     filter: "blur(50px)"
   },
 
@@ -155,14 +121,9 @@ const styles = {
     width: "420px",
     height: "420px",
     borderRadius: "50%",
-    background:
-      "radial-gradient(circle,rgba(92,138,255,.18),transparent 70%)",
+    background: "radial-gradient(circle,rgba(92,138,255,.18),transparent 70%)",
     filter: "blur(50px)"
   },
-
-  p1: particle("18%", "10%"),
-  p2: particle("65%", "14%"),
-  p3: particle("28%", "74%"),
 
   left: {
     position: "relative",
@@ -206,8 +167,7 @@ const styles = {
   goldBtn: {
     padding: "16px 34px",
     borderRadius: "999px",
-    background:
-      "linear-gradient(135deg,#d4af37,#b99118)",
+    background: "linear-gradient(135deg,#d4af37,#b99118)",
     color: "#111",
     fontWeight: "700",
     textDecoration: "none"
@@ -233,8 +193,7 @@ const styles = {
     height: "560px",
     borderRadius: "28px",
     background: "rgba(255,255,255,.04)",
-    transform: "rotate(-8deg) translateX(-40px)",
-    filter: "blur(1px)"
+    transform: "rotate(-8deg) translateX(-40px)"
   },
 
   layer2: {
@@ -252,10 +211,8 @@ const styles = {
     height: "590px",
     borderRadius: "28px",
     overflow: "hidden",
-    background:
-      "linear-gradient(135deg,#0f2146,#08152d)",
-    boxShadow:
-      "0 30px 70px rgba(0,0,0,.45)"
+    background: "linear-gradient(135deg,#0f2146,#08152d)",
+    boxShadow: "0 30px 70px rgba(0,0,0,.45)"
   },
 
   image: {
@@ -270,24 +227,9 @@ const styles = {
     left: "-50%",
     width: "40%",
     height: "100%",
-    background:
-      "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)",
+    background: "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)",
     transform: "skewX(-25deg)"
   }
 };
-
-function particle(top, left) {
-  return {
-    position: "absolute",
-    top,
-    left,
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
-    background: "#d4af37",
-    boxShadow:
-      "0 0 18px rgba(212,175,55,.8)"
-  };
-}
 
 export default Hero;

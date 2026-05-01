@@ -624,3 +624,29 @@ img{
   object-fit: cover;
   border-radius: 12px;
 }
+body {
+  background: linear-gradient(135deg, #02040b, #07162f, #02040b);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 🔥 LOGO BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px; /* size control */
+  height: 500px;
+
+  background: url("/src/assets/logo.png") no-repeat center;
+  background-size: contain;
+
+  opacity: 0.04; /* 🔥 transparency control */
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(1px);
+  transform: translate(-50%, -50%) rotate(-10deg);
+} 

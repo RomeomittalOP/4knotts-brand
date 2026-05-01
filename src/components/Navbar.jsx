@@ -46,7 +46,7 @@ function Navbar() {
           </div>
         </div>
       </Link>
-
+        
       {/* RIGHT */}
       {!mobile && (
         <div style={styles.right}>

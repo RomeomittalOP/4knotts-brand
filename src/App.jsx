@@ -1,6 +1,4 @@
 // FILE: src/App.jsx
-// FULL FILE REPLACE KAR DO
-// Login / Signup / Dashboard routes add ho gaye
 
 import {
   BrowserRouter as Router,
@@ -17,6 +15,7 @@ import {
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// 🔥 PAGES
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import WholesalePage from "./pages/WholesalePage";
@@ -24,19 +23,20 @@ import Customization from "./pages/Customization";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Cart from "./pages/Cart";
+import Terms from "./pages/Terms"; // ✅ ADD THIS
 
+// 🔥 COMPONENTS
 import ProductShowcase from "./components/ProductShowcase";
 import BrandStatement from "./components/BrandStatement";
-import Cart from "./pages/Cart";
+
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
-      <Routes
-        location={location}
-        key={location.pathname}
-      >
+      <Routes location={location} key={location.pathname}>
+
         {/* HOME */}
         <Route
           path="/"
@@ -109,22 +109,33 @@ function AnimatedRoutes() {
             </ProtectedRoute>
           }
         />
+
+        {/* CART */}
         <Route
-  path="/cart"
-  element={
-    <PageTransition>
-      <Cart />
-    </PageTransition>
-  }
-/>
+          path="/cart"
+          element={
+            <PageTransition>
+              <Cart />
+            </PageTransition>
+          }
+        />
+
+        {/* 🔥 TERMS (FIX) */}
+        <Route
+          path="/terms"
+          element={
+            <PageTransition>
+              <Terms />
+            </PageTransition>
+          }
+        />
+
       </Routes>
     </AnimatePresence>
   );
 }
 
-function PageTransition({
-  children
-}) {
+function PageTransition({ children }) {
   return (
     <motion.div
       initial={{
