@@ -5,58 +5,20 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CartContext } from "../context/CartContext";
 
-/* AUTO IMPORT ALL PRODUCTS */
-const a4Front = Object.values(
-  import.meta.glob("../assets/products/a4/*-front.png", {
-    eager: true,
-    import: "default"
-  })
-);
+/* AUTO IMPORT */
+const a4Front = Object.values(import.meta.glob("../assets/products/a4/*-front.png", { eager: true, import: "default" }));
+const a4Back = Object.values(import.meta.glob("../assets/products/a4/*-back.png", { eager: true, import: "default" }));
 
-const a4Back = Object.values(
-  import.meta.glob("../assets/products/a4/*-back.png", {
-    eager: true,
-    import: "default"
-  })
-);
+const a5Front = Object.values(import.meta.glob("../assets/products/a5/*-front.png", { eager: true, import: "default" }));
+const a5Back = Object.values(import.meta.glob("../assets/products/a5/*-back.png", { eager: true, import: "default" }));
 
-const a5Front = Object.values(
-  import.meta.glob("../assets/products/a5/*-front.png", {
-    eager: true,
-    import: "default"
-  })
-);
+const executiveFront = Object.values(import.meta.glob("../assets/products/executive/*-front.png", { eager: true, import: "default" }));
+const executiveBack = Object.values(import.meta.glob("../assets/products/executive/*-back.png", { eager: true, import: "default" }));
 
-const a5Back = Object.values(
-  import.meta.glob("../assets/products/a5/*-back.png", {
-    eager: true,
-    import: "default"
-  })
-);
+/* SPIRAL */
+const spiralImages = Object.values(import.meta.glob("../assets/products/spiral/*", { eager: true, import: "default" }));
 
-const executiveFront = Object.values(
-  import.meta.glob("../assets/products/executive/*-front.png", {
-    eager: true,
-    import: "default"
-  })
-);
-
-const executiveBack = Object.values(
-  import.meta.glob("../assets/products/executive/*-back.png", {
-    eager: true,
-    import: "default"
-  })
-);
-
-/* 🔥 NEW: SPIRAL (LANDSCAPE ONLY) */
-const spiralImages = Object.values(
-  import.meta.glob("../assets/products/spiral/*", {
-    eager: true,
-    import: "default"
-  })
-);
-
-/* CREATE PRODUCT ARRAYS */
+/* PRODUCT BUILDERS */
 const makeProducts = (frontArr, backArr, category, title) =>
   frontArr.map((img, i) => ({
     id: `${category}-${i}`,
@@ -68,14 +30,13 @@ const makeProducts = (frontArr, backArr, category, title) =>
     isLandscape: false
   }));
 
-/* 🔥 SPIRAL PRODUCTS */
 const makeSpiral = (arr) =>
   arr.map((img, i) => ({
     id: `SPIRAL-${i}`,
     title: `Spiral Notebook ${i + 1}`,
     category: "SPIRAL",
     front: img,
-    back: img, // same image (no flip)
+    back: img,
     price: 199 + i * 20,
     isLandscape: true
   }));
@@ -84,16 +45,20 @@ function Catalog() {
   const [active, setActive] = useState("ALL");
   const [popup, setPopup] = useState(false);
 
+  /* 🔥 FIXED FUNCTION */
+  const clickFilter = (item) => {
+    if (item === "PENS") {
+      setPopup(true);
+      return;
+    }
+    setActive(item);
+  };
+
   const products = [
     ...makeProducts(a4Front, a4Back, "A4", "A4 Premium"),
     ...makeProducts(a5Front, a5Back, "A5", "A5 Notebook"),
-    ...makeProducts(
-      executiveFront,
-      executiveBack,
-      "EXECUTIVE",
-      "Executive Series"
-    ),
-    ...makeSpiral(spiralImages) // 🔥 ADD THIS
+    ...makeProducts(executiveFront, executiveBack, "EXECUTIVE", "Executive Series"),
+    ...makeSpiral(spiralImages)
   ];
 
   const filters = ["ALL", "A4", "A5", "EXECUTIVE", "SPIRAL", "PENS"];
@@ -103,30 +68,17 @@ function Catalog() {
       ? products
       : products.filter((item) => item.category === active);
 
-  const clickFilter = (item) => {
-    if (["OFFICE", "PENS"].includes(item)) {
-      setPopup(true);
-      setTimeout(() => setPopup(false), 2200);
-    } else {
-      setActive(item);
-    }
-  };
-
   return (
     <>
       <Navbar />
 
       <section style={styles.page}>
-        <Link to="/" style={styles.back}>
-          ← Home
-        </Link>
+        <Link to="/" style={styles.back}>← Home</Link>
 
         <p style={styles.tag}>PREMIUM COLLECTION</p>
 
         <h1 style={styles.heading}>
-          The <span style={styles.gold}>complete</span>
-          <br />
-          collection.
+          The <span style={styles.gold}>complete</span><br />collection.
         </h1>
 
         <div style={styles.filters}>
@@ -152,42 +104,51 @@ function Catalog() {
         </div>
       </section>
 
-      {popup && <div style={styles.popup}>✨ Coming Soon</div>}
+      {/* 🔥 WORKING MODAL */}
+      {popup && (
+        <div style={styles.overlay} onClick={() => setPopup(false)}>
+          <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h1 style={styles.modalTitle}>COMING SOON</h1>
+            <p style={styles.modalText}>
+              Premium writing instruments are on the way.<br />
+              Crafted. Designed. Perfected.
+            </p>
+
+            <button style={styles.closeBtn} onClick={() => setPopup(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>
   );
 }
 
-/* 🔥 FIXED CARD */
+/* CARD */
 function Card({ product }) {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-      style={styles.card}
-    >
-      <div
-        style={{
-          ...styles.imageWrap,
-          height: product.isLandscape ? "180px" : "330px" // 🔥 MAIN CHANGE
-        }}
-        className="card"
-      >
-        <div className="card-inner">
-          <div className="card-front">
-            <img src={product.front} style={styles.image} />
-          </div>
-
-          {!product.isLandscape && ( // 🔥 NO FLIP FOR SPIRAL
+    <motion.div whileHover={{ y: -8, scale: 1.02 }} style={styles.card}>
+      
+      {product.isLandscape ? (
+        <div style={{ ...styles.imageWrap, height: "180px" }}>
+          <img src={product.front} style={styles.image} />
+        </div>
+      ) : (
+        <div style={styles.imageWrap} className="card">
+          <div className="card-inner">
+            <div className="card-front">
+              <img src={product.front} style={styles.image} />
+            </div>
             <div className="card-back">
               <img src={product.back} style={styles.image} />
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       <h3 style={styles.title}>{product.title}</h3>
       <p style={styles.cat}>{product.category}</p>
@@ -206,6 +167,7 @@ function Card({ product }) {
   );
 }
 
+/* STYLES */
 const styles = {
   page: {
     padding: "140px 40px 80px",
@@ -229,27 +191,23 @@ const styles = {
 
   heading: {
     fontSize: "88px",
-    lineHeight: ".92",
     color: "white",
-    margin: "10px 0 35px",
-    fontFamily: "Cormorant Garamond"
+    marginBottom: "30px"
   },
 
   gold: { color: "#d4af37" },
 
   filters: {
     display: "flex",
-    flexWrap: "wrap",
     gap: "14px",
     marginBottom: "35px"
   },
 
   btn: {
     border: "none",
-    padding: "14px 22px",
+    padding: "12px 20px",
     borderRadius: "40px",
-    cursor: "pointer",
-    fontWeight: "700"
+    cursor: "pointer"
   },
 
   grid: {
@@ -259,16 +217,15 @@ const styles = {
   },
 
   card: {
-    background: "linear-gradient(145deg,#0e1528,#08101c)",
-    borderRadius: "22px",
-    padding: "20px",
-    border: "1px solid rgba(212,175,55,.12)"
+    background: "#0e1528",
+    borderRadius: "20px",
+    padding: "20px"
   },
 
   imageWrap: {
-    borderRadius: "18px",
+    height: "320px",
     overflow: "hidden",
-    background: "#0c1220"
+    borderRadius: "12px"
   },
 
   image: {
@@ -277,43 +234,54 @@ const styles = {
     objectFit: "cover"
   },
 
-  title: {
-    color: "white",
-    fontSize: "28px",
-    marginTop: "16px",
-    fontFamily: "Cormorant Garamond"
-  },
-
-  cat: {
-    color: "#d4af37",
-    marginTop: "8px"
-  },
-
-  price: {
-    color: "#fff",
-    marginTop: "6px"
-  },
+  title: { color: "white", marginTop: "12px" },
+  cat: { color: "#d4af37" },
+  price: { color: "white" },
 
   cartBtn: {
-    marginTop: "12px",
+    marginTop: "10px",
     padding: "10px",
     width: "100%",
     background: "#d4af37",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    fontWeight: "700"
+    border: "none"
   },
 
-  popup: {
+  overlay: {
     position: "fixed",
-    right: "30px",
-    bottom: "30px",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    background: "rgba(0,0,0,0.8)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999
+  },
+
+  modal: {
+    background: "#111",
+    padding: "40px",
+    borderRadius: "10px",
+    color: "white",
+    textAlign: "center"
+  },
+
+  modalTitle: {
+    fontSize: "32px",
+    color: "#d4af37"
+  },
+
+  modalText: {
+    marginTop: "10px"
+  },
+
+  closeBtn: {
+    marginTop: "20px",
+    padding: "10px 20px",
     background: "#d4af37",
-    color: "#111",
-    padding: "16px 22px",
-    borderRadius: "14px",
-    fontWeight: "700"
+    border: "none",
+    cursor: "pointer"
   }
 };
 
