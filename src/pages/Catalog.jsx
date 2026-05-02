@@ -48,6 +48,14 @@ const executiveBack = Object.values(
   })
 );
 
+/* 🔥 NEW: SPIRAL (LANDSCAPE ONLY) */
+const spiralImages = Object.values(
+  import.meta.glob("../assets/products/spiral/*", {
+    eager: true,
+    import: "default"
+  })
+);
+
 /* CREATE PRODUCT ARRAYS */
 const makeProducts = (frontArr, backArr, category, title) =>
   frontArr.map((img, i) => ({
@@ -56,7 +64,20 @@ const makeProducts = (frontArr, backArr, category, title) =>
     category,
     front: img,
     back: backArr[i],
-    price: 199 + i * 20
+    price: 199 + i * 20,
+    isLandscape: false
+  }));
+
+/* 🔥 SPIRAL PRODUCTS */
+const makeSpiral = (arr) =>
+  arr.map((img, i) => ({
+    id: `SPIRAL-${i}`,
+    title: `Spiral Notebook ${i + 1}`,
+    category: "SPIRAL",
+    front: img,
+    back: img, // same image (no flip)
+    price: 199 + i * 20,
+    isLandscape: true
   }));
 
 function Catalog() {
@@ -71,7 +92,8 @@ function Catalog() {
       executiveBack,
       "EXECUTIVE",
       "Executive Series"
-    )
+    ),
+    ...makeSpiral(spiralImages) // 🔥 ADD THIS
   ];
 
   const filters = ["ALL", "A4", "A5", "EXECUTIVE", "SPIRAL", "PENS"];
@@ -82,7 +104,7 @@ function Catalog() {
       : products.filter((item) => item.category === active);
 
   const clickFilter = (item) => {
-    if (["SPIRAL", "OFFICE", "PENS"].includes(item)) {
+    if (["OFFICE", "PENS"].includes(item)) {
       setPopup(true);
       setTimeout(() => setPopup(false), 2200);
     } else {
@@ -147,20 +169,26 @@ function Card({ product }) {
       transition={{ duration: 0.3 }}
       style={styles.card}
     >
-      {/* 🔥 ONLY IMAGE FLIPS */}
-      <div style={styles.imageWrap} className="card">
+      <div
+        style={{
+          ...styles.imageWrap,
+          height: product.isLandscape ? "180px" : "330px" // 🔥 MAIN CHANGE
+        }}
+        className="card"
+      >
         <div className="card-inner">
           <div className="card-front">
             <img src={product.front} style={styles.image} />
           </div>
 
-          <div className="card-back">
-            <img src={product.back} style={styles.image} />
-          </div>
+          {!product.isLandscape && ( // 🔥 NO FLIP FOR SPIRAL
+            <div className="card-back">
+              <img src={product.back} style={styles.image} />
+            </div>
+          )}
         </div>
       </div>
 
-      {/* 🔥 TEXT ALWAYS VISIBLE */}
       <h3 style={styles.title}>{product.title}</h3>
       <p style={styles.cat}>{product.category}</p>
       <p style={styles.price}>₹{product.price}</p>
@@ -237,9 +265,7 @@ const styles = {
     border: "1px solid rgba(212,175,55,.12)"
   },
 
-  /* 🔥 FIXED WRAP */
   imageWrap: {
-    height: "330px",
     borderRadius: "18px",
     overflow: "hidden",
     background: "#0c1220"
