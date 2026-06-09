@@ -1,199 +1,115 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
 } from "firebase/auth";
-
 import { auth } from "../firebase";
+import logo from "../assets/logo-cutout.png";
 
 function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState("");
-  const [confirmObj, setConfirmObj] = useState(null);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // ✅ EMAIL LOGIN
   const loginUser = async (e) => {
     e.preventDefault();
     setError("");
-
+    setMsg("");
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.message.replace("Firebase:", "").trim());
+    } finally {
+      setLoading(false);
     }
   };
 
-  // ✅ GOOGLE LOGIN
   const googleLogin = async () => {
     setError("");
-
     try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, new GoogleAuthProvider());
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.message.replace("Firebase:", "").trim());
     }
   };
 
-  // ✅ FORGOT PASSWORD
   const forgotPassword = async () => {
+    setError("");
+    setMsg("");
     if (!email) {
-      setError("Enter email first");
+      setError("Pehle apna email daalo, phir reset bhejenge.");
       return;
     }
-
     try {
       await sendPasswordResetEmail(auth, email);
-      setMsg("Reset email sent 📩");
+      setMsg("Reset link bhej diya 📩 — inbox check karo.");
     } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  // ✅ SEND OTP (FIXED)
-  const sendOtp = async () => {
-    try {
-      setError("");
-      setMsg("");
-
-      // 🔥 Create Recaptcha only once
-    if (window.recaptchaVerifier) {
-  window.recaptchaVerifier.clear();
-}
-
-window.recaptchaVerifier = new RecaptchaVerifier(
-  auth,
-  "recaptcha-container",
-  { size: "normal" }
-);
-      const appVerifier = window.recaptchaVerifier;
-
-      // 🔥 Clean number
-      const cleanPhone = phone.replace(/\D/g, "");
-
-      const formattedPhone = cleanPhone.startsWith("91")
-        ? `+${cleanPhone}`
-        : `+91${cleanPhone}`;
-
-      const confirmation = await signInWithPhoneNumber(
-        auth,
-        formattedPhone,
-        appVerifier
-      );
-
-      setConfirmObj(confirmation);
-      setMsg("OTP Sent 🚀");
-
-    } catch (err) {
-      console.log(err);
-      setError(err.message);
-    }
-  };
-
-  // ✅ VERIFY OTP
-  const verifyOtp = async () => {
-    try {
-      setError("");
-
-      if (!confirmObj) {
-        setError("Send OTP first");
-        return;
-      }
-
-      await confirmObj.confirm(otp);
-      setMsg("Login Successful ✅");
-      navigate("/");
-
-    } catch (err) {
-      setError(err.message);
+      setError(err.message.replace("Firebase:", "").trim());
     }
   };
 
   return (
     <section style={styles.page}>
-      <div style={styles.box}>
-        <h1>Login</h1>
-        <p style={styles.sub}>Welcome back, superstar ✨</p>
+      <div style={styles.glow} />
 
-        {/* EMAIL LOGIN */}
+      <div style={styles.box}>
+        <img src={logo} alt="Noted By 4 Knotts" style={styles.logo} />
+
+        <h1 style={styles.title}>Welcome Back</h1>
+        <p style={styles.sub}>Login to your Noted account ✨</p>
+
         <form onSubmit={loginUser} style={styles.form}>
           <input
             style={styles.input}
             type="email"
             placeholder="Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-
           <input
             style={styles.input}
             type="password"
             placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
-          <button style={styles.btn}>Login</button>
+          <p style={styles.forgot} onClick={forgotPassword}>
+            Forgot password?
+          </p>
+
+          <button style={styles.btn} disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
 
-        {/* GOOGLE */}
+        <div style={styles.divider}>
+          <span style={styles.dividerText}>or</span>
+        </div>
+
         <button style={styles.googleBtn} onClick={googleLogin}>
-          Continue with Google
+          <span style={styles.gIcon}>G</span> Continue with Google
         </button>
-
-        {/* PHONE LOGIN */}
-        <div style={styles.line}>OR Login with Phone</div>
-
-        <input
-          style={styles.input}
-          placeholder="+91XXXXXXXXXX"
-          onChange={(e) => setPhone(e.target.value)}
-        />
-
-        <button style={styles.btn} onClick={sendOtp}>
-          Send OTP
-        </button>
-
-        {confirmObj && (
-          <>
-            <input
-              style={styles.input}
-              placeholder="Enter OTP"
-              onChange={(e) => setOtp(e.target.value)}
-            />
-
-            <button style={styles.btn} onClick={verifyOtp}>
-              Verify OTP
-            </button>
-          </>
-        )}
-
-        {/* 🔥 RECAPTCHA */}
-        <div id="recaptcha-container" style={{ marginTop: "10px" }}></div>
-
-        <p style={styles.forgot} onClick={forgotPassword}>
-          Forgot Password?
-        </p>
 
         {error && <p style={styles.error}>{error}</p>}
         {msg && <p style={styles.msg}>{msg}</p>}
 
         <p style={styles.bottom}>
-          New user?{" "}
+          New here?{" "}
           <Link to="/signup" style={styles.link}>
-            Sign Up
+            Create an account
           </Link>
         </p>
       </div>
@@ -204,91 +120,121 @@ window.recaptchaVerifier = new RecaptchaVerifier(
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "linear-gradient(135deg,#02040b,#07162f,#0d2a52)",
+    background: "radial-gradient(circle at 50% 0%, #0a1428, #02040b 70%)",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: "20px",
+    position: "relative",
+    overflow: "hidden",
   },
-
+  glow: {
+    position: "absolute",
+    width: "520px",
+    height: "520px",
+    borderRadius: "50%",
+    background:
+      "radial-gradient(circle, rgba(212,175,55,.16), transparent 65%)",
+    filter: "blur(20px)",
+  },
   box: {
+    position: "relative",
     width: "100%",
-    maxWidth: "430px",
-    background: "rgba(255,255,255,.05)",
-    padding: "40px",
-    borderRadius: "18px",
-    backdropFilter: "blur(14px)",
-    color: "white"
+    maxWidth: "420px",
+    background: "rgba(255,255,255,.04)",
+    padding: "40px 36px",
+    borderRadius: "24px",
+    border: "1px solid rgba(212,175,55,.18)",
+    backdropFilter: "blur(16px)",
+    boxShadow: "0 30px 70px rgba(0,0,0,.5)",
+    color: "white",
+    textAlign: "center",
   },
-
-  sub: {
-    color: "#b8b8b8",
-    marginBottom: "24px"
+  logo: {
+    width: "58px",
+    height: "58px",
+    borderRadius: "14px",
+    background: "#fff",
+    padding: "6px",
+    boxSizing: "border-box",
+    objectFit: "contain",
+    marginBottom: "16px",
   },
-
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "14px"
+  title: {
+    margin: 0,
+    fontSize: "30px",
+    fontFamily: "Cormorant Garamond, serif",
+    fontWeight: 600,
   },
-
+  sub: { color: "#9aa4bd", marginTop: "6px", marginBottom: "26px" },
+  form: { display: "flex", flexDirection: "column", gap: "12px" },
   input: {
-    padding: "14px",
-    borderRadius: "10px",
-    border: "none",
-    marginTop: "10px"
+    padding: "14px 16px",
+    borderRadius: "12px",
+    border: "1px solid rgba(255,255,255,.1)",
+    background: "rgba(255,255,255,.06)",
+    color: "white",
+    fontSize: "15px",
+    outline: "none",
   },
-
+  forgot: {
+    color: "#9aa4bd",
+    fontSize: "13px",
+    textAlign: "right",
+    margin: "2px 2px 4px",
+    cursor: "pointer",
+  },
   btn: {
     padding: "14px",
-    borderRadius: "10px",
+    borderRadius: "12px",
     border: "none",
-    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
-    color: "white",
-    marginTop: "10px",
-    cursor: "pointer"
+    background: "linear-gradient(135deg,#f5d77a,#d4af37,#b99118)",
+    color: "#111",
+    fontWeight: 700,
+    fontSize: "15px",
+    cursor: "pointer",
   },
-
+  divider: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "20px 0",
+    borderTop: "1px solid rgba(255,255,255,.1)",
+    position: "relative",
+  },
+  dividerText: {
+    position: "absolute",
+    top: "-10px",
+    background: "#070b16",
+    padding: "0 12px",
+    color: "#9aa4bd",
+    fontSize: "13px",
+  },
   googleBtn: {
-    marginTop: "14px",
     width: "100%",
-    padding: "14px",
-    borderRadius: "10px",
-    border: "none",
+    padding: "13px",
+    borderRadius: "12px",
+    border: "1px solid rgba(255,255,255,.15)",
     background: "#fff",
     color: "#111",
-    cursor: "pointer"
+    fontWeight: 600,
+    fontSize: "15px",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
   },
-
-  line: {
-    marginTop: "18px",
-    color: "#9ca3af",
-    textAlign: "center"
-  },
-
-  forgot: {
-    marginTop: "16px",
-    color: "#6f8fff",
-    cursor: "pointer"
-  },
-
+  gIcon: { fontWeight: 800, color: "#4285F4", fontSize: "17px" },
   error: {
-    color: "#ff8f8f",
-    marginTop: "14px"
+    color: "#ff9a9a",
+    marginTop: "16px",
+    fontSize: "14px",
+    lineHeight: 1.5,
   },
-
-  msg: {
-    color: "#8fffaa",
-    marginTop: "14px"
-  },
-
-  bottom: {
-    marginTop: "20px",
-    color: "#b8b8b8"
-  },
-
-  link: {
-    color: "#6f8fff"
-  }
+  msg: { color: "#8fffaa", marginTop: "16px", fontSize: "14px" },
+  bottom: { marginTop: "22px", color: "#9aa4bd", fontSize: "14px" },
+  link: { color: "#d4af37", fontWeight: 600, textDecoration: "none" },
 };
 
 export default Login;

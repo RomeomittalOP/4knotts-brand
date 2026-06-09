@@ -38,9 +38,9 @@ function Hero() {
         </h1>
 
         <p style={styles.desc}>
-          Luxury notebooks, diaries &amp; custom stationery on buttery{" "}
-          <b style={styles.descHi}>100 GSM</b> paper — bold designs, clean
-          finish, and a vibe that just hits different.
+          Notebooks, diaries &amp; custom stationery designed to turn
+          plain pages into your <b style={styles.descHi}>main-character
+          moment.</b> ✨
         </p>
 
         <div style={styles.btnWrap}>
