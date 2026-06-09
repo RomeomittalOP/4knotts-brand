@@ -1,26 +1,78 @@
+import { motion } from "framer-motion";
+
 function ProductShowcase() {
   const products = [
     {
       title: "Premium Notebooks",
-      desc: "Luxury spiral notebooks for students and professionals.",
+      desc: "Spiral notebooks that make your notes look elite.",
       emoji: "📒"
     },
     {
       title: "Executive Diaries",
-      desc: "Elegant diaries for offices, meetings and gifting.",
+      desc: "For the boardroom main characters and meeting royalty.",
       emoji: "📘"
     },
     {
       title: "Office Essentials",
-      desc: "Pens, folders, files and desk stationery supplies.",
+      desc: "Pens, folders & desk drip that actually slaps.",
       emoji: "🖊️"
     },
     {
       title: "Custom Branding",
-      desc: "Personalized printing for schools and companies.",
+      desc: "Your logo, your vibe — printed to perfection.",
       emoji: "🎁"
     }
   ];
+
+  return (
+    <section style={styles.section}>
+      <motion.p
+        style={styles.tag}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        THE LINEUP
+      </motion.p>
+
+      <motion.h2
+        style={styles.heading}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.05 }}
+      >
+        Built Different, For Every Desk
+      </motion.h2>
+
+      <div style={styles.grid}>
+        {products.map((item, index) => (
+          <motion.div
+            key={index}
+            style={styles.card}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.12,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            whileHover={{
+              y: -10,
+              borderColor: "rgba(212,175,55,.45)",
+              boxShadow: "0 20px 45px rgba(0,0,0,.45)"
+            }}
+          >
+            <div style={styles.icon}>{item.emoji}</div>
+            <h3 style={styles.title}>{item.title}</h3>
+            <p style={styles.desc}>{item.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 const styles = {

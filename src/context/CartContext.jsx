@@ -1,14 +1,24 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  
+
   // ✅ LOCAL STORAGE (important)
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
   });
+
+  // ✅ TOAST (shown when a product is added)
+  const [toast, setToast] = useState(null);
+  const toastTimer = useRef(null);
+
+  const showToast = (product) => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ ...product, _t: Date.now() });
+    toastTimer.current = setTimeout(() => setToast(null), 2800);
+  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -31,11 +41,10 @@ export function CartProvider({ children }) {
         updatedCart = [...prev, { ...product, qty: 1 }];
       }
 
-      console.log("🟢 Product Added:", product);
-      console.log("🛒 Updated Cart:", updatedCart);
-
       return updatedCart;
     });
+
+    showToast(product);
   };
 
   // ✅ REMOVE FROM CART (ID BASED - FIXED)
@@ -86,7 +95,9 @@ export function CartProvider({ children }) {
         removeFromCart,
         increaseQty,
         decreaseQty,
-        clearCart
+        clearCart,
+        toast,
+        dismissToast: () => setToast(null)
       }}
     >
       {children}

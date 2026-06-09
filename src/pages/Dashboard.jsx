@@ -16,11 +16,11 @@ function Dashboard() {
     <section style={styles.page}>
       <div style={styles.box}>
         <p style={styles.tag}>
-          4 KNOTTS DASHBOARD
+          NOTED BY 4 KNOTTS DASHBOARD
         </p>
 
         <h1 style={styles.heading}>
-          Welcome Back
+          Hey, superstar ✨
         </h1>
 
         <p style={styles.email}>
@@ -30,22 +30,22 @@ function Dashboard() {
         <div style={styles.grid}>
           <div style={styles.card}>
             <h3>My Orders</h3>
-            <p>Track your bulk & retail orders.</p>
+            <p>Track your bulk & retail hauls.</p>
           </div>
 
           <div style={styles.card}>
-            <h3>Saved Products</h3>
-            <p>Your favourite stationery items.</p>
+            <h3>Saved Faves</h3>
+            <p>The stationery living in your head.</p>
           </div>
 
           <div style={styles.card}>
             <h3>Custom Requests</h3>
-            <p>Manage branding enquiries.</p>
+            <p>Your branding ideas, sorted.</p>
           </div>
 
           <div style={styles.card}>
             <h3>Account</h3>
-            <p>Profile & preferences settings.</p>
+            <p>Profile & vibe settings.</p>
           </div>
         </div>
 

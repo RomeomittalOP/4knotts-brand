@@ -127,7 +127,7 @@ window.recaptchaVerifier = new RecaptchaVerifier(
     <section style={styles.page}>
       <div style={styles.box}>
         <h1>Login</h1>
-        <p style={styles.sub}>Welcome Back</p>
+        <p style={styles.sub}>Welcome back, superstar ✨</p>
 
         {/* EMAIL LOGIN */}
         <form onSubmit={loginUser} style={styles.form}>

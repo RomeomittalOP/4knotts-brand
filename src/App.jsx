@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Link,
   useLocation
 } from "react-router-dom";
 
@@ -27,8 +28,9 @@ import Cart from "./pages/Cart";
 import Terms from "./pages/Terms"; // ✅ ADD THIS
 
 // 🔥 COMPONENTS
-import ProductShowcase from "./components/ProductShowcase";
-import BrandStatement from "./components/BrandStatement";
+import IntroLoader from "./components/IntroLoader";
+import CartToast from "./components/CartToast";
+import ScrollProgress from "./components/ScrollProgress";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -42,11 +44,7 @@ function AnimatedRoutes() {
           path="/"
           element={
             <PageTransition>
-              <>
-                <Home />
-                <ProductShowcase />
-                <BrandStatement />
-              </>
+              <Home />
             </PageTransition>
           }
         />
@@ -130,8 +128,56 @@ function AnimatedRoutes() {
           }
         />
 
+        {/* 🔥 404 FALLBACK */}
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFound />
+            </PageTransition>
+          }
+        />
+
       </Routes>
     </AnimatePresence>
+  );
+}
+
+function NotFound() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "14px",
+        background: "linear-gradient(135deg,#02040b,#07162f,#02040b)",
+        color: "white",
+        textAlign: "center",
+        padding: "20px"
+      }}
+    >
+      <h1 style={{ fontSize: "96px", margin: 0, color: "#d4af37" }}>404</h1>
+      <p style={{ fontSize: "20px", opacity: 0.8 }}>
+        Yeh page maujood nahi hai.
+      </p>
+      <Link
+        to="/"
+        style={{
+          marginTop: "10px",
+          padding: "12px 28px",
+          borderRadius: "40px",
+          background: "#d4af37",
+          color: "#111",
+          textDecoration: "none",
+          fontWeight: 600
+        }}
+      >
+        ← Back to Home
+      </Link>
+    </div>
   );
 }
 
@@ -165,11 +211,17 @@ function PageTransition({ children }) {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <AnimatedRoutes />
-      </AuthProvider>
-    </Router>
+    <>
+      <IntroLoader />
+      <ScrollProgress />
+
+      <Router>
+        <AuthProvider>
+          <AnimatedRoutes />
+          <CartToast />
+        </AuthProvider>
+      </Router>
+    </>
   );
 }
 

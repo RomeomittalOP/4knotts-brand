@@ -134,7 +134,7 @@ function Signup() {
         <h1>Create Account</h1>
 
         <p style={styles.sub}>
-          Join 4 Knotts
+          Join the Noted fam ✨
         </p>
 
         {/* EMAIL */}

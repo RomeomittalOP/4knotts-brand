@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_BASE } from "../api";
 
 function Customization() {
   const [showPopup, setShowPopup] = useState(false);
@@ -46,10 +47,7 @@ function Customization() {
 
       if (image) data.append("image", image);
 
-      await axios.post(
-        "https://fourknotts-backend.onrender.com/api/customization",
-        data
-      );
+      await axios.post(`${API_BASE}/api/customization`, data);
 
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 3000);
@@ -77,15 +75,15 @@ function Customization() {
 
       <section style={styles.page}>
         <div style={styles.wrap}>
-          <p style={styles.tag}>PREMIUM CUSTOMIZATION</p>
+          <p style={styles.tag}>MAKE IT YOURS</p>
 
           <h1 style={styles.heading}>
-            Make It <span style={styles.gold}>Uniquely Yours</span>
+            Design It <span style={styles.gold}>Your Way</span>
           </h1>
 
           <p style={styles.sub}>
-            Create luxury notebooks, diaries and stationery with your
-            logo, design theme, premium pages and custom packaging.
+            Luxury notebooks, diaries and stationery built around your
+            logo, your theme, your packaging — basically, your whole vibe.
           </p>
 
           {/* TOP STEPS */}

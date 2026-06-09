@@ -6,15 +6,15 @@ function Footer() {
       {/* TOP CTA */}
       <section style={styles.cta}>
         <h2 style={styles.ctaHeading}>
-          Ready to Build Your Brand?
+          Ready To Make It Iconic?
         </h2>
 
         <p style={styles.ctaText}>
-          Premium notebooks, custom printing and wholesale solutions.
+          Premium notebooks, custom printing and bulk orders — let's make it yours.
         </p>
 
         <Link to="/customization" style={styles.ctaBtn}>
-          Start Now →
+          Let's Go →
         </Link>
       </section>
 
@@ -24,14 +24,14 @@ function Footer() {
           {/* LEFT */}
           <div>
             <h1 style={styles.logo}>
-              4 Knotts Stationery
+              Noted By 4 Knotts
             </h1>
 
             <p style={styles.desc}>
-              India's most premium notebook brand.
-              Crafted for writers, dreamers and doers
-              who believe the right notebook changes
-              everything.
+              India's most-wanted notebook brand. Made for
+              writers, dreamers and doers living their
+              main-character era — because the right
+              notebook honestly changes everything.
             </p>
 
             <div style={styles.icons}>
@@ -68,7 +68,7 @@ function Footer() {
             <p style={styles.link}>Track Order</p>
             <p style={styles.link}>Return Policy</p>
             <p style={styles.link}>Privacy Policy</p>
-           <Link to="/Terms" style={{ color: "#ccc", textDecoration: "none" }}>
+           <Link to="/terms" style={{ color: "#ccc", textDecoration: "none" }}>
   Terms of Service
 </Link>
           </div>
@@ -76,7 +76,7 @@ function Footer() {
 
         {/* BOTTOM */}
         <div style={styles.bottom}>
-          © 2024 4 Knotts Stationery. All rights reserved. Made with ❤️ in India.
+          © {new Date().getFullYear()} Noted By 4 Knotts. All rights reserved. Made with ❤️ in India.
         </div>
       </section>
     </footer>

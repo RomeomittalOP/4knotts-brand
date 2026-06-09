@@ -4,6 +4,8 @@ import Ticker from "../components/Ticker";
 import Legacy from "../components/Legacy";
 import Wholesale from "../components/Wholesale";
 import ProductShowcase from "../components/ProductShowcase";
+import BrandStatement from "../components/BrandStatement";
+import Reveal from "../components/Reveal";
 import Footer from "../components/Footer";
 
 function Home() {
@@ -22,38 +24,40 @@ function Home() {
       {/* DARK SECTION */}
       {/* WHITE */}
 <section style={styles.whiteSection}>
-  <div style={styles.container}>
-    <p style={styles.tagGold}>WHY CHOOSE US</p>
+  <Reveal style={styles.container}>
+    <p style={styles.tagGold}>THE HYPE IS REAL</p>
 
     <h2 style={styles.headingWhite}>
-      Trusted By Smart Brands
+      Brands That Get It, Get Us
     </h2>
 
     <p style={styles.descWhite}>
-      Premium quality, fast delivery and memorable
-      custom branding solutions across India.
+      Premium quality, quick delivery, and branding that
+      lives rent-free in everyone's head.
     </p>
-  </div>
+  </Reveal>
 </section>
       <Legacy />
 
       {/* WHITE SECTION */}
       <section style={styles.whiteSection}>
-        <div style={styles.container}>
-          <p style={styles.tagGold}>WHOLESALE</p>
+        <Reveal style={styles.container}>
+          <p style={styles.tagGold}>BULK MODE</p>
 
           <h2 style={styles.headingWhite}>
-            Bulk Orders. Premium Results.
+            Order Big. Flex Bigger.
           </h2>
 
           <p style={styles.descWhite}>
-            Trusted by schools, offices, institutions and
-            serious businesses nationwide.
+            Schools, offices and businesses that don't do
+            basic — they stock up with us.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       <Wholesale />
+
+      <BrandStatement />
 
       {/* ALWAYS LAST */}
       <Footer />

@@ -11,7 +11,7 @@ function Wholesale() {
           <h2>
             Built for <span>volume.</span>
             <br />
-            Finished with care.
+            Finished with the vibe.
           </h2>
 
           <div className="stats-row">

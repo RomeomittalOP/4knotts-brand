@@ -75,10 +75,10 @@ function Catalog() {
       <section style={styles.page}>
         <Link to="/" style={styles.back}>← Home</Link>
 
-        <p style={styles.tag}>PREMIUM COLLECTION</p>
+        <p style={styles.tag}>THE FULL DROP</p>
 
         <h1 style={styles.heading}>
-          The <span style={styles.gold}>complete</span><br />collection.
+          Everything, <span style={styles.gold}>in one</span><br />place.
         </h1>
 
         <div style={styles.filters}>
@@ -108,14 +108,14 @@ function Catalog() {
       {popup && (
         <div style={styles.overlay} onClick={() => setPopup(false)}>
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <h1 style={styles.modalTitle}>COMING SOON</h1>
+            <h1 style={styles.modalTitle}>DROPPING SOON 👀</h1>
             <p style={styles.modalText}>
-              Premium writing instruments are on the way.<br />
-              Crafted. Designed. Perfected.
+              Premium pens are loading...<br />
+              Trust us, they'll be worth the wait.
             </p>
 
             <button style={styles.closeBtn} onClick={() => setPopup(false)}>
-              Close
+              Bet, close
             </button>
           </div>
         </div>

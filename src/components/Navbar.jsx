@@ -1,4 +1,4 @@
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-cutout.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { signOut } from "firebase/auth";
@@ -41,8 +41,8 @@ function Navbar() {
           <img src={logo} alt="logo" style={styles.logo} />
 
           <div>
-            <h2 style={styles.title}>4 KNOTTS</h2>
-            <p style={styles.sub}>STATIONERY</p>
+            <h2 style={styles.title}>NOTED</h2>
+            <p style={styles.sub}>BY 4 KNOTTS</p>
           </div>
         </div>
       </Link>
@@ -168,7 +168,13 @@ const styles = {
   logo: {
     width: "52px",
     height: "52px",
-    borderRadius: "12px"
+    borderRadius: "14px",
+    background: "#fff",
+    padding: "6px",
+    boxSizing: "border-box",
+    objectFit: "contain",
+    border: "1px solid rgba(212,175,55,.55)",
+    boxShadow: "0 6px 18px rgba(0,0,0,.35)"
   },
 
   title: { margin: 0, color: "white" },

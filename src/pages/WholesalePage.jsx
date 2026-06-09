@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { API_BASE } from "../api";
 
 function WholesalePage() {
   const [showPopup, setShowPopup] = useState(false);
@@ -31,10 +32,7 @@ function WholesalePage() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://fourknotts-backend.onrender.com/api/wholesale",
-        formData
-      );
+      await axios.post(`${API_BASE}/api/wholesale`, formData);
 
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 3000);
@@ -62,12 +60,12 @@ function WholesalePage() {
           <p style={styles.tag}>WHOLESALE • BULK • BESPOKE</p>
 
           <h1 style={styles.heading}>
-            Begin a <span style={styles.gold}>conversation.</span>
+            Let's <span style={styles.gold}>talk bulk.</span>
           </h1>
 
           <p style={styles.sub}>
-            Premium notebooks, corporate gifting, institutional supply
-            and custom branded stationery solutions for businesses.
+            Premium notebooks, corporate gifting and custom branded
+            stationery for businesses that like to do things big.
           </p>
 
           {/* TRUST BAR */}

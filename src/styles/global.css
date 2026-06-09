@@ -6,6 +6,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Brand shimmer for the intro reveal + gold accents */
+@keyframes introShimmer {
+  to { background-position: 200% center; }
+}
+
+/* Cart toast entry */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(14px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 *{
   margin:0;
   padding:0;
@@ -639,7 +650,7 @@ body::before {
   width: 500px; /* size control */
   height: 500px;
 
-  background: url("/src/assets/logo.png") no-repeat center;
+  background: url("../assets/logo-cutout.png") no-repeat center;
   background-size: contain;
 
   opacity: 0.04; /* 🔥 transparency control */

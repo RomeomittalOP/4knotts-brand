@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import { auth } from "../firebase"; // 🔥 ADD
+import { API_BASE } from "../api";
 
 export default function Cart() {
   const {
@@ -30,7 +31,7 @@ export default function Cart() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/order", {
+      const res = await fetch(`${API_BASE}/api/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -63,10 +64,10 @@ export default function Cart() {
       <Navbar />
 
       <div style={styles.page}>
-        <h1 style={styles.heading}>🛒 Your Cart</h1>
+        <h1 style={styles.heading}>🛒 Your Bag</h1>
 
         {cart.length === 0 ? (
-          <p style={styles.empty}>Cart is empty 😢</p>
+          <p style={styles.empty}>It's empty in here, bestie 😭 go add some drip.</p>
         ) : (
           <>
             {cart.map((item) => (

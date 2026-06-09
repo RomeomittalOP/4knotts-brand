@@ -20,7 +20,7 @@ function Terms() {
       <h1 style={styles.title}>Terms of Service</h1>
 
       <p style={styles.subtitle}>
-        Clauses for 4 Knotts Stationery Agreement
+        Clauses for Noted By 4 Knotts Agreement
       </p>
 
       <div style={styles.container}>
@@ -61,7 +61,7 @@ const terms = [
   {
     title: "Property Rights",
     content:
-      "The rights of the design will remain with 4Knotts Stationery even after acquisition of the designs by the client company."
+      "The rights of the design will remain with Noted By 4 Knotts even after acquisition of the designs by the client company."
   },
   {
     title: "Termination of Project",
@@ -71,7 +71,7 @@ const terms = [
   {
     title: "Usage Rights",
     content:
-      "The client cannot modify designs without approval. Ownership remains with 4Knotts. Any modification requires a new project."
+      "The client cannot modify designs without approval. Ownership remains with Noted By 4 Knotts. Any modification requires a new project."
   },
   {
     title: "Product Usage Scope",
@@ -81,7 +81,7 @@ const terms = [
   {
     title: "Royalty",
     content:
-      "4Knotts is entitled to 15% of gross revenue from design sales. Payments will be made quarterly."
+      "Noted By 4 Knotts is entitled to 15% of gross revenue from design sales. Payments will be made quarterly."
   },
   {
     title: "Quality Control",
@@ -106,7 +106,7 @@ const terms = [
   {
     title: "Print Management",
     content:
-      "4Knotts is not responsible for printing errors after final approval."
+      "Noted By 4 Knotts is not responsible for printing errors after final approval."
   },
   {
     title: "Client Responsibilities",
@@ -116,7 +116,7 @@ const terms = [
   {
     title: "Indemnification",
     content:
-      "Client protects 4Knotts from legal claims related to design usage."
+      "Client protects Noted By 4 Knotts from legal claims related to design usage."
   },
   {
     title: "Limited Liability",

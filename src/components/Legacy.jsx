@@ -6,66 +6,83 @@ import {
   Leaf,
   Truck
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 function Legacy() {
   const cards = [
     {
       icon: <FileText size={22} />,
-      title: "100 GSM Premium Paper",
+      title: "Buttery 100 GSM Paper",
       desc:
-        "No bleed-through. Smooth pages engineered for superior everyday writing."
+        "Zero bleed-through. Smooth pages your pen will be obsessed with."
     },
     {
       icon: <Palette size={22} />,
-      title: "25+ Exclusive Designs",
+      title: "25+ Aesthetics",
       desc:
-        "From elegant marble themes to bold modern collections."
+        "From clean marble vibes to bold loud designs — there's a whole mood."
     },
     {
       icon: <Settings size={22} />,
       title: "Custom Branding",
       desc:
-        "Logo printing, corporate gifting and institutional identity solutions."
+        "Your logo, your story — printed clean for brands and big gifting energy."
     },
     {
       icon: <Boxes size={22} />,
-      title: "Wholesale Ready",
+      title: "Bulk Ready",
       desc:
-        "Bulk supply for schools, retailers, colleges and corporate clients."
+        "Big orders for schools, stores, colleges and corporates — no stress."
     },
     {
       icon: <Leaf size={22} />,
       title: "Eco Conscious",
       desc:
-        "Sustainable materials, recyclable packaging and responsible production."
+        "Sustainable materials and recyclable packaging — guilt-free flexing."
     },
     {
       icon: <Truck size={22} />,
-      title: "Pan India Shipping",
+      title: "Pan-India Shipping",
       desc:
-        "Reliable dispatch network with fast delivery across India."
+        "Fast, reliable delivery that pulls up anywhere in India."
     }
   ];
 
   return (
     <section style={styles.section}>
       <div style={styles.top}>
-        <p style={styles.mini}>WHY CHOOSE US</p>
+        <p style={styles.mini}>WHY WE HIT DIFFERENT</p>
 
         <h2 style={styles.heading}>
-          The <span style={styles.gold}>4 Knotts</span> Difference
+          The <span style={styles.gold}>Noted</span> Difference
         </h2>
       </div>
 
       <div style={styles.grid}>
         {cards.map((item, index) => (
-          <div key={index} style={styles.card}>
+          <motion.div
+            key={index}
+            style={styles.card}
+            initial={{ opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.6,
+              delay: (index % 3) * 0.12,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            whileHover={{
+              y: -8,
+              borderColor: "rgba(212,175,55,.4)",
+              boxShadow: "0 18px 40px rgba(0,0,0,.4)"
+            }}
+          >
             <div style={styles.iconWrap}>{item.icon}</div>
 
             <h3 style={styles.title}>{item.title}</h3>
 
             <p style={styles.desc}>{item.desc}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

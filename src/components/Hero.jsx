@@ -1,7 +1,7 @@
-import heroImage from "../assets/products/hero.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Mascot3D from "./Mascot3D";
 
 function Hero() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
@@ -29,63 +29,48 @@ function Hero() {
         transition={{ duration: 1 }}
       >
         <p style={styles.tag}>
-          DELHI • PREMIUM STATIONERY • SINCE 2026
+          ✦&nbsp;&nbsp;MADE IN INDIA&nbsp;&nbsp;•&nbsp;&nbsp;CERTIFIED ICONIC
         </p>
 
         <h1 style={styles.heading}>
-          Stationery <br />
-          <span style={styles.gold}>for life.</span>
+          Some things are <br />
+          worth <span style={styles.gold}>Noting.</span>
         </h1>
 
         <p style={styles.desc}>
-          Premium notebooks, executive collections, A4 designs and office
-          essentials crafted for schools, corporates and serious brands.
+          Luxury notebooks, diaries &amp; custom stationery on buttery{" "}
+          <b style={styles.descHi}>100 GSM</b> paper — bold designs, clean
+          finish, and a vibe that just hits different.
         </p>
 
         <div style={styles.btnWrap}>
           <Link to="/catalog" style={styles.goldBtn}>
-            Explore Catalog
+            Shop the Drop&nbsp;→
           </Link>
 
-          <Link to="/wholesale" style={styles.darkBtn}>
-            Contact Us
+          <Link to="/customization" style={styles.darkBtn}>
+            Make It Yours
           </Link>
+        </div>
+
+        {/* trust chips */}
+        <div style={styles.trustRow}>
+          {["buttery 100 GSM", "25+ aesthetics", "ships pan-india"].map((t) => (
+            <span key={t} style={styles.chip}>
+              <span style={styles.dot} /> {t}
+            </span>
+          ))}
         </div>
       </motion.div>
 
-      {/* 🔥 RIGHT */}
+      {/* 🔥 RIGHT — interactive 3D mascot */}
       <motion.div
-        style={{
-          ...styles.right,
-          transform: `translate(${-mouse.x * 0.6}px, ${-mouse.y * 0.6}px)`
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
+        style={styles.right}
+        initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2 }}
       >
-        <div style={styles.layer1}></div>
-        <div style={styles.layer2}></div>
-
-        <motion.div
-          style={styles.card}
-          animate={{
-            rotateY: [0, -10, 0],
-            rotateX: [0, 5, 0],
-            y: [0, -12, 0]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity
-          }}
-          whileHover={{
-            scale: 1.05,
-            rotateY: -18
-          }}
-        >
-          <img src={heroImage} alt="Hero" style={styles.image} />
-
-          <div style={styles.shine}></div>
-        </motion.div>
+        <Mascot3D />
       </motion.div>
     </section>
   );
@@ -147,88 +132,86 @@ const styles = {
   },
 
   gold: {
-    color: "#d4af37",
-    fontStyle: "italic"
+    fontStyle: "italic",
+    background:
+      "linear-gradient(120deg,#f5d77a 10%,#d4af37 40%,#fff 50%,#d4af37 60%,#f5d77a 90%)",
+    backgroundSize: "200% auto",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    color: "transparent",
+    WebkitTextFillColor: "transparent",
+    animation: "introShimmer 3s linear infinite"
   },
 
   desc: {
     color: "#d8deef",
     fontSize: "22px",
     lineHeight: "1.8",
-    maxWidth: "700px",
-    marginBottom: "36px"
+    maxWidth: "640px",
+    marginBottom: "32px"
+  },
+
+  descHi: {
+    color: "#f0d585",
+    fontWeight: 700
   },
 
   btnWrap: {
     display: "flex",
-    gap: "18px"
+    gap: "18px",
+    flexWrap: "wrap"
   },
 
   goldBtn: {
     padding: "16px 34px",
     borderRadius: "999px",
-    background: "linear-gradient(135deg,#d4af37,#b99118)",
+    background: "linear-gradient(135deg,#f5d77a,#d4af37,#b99118)",
     color: "#111",
     fontWeight: "700",
-    textDecoration: "none"
+    textDecoration: "none",
+    boxShadow: "0 12px 30px rgba(212,175,55,.32)"
   },
 
   darkBtn: {
     padding: "16px 34px",
     borderRadius: "999px",
-    border: "1px solid rgba(255,255,255,.15)",
+    border: "1px solid rgba(255,255,255,.18)",
     color: "white",
-    textDecoration: "none"
+    textDecoration: "none",
+    backdropFilter: "blur(6px)"
+  },
+
+  trustRow: {
+    display: "flex",
+    gap: "22px",
+    flexWrap: "wrap",
+    marginTop: "30px"
+  },
+
+  chip: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "9px",
+    color: "#c7d0e6",
+    fontSize: "14px",
+    letterSpacing: "0.5px"
+  },
+
+  dot: {
+    width: "7px",
+    height: "7px",
+    borderRadius: "50%",
+    background: "linear-gradient(135deg,#f5d77a,#d4af37)",
+    boxShadow: "0 0 8px rgba(212,175,55,.7)"
   },
 
   right: {
     position: "relative",
     display: "flex",
-    justifyContent: "center"
-  },
-
-  layer1: {
-    position: "absolute",
-    width: "470px",
-    height: "560px",
-    borderRadius: "28px",
-    background: "rgba(255,255,255,.04)",
-    transform: "rotate(-8deg) translateX(-40px)"
-  },
-
-  layer2: {
-    position: "absolute",
-    width: "470px",
-    height: "560px",
-    borderRadius: "28px",
-    background: "rgba(255,255,255,.06)",
-    transform: "rotate(8deg) translateX(40px)"
-  },
-
-  card: {
-    position: "relative",
-    width: "500px",
-    height: "590px",
-    borderRadius: "28px",
-    overflow: "hidden",
-    background: "linear-gradient(135deg,#0f2146,#08152d)",
-    boxShadow: "0 30px 70px rgba(0,0,0,.45)"
-  },
-
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover"
-  },
-
-  shine: {
-    position: "absolute",
-    top: 0,
-    left: "-50%",
-    width: "40%",
-    height: "100%",
-    background: "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)",
-    transform: "skewX(-25deg)"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "600px"
   }
 };
 
