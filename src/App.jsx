@@ -19,6 +19,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 // 🔥 PAGES
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
+import ProductPage from "./pages/ProductPage";
 import WholesalePage from "./pages/WholesalePage";
 import Customization from "./pages/Customization";
 import Login from "./pages/Login";
@@ -28,9 +29,7 @@ import Cart from "./pages/Cart";
 import Terms from "./pages/Terms"; // ✅ ADD THIS
 
 // 🔥 COMPONENTS
-import IntroLoader from "./components/IntroLoader";
 import CartToast from "./components/CartToast";
-import ScrollProgress from "./components/ScrollProgress";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -55,6 +54,15 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <Catalog />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/product/:slug"
+          element={
+            <PageTransition>
+              <ProductPage />
             </PageTransition>
           }
         />
@@ -153,13 +161,13 @@ function NotFound() {
         justifyContent: "center",
         alignItems: "center",
         gap: "14px",
-        background: "linear-gradient(135deg,#02040b,#07162f,#02040b)",
-        color: "white",
+        background: "linear-gradient(135deg,#faf8f4,#f1ede4,#faf8f4)",
+        color: "#161616",
         textAlign: "center",
         padding: "20px"
       }}
     >
-      <h1 style={{ fontSize: "96px", margin: 0, color: "#d4af37" }}>404</h1>
+      <h1 style={{ fontSize: "96px", margin: 0, color: "#8b6cff" }}>404</h1>
       <p style={{ fontSize: "20px", opacity: 0.8 }}>
         Yeh page maujood nahi hai.
       </p>
@@ -169,7 +177,7 @@ function NotFound() {
           marginTop: "10px",
           padding: "12px 28px",
           borderRadius: "40px",
-          background: "#d4af37",
+          background: "#8b6cff",
           color: "#111",
           textDecoration: "none",
           fontWeight: 600
@@ -211,17 +219,12 @@ function PageTransition({ children }) {
 
 function App() {
   return (
-    <>
-      <IntroLoader />
-      <ScrollProgress />
-
-      <Router>
-        <AuthProvider>
-          <AnimatedRoutes />
-          <CartToast />
-        </AuthProvider>
-      </Router>
-    </>
+    <Router>
+      <AuthProvider>
+        <AnimatedRoutes />
+        <CartToast />
+      </AuthProvider>
+    </Router>
   );
 }
 

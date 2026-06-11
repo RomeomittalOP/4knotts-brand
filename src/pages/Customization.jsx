@@ -247,8 +247,8 @@ const styles = {
     minHeight: "100vh",
     padding: "130px 25px 80px",
     background:
-      "linear-gradient(135deg,#050505,#0d0d0d,#050505)",
-    color: "white",
+      "linear-gradient(135deg,#FAF7F1,#ffffff,#FAF7F1)",
+    color: "#221F1A",
   },
 
   wrap: {
@@ -257,7 +257,7 @@ const styles = {
   },
 
   tag: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     letterSpacing: "4px",
     fontSize: "12px",
   },
@@ -265,12 +265,12 @@ const styles = {
   heading: {
     fontSize: "76px",
     margin: "10px 0",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     lineHeight: "1",
   },
 
   gold: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     fontStyle: "italic",
   },
 
@@ -297,7 +297,7 @@ const styles = {
 
   stepNo: {
     fontSize: "38px",
-    color: "#d4af37",
+    color: "#2C2E6B",
     fontWeight: "700",
   },
 
@@ -323,7 +323,7 @@ const styles = {
   formTitle: {
     fontSize: "38px",
     marginBottom: "22px",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
   },
 
   row: {
@@ -357,7 +357,7 @@ const styles = {
     border: "none",
     borderRadius: "50px",
     background: "#111",
-    color: "white",
+    color: "#221F1A",
     fontWeight: "700",
     cursor: "pointer",
   },
@@ -373,11 +373,11 @@ const styles = {
     padding: "30px",
     borderRadius: "26px",
     textAlign: "center",
-    border: "1px solid rgba(212,175,55,.15)",
+    border: "1px solid rgba(44,46,107,.15)",
   },
 
   smallTag: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     fontSize: "12px",
     letterSpacing: "3px",
   },
@@ -388,9 +388,9 @@ const styles = {
     margin: "30px auto",
     borderRadius: "14px",
     background:
-      "linear-gradient(145deg,#111,#d4af37,#222)",
+      "linear-gradient(145deg,#111,#2C2E6B,#222)",
     boxShadow:
-      "0 0 30px rgba(212,175,55,.18)",
+      "0 0 30px rgba(44,46,107,.18)",
   },
 
   previewText: {
@@ -401,7 +401,7 @@ const styles = {
     background: "#111",
     padding: "30px",
     borderRadius: "26px",
-    border: "1px solid rgba(212,175,55,.15)",
+    border: "1px solid rgba(44,46,107,.15)",
   },
 
   list: {
@@ -417,7 +417,7 @@ const styles = {
     padding: "14px 20px",
     borderRadius: "12px",
     background: "#111",
-    color: "white",
+    color: "#221F1A",
     zIndex: 9999,
   },
 };

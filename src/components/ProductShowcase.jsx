@@ -61,7 +61,7 @@ function ProductShowcase() {
             }}
             whileHover={{
               y: -10,
-              borderColor: "rgba(212,175,55,.45)",
+              borderColor: "rgba(44,46,107,.45)",
               boxShadow: "0 20px 45px rgba(0,0,0,.45)"
             }}
           >
@@ -79,13 +79,13 @@ const styles = {
   section: {
     padding: "90px 60px",
     background:
-      "linear-gradient(180deg,#02060d,#07111f,#02060d)",
-    color: "white",
+      "linear-gradient(180deg,#FAF7F1,#F2EDE3,#FAF7F1)",
+    color: "#221F1A",
     textAlign: "center"
   },
 
   tag: {
-    color: "#6f8fff",
+    color: "#2C2E6B",
     fontSize: "12px",
     letterSpacing: "3px",
     marginBottom: "18px"
@@ -94,7 +94,7 @@ const styles = {
   heading: {
     fontSize: "48px",
     marginBottom: "55px",
-    fontFamily: "Cormorant Garamond"
+    fontFamily: "Fraunces"
   },
 
   grid: {
@@ -106,8 +106,8 @@ const styles = {
 
   card: {
     background:
-      "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,.06)",
+      "rgba(17,17,17,0.04)",
+    border: "1px solid rgba(17,17,17,.06)",
     borderRadius: "18px",
     padding: "32px 24px",
     backdropFilter: "blur(12px)",
@@ -126,7 +126,7 @@ const styles = {
   },
 
   desc: {
-    color: "#b8b8b8",
+    color: "#666666",
     lineHeight: "1.7",
     fontSize: "15px"
   }

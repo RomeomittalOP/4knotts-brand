@@ -1,126 +1,73 @@
-import logo from "../assets/logo-cutout.png";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
 import { signOut } from "firebase/auth";
-
+import logo from "../assets/logo-cutout.png";
 import { auth } from "../firebase";
 import { useAuth } from "../context/AuthContext";
-import { CartContext } from "../context/CartContext"; // ✅ IMPORTANT
+import { CartContext } from "../context/CartContext";
 
 function Navbar() {
-  const [mobile, setMobile] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
+  const [open, setOpen] = useState(false);
   const { user } = useAuth();
-  const { cart } = useContext(CartContext); // ✅ CART CONNECT
+  const { cart } = useContext(CartContext);
   const navigate = useNavigate();
+  const count = cart.reduce((n, i) => n + (i.qty || 1), 0);
 
-  useEffect(() => {
-    const checkScreen = () => {
-      setMobile(window.innerWidth <= 768);
-    };
-
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    return () =>
-      window.removeEventListener("resize", checkScreen);
-  }, []);
-
-  const logoutUser = async () => {
+  const logout = async () => {
     await signOut(auth);
     navigate("/login");
   };
 
   return (
-    <header style={mobile ? styles.headerMobile : styles.header}>
-      
-      {/* LEFT */}
-      <Link to="/" style={styles.brandLink}>
-        <div style={styles.brand}>
-          <img src={logo} alt="logo" style={styles.logo} />
+    <header>
+      <div className="wrap nav">
+        <Link className="nav-logo" to="/" aria-label="Noted by 4 Knotts — home">
+          <img className="lmark" src={logo} alt="" />
+          <span className="nav-brandtext">
+            <b>Noted</b>
+            <small>by 4 Knotts</small>
+          </span>
+        </Link>
 
-          <div>
-            <h2 style={styles.title}>NOTED</h2>
-            <p style={styles.sub}>BY 4 KNOTTS</p>
-          </div>
-        </div>
-      </Link>
-        
-      {/* RIGHT */}
-      {!mobile && (
-        <div style={styles.right}>
-          
-          <nav style={styles.nav}>
-            <Link to="/" style={styles.link}>Home</Link>
-            <Link to="/catalog" style={styles.link}>Catalog</Link>
-            <Link to="/wholesale" style={styles.link}>Wholesale</Link>
-            <Link to="/customization" style={styles.link}>Customization</Link>
-          </nav>
+        <nav className="nav-links" aria-label="Primary">
+          <Link to="/catalog">Catalog</Link>
+          <Link to="/customization">Customization</Link>
+          <Link to="/wholesale">Wholesale</Link>
+          {user && <Link to="/dashboard">Dashboard</Link>}
+        </nav>
 
+        <div className="nav-icons">
+          <Link to="/cart" aria-label="Bag">
+            🛍 {count > 0 ? count : ""}
+          </Link>
           {!user ? (
-            <div style={styles.authBtns}>
-              <Link to="/login" style={styles.outlineBtn}>Login</Link>
-              <Link to="/signup" style={styles.btn}>Sign Up</Link>
-            </div>
+            <Link to="/login" aria-label="Login">Login</Link>
           ) : (
-            <div style={styles.userBox}>
-              
-              {/* USER DP */}
-              <Link to="/dashboard">
-                <img
-                  src={
-                    user.photoURL ||
-                    "https://ui-avatars.com/api/?name=" + user.email
-                  }
-                  alt="dp"
-                  style={styles.dp}
-                />
-              </Link>
-
-              {/* ✅ CART WITH COUNT */}
-              <Link to="/cart" style={styles.cart}>
-                🛒 {cart.length}
-              </Link>
-
-              <button onClick={logoutUser} style={styles.btn}>
-                Logout
-              </button>
-            </div>
+            <a onClick={logout} aria-label="Logout">Logout</a>
           )}
+          <button
+            className="nav-toggle"
+            aria-label="Menu"
+            onClick={() => setOpen((o) => !o)}
+          >
+            ☰
+          </button>
         </div>
-      )}
+      </div>
 
-      {/* MOBILE */}
-      {mobile && (
-        <button
-          style={styles.menuBtn}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-      )}
-
-      {mobile && menuOpen && (
-        <div style={styles.mobileNav}>
-          <Link to="/" style={styles.mobileLink}>Home</Link>
-          <Link to="/catalog" style={styles.mobileLink}>Catalog</Link>
-
+      {/* mobile menu */}
+      {open && (
+        <div style={styles.mobile}>
+          <Link to="/catalog" onClick={() => setOpen(false)} style={styles.mlink}>Catalog</Link>
+          <Link to="/customization" onClick={() => setOpen(false)} style={styles.mlink}>Customization</Link>
+          <Link to="/wholesale" onClick={() => setOpen(false)} style={styles.mlink}>Wholesale</Link>
+          <Link to="/cart" onClick={() => setOpen(false)} style={styles.mlink}>Cart ({count})</Link>
           {!user ? (
-            <>
-              <Link to="/login" style={styles.mobileBtn}>Login</Link>
-              <Link to="/signup" style={styles.mobileBtn}>Sign Up</Link>
-            </>
+            <Link to="/login" onClick={() => setOpen(false)} style={styles.mlink}>Login</Link>
           ) : (
             <>
-              <Link to="/dashboard" style={styles.mobileBtn}>Dashboard</Link>
-              <Link to="/cart" style={styles.mobileBtn}>
-                🛒 Cart ({cart.length})
-              </Link>
-
-              <button onClick={logoutUser} style={styles.mobileBtn}>
-                Logout
-              </button>
+              <Link to="/dashboard" onClick={() => setOpen(false)} style={styles.mlink}>Dashboard</Link>
+              <a onClick={() => { setOpen(false); logout(); }} style={styles.mlink}>Logout</a>
             </>
           )}
         </div>
@@ -130,152 +77,22 @@ function Navbar() {
 }
 
 const styles = {
-  header: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: 1000,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "18px 60px",
-    background: "rgba(2,4,11,.88)",
-    backdropFilter: "blur(14px)"
-  },
-
-  headerMobile: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: 1000,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 20px",
-    background: "rgba(2,4,11,.92)"
-  },
-
-  brandLink: { textDecoration: "none" },
-
-  brand: {
-    display: "flex",
-    gap: "12px",
-    alignItems: "center"
-  },
-
-  logo: {
-    width: "52px",
-    height: "52px",
-    borderRadius: "14px",
-    background: "#fff",
-    padding: "6px",
-    boxSizing: "border-box",
-    objectFit: "contain",
-    border: "1px solid rgba(212,175,55,.55)",
-    boxShadow: "0 6px 18px rgba(0,0,0,.35)"
-  },
-
-  title: { margin: 0, color: "white" },
-
-  sub: {
-    margin: 0,
-    color: "#9ca3af",
-    fontSize: "10px",
-    letterSpacing: "3px"
-  },
-
-  right: {
-    display: "flex",
-    alignItems: "center",
-    gap: "26px"
-  },
-
-  nav: {
-    display: "flex",
-    gap: "22px"
-  },
-
-  link: {
-    color: "white",
-    textDecoration: "none"
-  },
-
-  authBtns: {
-    display: "flex",
-    gap: "12px"
-  },
-
-  userBox: {
-    display: "flex",
-    gap: "16px",
-    alignItems: "center"
-  },
-
-  dp: {
-    width: "42px",
-    height: "42px",
-    borderRadius: "50%",
-    objectFit: "cover",
-    border: "2px solid #6f8fff"
-  },
-
-  cart: {
-    color: "white",
-    textDecoration: "none",
-    fontSize: "16px"
-  },
-
-  btn: {
-    padding: "10px 16px",
-    border: "none",
-    borderRadius: "8px",
-    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
-    color: "white",
-    cursor: "pointer"
-  },
-
-  outlineBtn: {
-    padding: "10px 16px",
-    border: "1px solid rgba(255,255,255,.15)",
-    borderRadius: "8px",
-    color: "white",
-    textDecoration: "none"
-  },
-
-  menuBtn: {
-    background: "none",
-    border: "none",
-    color: "white",
-    fontSize: "28px"
-  },
-
-  mobileNav: {
-    position: "absolute",
-    top: "78px",
-    left: 0,
-    width: "100%",
-    background: "rgba(2,4,11,.97)",
+  mobile: {
+    borderTop: "1px solid rgba(0,0,0,.06)",
+    background: "rgba(251,251,253,.96)",
+    backdropFilter: "blur(20px)",
     display: "flex",
     flexDirection: "column",
-    gap: "14px",
-    padding: "24px"
+    padding: "12px 26px 18px",
+    gap: "4px",
   },
-
-  mobileLink: {
-    color: "white",
-    textDecoration: "none"
+  mlink: {
+    padding: "10px 0",
+    color: "#221F1A",
+    fontSize: "16px",
+    cursor: "pointer",
+    borderBottom: "1px solid rgba(0,0,0,.05)",
   },
-
-  mobileBtn: {
-    padding: "12px",
-    borderRadius: "8px",
-    border: "none",
-    background: "linear-gradient(135deg,#6f8fff,#4d6fff)",
-    color: "white",
-    textDecoration: "none"
-  }
 };
 
 export default Navbar;

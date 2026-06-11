@@ -85,7 +85,7 @@ const styles = {
     padding: "90px 60px",
     position: "relative",
     overflow: "hidden",
-    background: "linear-gradient(135deg,#061226,#08182f,#02040b)"
+    background: "linear-gradient(135deg,#F2EDE3,#F2EDE3,#FAF7F1)"
   },
 
   glow1: {
@@ -95,7 +95,7 @@ const styles = {
     width: "420px",
     height: "420px",
     borderRadius: "50%",
-    background: "radial-gradient(circle,rgba(255,215,0,.18),transparent 70%)",
+    background: "radial-gradient(circle,rgba(44,46,107,.18),transparent 70%)",
     filter: "blur(50px)"
   },
 
@@ -106,7 +106,7 @@ const styles = {
     width: "420px",
     height: "420px",
     borderRadius: "50%",
-    background: "radial-gradient(circle,rgba(92,138,255,.18),transparent 70%)",
+    background: "radial-gradient(circle,rgba(44,46,107,.16),transparent 70%)",
     filter: "blur(50px)"
   },
 
@@ -116,25 +116,25 @@ const styles = {
   },
 
   tag: {
-    color: "#7da4ff",
+    color: "#2C2E6B",
     fontSize: "12px",
     letterSpacing: "4px",
     marginBottom: "22px"
   },
 
   heading: {
-    color: "white",
+    color: "#221F1A",
     fontSize: "112px",
     lineHeight: ".88",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     fontWeight: "600",
     marginBottom: "28px"
   },
 
   gold: {
     fontStyle: "italic",
-    background:
-      "linear-gradient(120deg,#f5d77a 10%,#d4af37 40%,#fff 50%,#d4af37 60%,#f5d77a 90%)",
+    backgroundImage:
+      "linear-gradient(120deg,#5B60C0 10%,#2C2E6B 40%,#fff 50%,#2C2E6B 60%,#5B60C0 90%)",
     backgroundSize: "200% auto",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
@@ -144,7 +144,7 @@ const styles = {
   },
 
   desc: {
-    color: "#d8deef",
+    color: "#4A463F",
     fontSize: "22px",
     lineHeight: "1.8",
     maxWidth: "640px",
@@ -152,7 +152,7 @@ const styles = {
   },
 
   descHi: {
-    color: "#f0d585",
+    color: "#5B60C0",
     fontWeight: 700
   },
 
@@ -165,18 +165,18 @@ const styles = {
   goldBtn: {
     padding: "16px 34px",
     borderRadius: "999px",
-    background: "linear-gradient(135deg,#f5d77a,#d4af37,#b99118)",
+    background: "linear-gradient(135deg,#5B60C0,#2C2E6B,#21224F)",
     color: "#111",
     fontWeight: "700",
     textDecoration: "none",
-    boxShadow: "0 12px 30px rgba(212,175,55,.32)"
+    boxShadow: "0 12px 30px rgba(44,46,107,.32)"
   },
 
   darkBtn: {
     padding: "16px 34px",
     borderRadius: "999px",
-    border: "1px solid rgba(255,255,255,.18)",
-    color: "white",
+    border: "1px solid rgba(17,17,17,.18)",
+    color: "#221F1A",
     textDecoration: "none",
     backdropFilter: "blur(6px)"
   },
@@ -192,7 +192,7 @@ const styles = {
     display: "inline-flex",
     alignItems: "center",
     gap: "9px",
-    color: "#c7d0e6",
+    color: "#4A463F",
     fontSize: "14px",
     letterSpacing: "0.5px"
   },
@@ -201,8 +201,8 @@ const styles = {
     width: "7px",
     height: "7px",
     borderRadius: "50%",
-    background: "linear-gradient(135deg,#f5d77a,#d4af37)",
-    boxShadow: "0 0 8px rgba(212,175,55,.7)"
+    background: "linear-gradient(135deg,#5B60C0,#2C2E6B)",
+    boxShadow: "0 0 8px rgba(44,46,107,.7)"
   },
 
   right: {

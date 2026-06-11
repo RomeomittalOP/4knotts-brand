@@ -16,7 +16,7 @@ function BrandStatement() {
 
         <h2 style={styles.heading}>
           “A good notebook doesn't just hold your ideas —
-          <span style={{ color: "#d4af37" }}> it makes them iconic.”</span>
+          <span style={{ color: "#2C2E6B" }}> it makes them iconic.”</span>
         </h2>
 
         <p style={styles.desc}>
@@ -35,9 +35,9 @@ const styles = {
     padding: "110px 40px",
     textAlign: "center",
     background:
-      "linear-gradient(180deg,#02060d,#07111f,#02060d)",
+      "linear-gradient(180deg,#FAF7F1,#F2EDE3,#FAF7F1)",
     overflow: "hidden",
-    color: "white"
+    color: "#221F1A"
   },
 
   overlay: {
@@ -57,7 +57,7 @@ const styles = {
   },
 
   tag: {
-    color: "#6f8fff",
+    color: "#2C2E6B",
     letterSpacing: "3px",
     fontSize: "12px",
     marginBottom: "20px"
@@ -67,11 +67,11 @@ const styles = {
     fontSize: "56px",
     lineHeight: "1.1",
     marginBottom: "20px",
-    fontFamily: "Cormorant Garamond"
+    fontFamily: "Fraunces"
   },
 
   desc: {
-    color: "#b8b8b8",
+    color: "#666666",
     fontSize: "18px",
     lineHeight: "1.8"
   }

@@ -64,7 +64,7 @@ const styles = {
   page: {
     minHeight: "100vh",
     background:
-      "linear-gradient(135deg,#02040b,#07162f,#0d2a52)",
+      "linear-gradient(135deg,#FAF7F1,#F2EDE3,#ece7f6)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -75,15 +75,15 @@ const styles = {
     width: "100%",
     maxWidth: "1000px",
     background:
-      "rgba(255,255,255,.05)",
+      "rgba(17,17,17,.05)",
     padding: "40px",
     borderRadius: "20px",
     backdropFilter: "blur(14px)",
-    color: "white"
+    color: "#221F1A"
   },
 
   tag: {
-    color: "#6f8fff",
+    color: "#2C2E6B",
     fontSize: "12px",
     letterSpacing: "3px"
   },
@@ -94,7 +94,7 @@ const styles = {
   },
 
   email: {
-    color: "#b8b8b8",
+    color: "#666666",
     marginBottom: "30px"
   },
 
@@ -107,9 +107,9 @@ const styles = {
 
   card: {
     background:
-      "rgba(255,255,255,.04)",
+      "rgba(17,17,17,.04)",
     border:
-      "1px solid rgba(255,255,255,.08)",
+      "1px solid rgba(17,17,17,.08)",
     borderRadius: "16px",
     padding: "24px"
   },
@@ -120,8 +120,9 @@ const styles = {
     border: "none",
     borderRadius: "10px",
     background:
-      "linear-gradient(135deg,#6f8fff,#4d6fff)",
-    color: "white",
+      "linear-gradient(135deg,#5B60C0,#2C2E6B,#21224F)",
+    color: "#111",
+    fontWeight: 700,
     cursor: "pointer"
   }
 };

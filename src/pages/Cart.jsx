@@ -161,8 +161,8 @@ const styles = {
   page: {
     padding: "120px 40px",
     minHeight: "100vh",
-    background: "linear-gradient(135deg,#02040b,#07162f,#02040b)",
-    color: "white"
+    background: "linear-gradient(135deg,#FAF7F1,#F2EDE3,#FAF7F1)",
+    color: "#221F1A"
   },
 
   heading: {
@@ -179,7 +179,9 @@ const styles = {
     display: "flex",
     gap: "20px",
     alignItems: "center",
-    background: "#111",
+    background: "#fff",
+    border: "1px solid #EDE7DA",
+    boxShadow: "0 10px 30px rgba(0,0,0,.04)",
     padding: "20px",
     borderRadius: "16px",
     marginBottom: "20px"
@@ -197,9 +199,10 @@ const styles = {
   },
 
   removeBtn: {
-    background: "red",
+    background: "transparent",
     border: "none",
-    color: "white",
+    color: "#86868b",
+    fontSize: "18px",
     padding: "8px",
     borderRadius: "6px",
     cursor: "pointer"
@@ -208,16 +211,19 @@ const styles = {
   total: {
     marginTop: "30px",
     fontSize: "26px",
-    color: "#d4af37"
+    color: "#2C2E6B"
   },
 
   orderBtn: {
     marginTop: "20px",
     padding: "14px",
     width: "100%",
-    background: "#d4af37",
+    background: "#2C2E6B",
+    color: "#fff",
+    fontWeight: 600,
     border: "none",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    cursor: "pointer"
   },
 
   overlay: {
@@ -233,12 +239,13 @@ const styles = {
   },
 
   modal: {
-    background: "#111",
+    background: "#fff",
     padding: "30px",
-    borderRadius: "12px",
-    color: "white",
+    borderRadius: "16px",
+    color: "#221F1A",
     width: "320px",
-    textAlign: "center"
+    textAlign: "center",
+    boxShadow: "0 30px 70px rgba(0,0,0,.2)"
   },
 
   methods: {
@@ -250,18 +257,18 @@ const styles = {
   methodBtn: {
     flex: 1,
     padding: "10px",
-    background: "#222",
+    background: "#F2EDE3",
     border: "none",
-    color: "white",
+    color: "#221F1A",
     borderRadius: "8px"
   },
 
   active: {
     flex: 1,
     padding: "10px",
-    background: "#d4af37",
+    background: "#2C2E6B",
     border: "none",
-    color: "#111",
+    color: "#fff",
     borderRadius: "8px"
   },
 
@@ -279,8 +286,8 @@ const styles = {
     marginTop: "10px",
     borderRadius: "6px",
     border: "none",
-    background: "#222",
-    color: "white"
+    background: "#F2EDE3",
+    color: "#221F1A"
   },
 
   row: {
@@ -292,9 +299,10 @@ const styles = {
     marginTop: "20px",
     padding: "12px",
     width: "100%",
-    background: "#6f8fff",
+    background: "linear-gradient(135deg,#5B60C0,#2C2E6B,#21224F)",
     border: "none",
-    color: "white",
+    color: "#fff",
+    fontWeight: 700,
     borderRadius: "8px",
     cursor: "pointer"
   }

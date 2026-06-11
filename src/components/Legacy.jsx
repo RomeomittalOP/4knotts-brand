@@ -73,7 +73,7 @@ function Legacy() {
             }}
             whileHover={{
               y: -8,
-              borderColor: "rgba(212,175,55,.4)",
+              borderColor: "rgba(44,46,107,.4)",
               boxShadow: "0 18px 40px rgba(0,0,0,.4)"
             }}
           >
@@ -93,8 +93,8 @@ const styles = {
   section: {
     padding: "110px 60px",
     background:
-      "radial-gradient(circle at top left, rgba(212,175,55,.06), transparent 28%), #02040b",
-    color: "white"
+      "radial-gradient(circle at top left, rgba(44,46,107,.06), transparent 28%), #FAF7F1",
+    color: "#221F1A"
   },
 
   top: {
@@ -103,7 +103,7 @@ const styles = {
   },
 
   mini: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     fontSize: "12px",
     letterSpacing: "4px",
     marginBottom: "18px"
@@ -113,12 +113,12 @@ const styles = {
     fontSize: "clamp(42px,6vw,78px)",
     lineHeight: "1",
     fontWeight: "500",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     margin: 0
   },
 
   gold: {
-    color: "#d4af37"
+    color: "#2C2E6B"
   },
 
   grid: {
@@ -128,8 +128,8 @@ const styles = {
   },
 
   card: {
-    background: "rgba(255,255,255,.03)",
-    border: "1px solid rgba(212,175,55,.12)",
+    background: "rgba(17,17,17,.03)",
+    border: "1px solid rgba(44,46,107,.12)",
     borderRadius: "22px",
     padding: "30px",
     minHeight: "260px",
@@ -144,19 +144,19 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "rgba(212,175,55,.08)",
-    color: "#d4af37",
+    background: "rgba(44,46,107,.08)",
+    color: "#2C2E6B",
     marginBottom: "22px"
   },
 
   title: {
     fontSize: "28px",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     marginBottom: "14px"
   },
 
   desc: {
-    color: "#b8b8b8",
+    color: "#666666",
     lineHeight: "1.8",
     fontSize: "15px"
   }

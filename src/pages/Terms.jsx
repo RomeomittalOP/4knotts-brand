@@ -133,8 +133,8 @@ const terms = [
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "linear-gradient(135deg,#02040b,#07162f,#02040b)",
-    color: "white",
+    background: "linear-gradient(135deg,#FAF7F1,#F2EDE3,#FAF7F1)",
+    color: "#221F1A",
     padding: "100px 20px",
     textAlign: "center"
   },
@@ -142,13 +142,13 @@ const styles = {
   title: {
     fontSize: "60px",
     marginBottom: "10px",
-    color: "#d4af37"
+    color: "#2C2E6B"
   },
 
   subtitle: {
     fontSize: "18px",
     marginBottom: "40px",
-    color: "#aaa"
+    color: "#7C766B"
   },
 
   container: {
@@ -160,16 +160,16 @@ const styles = {
   },
 
   card: {
-    background: "rgba(255,255,255,0.03)",
+    background: "rgba(17,17,17,0.03)",
     padding: "20px",
     borderRadius: "12px",
-    border: "1px solid rgba(255,255,255,0.05)",
+    border: "1px solid rgba(17,17,17,0.05)",
     textAlign: "left",
     backdropFilter: "blur(10px)"
   },
 
   heading: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     marginBottom: "10px",
     fontSize: "20px"
   },
@@ -177,7 +177,7 @@ const styles = {
   text: {
     fontSize: "16px",
     lineHeight: "1.6",
-    color: "#ddd"
+    color: "#4A463F"
   }
 };
 

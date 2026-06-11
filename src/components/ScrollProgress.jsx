@@ -20,8 +20,8 @@ function ScrollProgress() {
         transformOrigin: "0%",
         scaleX,
         zIndex: 99998,
-        background: "linear-gradient(90deg,#f5d77a,#d4af37,#b99118)",
-        boxShadow: "0 0 12px rgba(212,175,55,.5)",
+        background: "linear-gradient(90deg,#5B60C0,#2C2E6B,#21224F)",
+        boxShadow: "0 0 12px rgba(44,46,107,.5)",
       }}
     />
   );

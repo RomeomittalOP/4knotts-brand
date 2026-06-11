@@ -75,7 +75,7 @@ const styles = {
     inset: 0,
     zIndex: 100000,
     background:
-      "radial-gradient(circle at 50% 40%, #0a1020, #02040b 70%)",
+      "radial-gradient(circle at 50% 40%, #F2EDE3, #FAF7F1 70%)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -87,7 +87,7 @@ const styles = {
     height: "520px",
     borderRadius: "50%",
     background:
-      "radial-gradient(circle, rgba(212,175,55,.18), transparent 65%)",
+      "radial-gradient(circle, rgba(44,46,107,.18), transparent 65%)",
     filter: "blur(10px)",
   },
   center: {
@@ -96,12 +96,12 @@ const styles = {
   },
   word: {
     margin: 0,
-    fontFamily: "Cormorant Garamond, serif",
+    fontFamily: "Fraunces, serif",
     fontSize: "clamp(56px, 12vw, 130px)",
     fontWeight: 700,
     lineHeight: 1,
-    background:
-      "linear-gradient(120deg,#fff 20%,#f5d77a 45%,#d4af37 55%,#fff 80%)",
+    backgroundImage:
+      "linear-gradient(120deg,#fff 20%,#5B60C0 45%,#2C2E6B 55%,#fff 80%)",
     backgroundSize: "200% auto",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
@@ -114,12 +114,12 @@ const styles = {
     width: "min(340px, 70vw)",
     margin: "18px auto",
     background:
-      "linear-gradient(90deg,transparent,#d4af37,transparent)",
+      "linear-gradient(90deg,transparent,#2C2E6B,transparent)",
     transformOrigin: "center",
   },
   sub: {
     margin: 0,
-    color: "#cfd6e6",
+    color: "#4A463F",
     fontSize: "13px",
     letterSpacing: "6px",
     fontWeight: 500,

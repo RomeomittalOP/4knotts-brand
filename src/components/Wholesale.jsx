@@ -1,4 +1,4 @@
-import wholesaleImg from "../assets/products/wholesale.png";
+import wholesaleImg from "../assets/products/catalog-collage.png";
 import Footer from "../components/Footer";
 
 function Wholesale() {

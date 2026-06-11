@@ -208,8 +208,8 @@ function WholesalePage() {
 
 const styles = {
   page: {
-    background: "#040404",
-    color: "white",
+    background: "#FAF7F1",
+    color: "#221F1A",
     padding: "130px 25px 80px",
   },
 
@@ -219,23 +219,23 @@ const styles = {
   },
 
   tag: {
-    color: "#d4af37",
+    color: "#2C2E6B",
     letterSpacing: "4px",
     fontSize: "12px",
   },
 
   heading: {
     fontSize: "78px",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     margin: "12px 0",
   },
 
   gold: {
-    color: "#d4af37",
+    color: "#2C2E6B",
   },
 
   sub: {
-    color: "#b7b7b7",
+    color: "#666666",
     fontSize: "18px",
     maxWidth: "700px",
     lineHeight: "1.8",
@@ -260,8 +260,8 @@ const styles = {
   },
 
   leftCard: {
-    background: "#0b0b0b",
-    border: "1px solid rgba(212,175,55,.15)",
+    background: "#ffffff",
+    border: "1px solid rgba(44,46,107,.15)",
     borderRadius: "24px",
     padding: "32px",
   },
@@ -275,13 +275,13 @@ const styles = {
 
   cardTitle: {
     fontSize: "34px",
-    fontFamily: "Cormorant Garamond",
+    fontFamily: "Fraunces",
     marginBottom: "20px",
   },
 
   info: {
     lineHeight: "1.9",
-    color: "#d2d2d2",
+    color: "#777777",
     marginBottom: "18px",
   },
 
@@ -322,7 +322,7 @@ const styles = {
     border: "none",
     borderRadius: "50px",
     background: "#111",
-    color: "#fff",
+    color: "#221F1A",
     fontWeight: "700",
     cursor: "pointer",
   },
@@ -332,7 +332,7 @@ const styles = {
     top: "30px",
     right: "30px",
     background: "#111",
-    color: "white",
+    color: "#221F1A",
     padding: "14px 20px",
     borderRadius: "12px",
     zIndex: 9999,

@@ -112,6 +112,10 @@ function Login() {
             Create an account
           </Link>
         </p>
+
+        <Link to="/" style={styles.skip}>
+          Skip for now — just browsing →
+        </Link>
       </div>
     </section>
   );
@@ -120,7 +124,7 @@ function Login() {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "radial-gradient(circle at 50% 0%, #0a1428, #02040b 70%)",
+    background: "radial-gradient(circle at 50% 0%, #F2EDE3, #FAF7F1 70%)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -134,20 +138,19 @@ const styles = {
     height: "520px",
     borderRadius: "50%",
     background:
-      "radial-gradient(circle, rgba(212,175,55,.16), transparent 65%)",
+      "radial-gradient(circle, rgba(44,46,107,.16), transparent 65%)",
     filter: "blur(20px)",
   },
   box: {
     position: "relative",
     width: "100%",
     maxWidth: "420px",
-    background: "rgba(255,255,255,.04)",
-    padding: "40px 36px",
+    background: "#fff",
+    padding: "44px 38px",
     borderRadius: "24px",
-    border: "1px solid rgba(212,175,55,.18)",
-    backdropFilter: "blur(16px)",
-    boxShadow: "0 30px 70px rgba(0,0,0,.5)",
-    color: "white",
+    border: "1px solid #EDE7DA",
+    boxShadow: "0 30px 70px rgba(0,0,0,.1)",
+    color: "#221F1A",
     textAlign: "center",
   },
   logo: {
@@ -163,22 +166,22 @@ const styles = {
   title: {
     margin: 0,
     fontSize: "30px",
-    fontFamily: "Cormorant Garamond, serif",
+    fontFamily: "Fraunces, serif",
     fontWeight: 600,
   },
-  sub: { color: "#9aa4bd", marginTop: "6px", marginBottom: "26px" },
+  sub: { color: "#7C766B", marginTop: "6px", marginBottom: "26px" },
   form: { display: "flex", flexDirection: "column", gap: "12px" },
   input: {
     padding: "14px 16px",
     borderRadius: "12px",
-    border: "1px solid rgba(255,255,255,.1)",
-    background: "rgba(255,255,255,.06)",
-    color: "white",
+    border: "1px solid rgba(17,17,17,.1)",
+    background: "rgba(17,17,17,.06)",
+    color: "#221F1A",
     fontSize: "15px",
     outline: "none",
   },
   forgot: {
-    color: "#9aa4bd",
+    color: "#7C766B",
     fontSize: "13px",
     textAlign: "right",
     margin: "2px 2px 4px",
@@ -188,8 +191,8 @@ const styles = {
     padding: "14px",
     borderRadius: "12px",
     border: "none",
-    background: "linear-gradient(135deg,#f5d77a,#d4af37,#b99118)",
-    color: "#111",
+    background: "linear-gradient(135deg,#3A3D85,#2C2E6B,#21224F)",
+    color: "#fff",
     fontWeight: 700,
     fontSize: "15px",
     cursor: "pointer",
@@ -199,22 +202,22 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     margin: "20px 0",
-    borderTop: "1px solid rgba(255,255,255,.1)",
+    borderTop: "1px solid rgba(17,17,17,.1)",
     position: "relative",
   },
   dividerText: {
     position: "absolute",
     top: "-10px",
-    background: "#070b16",
+    background: "#FAF7F1",
     padding: "0 12px",
-    color: "#9aa4bd",
+    color: "#7C766B",
     fontSize: "13px",
   },
   googleBtn: {
     width: "100%",
     padding: "13px",
     borderRadius: "12px",
-    border: "1px solid rgba(255,255,255,.15)",
+    border: "1px solid rgba(17,17,17,.15)",
     background: "#fff",
     color: "#111",
     fontWeight: 600,
@@ -233,8 +236,15 @@ const styles = {
     lineHeight: 1.5,
   },
   msg: { color: "#8fffaa", marginTop: "16px", fontSize: "14px" },
-  bottom: { marginTop: "22px", color: "#9aa4bd", fontSize: "14px" },
-  link: { color: "#d4af37", fontWeight: 600, textDecoration: "none" },
+  bottom: { marginTop: "22px", color: "#7C766B", fontSize: "14px" },
+  link: { color: "#2C2E6B", fontWeight: 600, textDecoration: "none" },
+  skip: {
+    display: "inline-block",
+    marginTop: "14px",
+    color: "#7C766B",
+    fontSize: "13px",
+    textDecoration: "none",
+  },
 };
 
 export default Login;

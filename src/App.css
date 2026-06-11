@@ -20,7 +20,7 @@
 .hero {
   position: relative;
   background-image:
-  radial-gradient(circle at top right,#0d2a52 0%,#07111f 35%,#02060d 100%);
+  radial-gradient(circle at top right,#ece7f6 0%,#f1ede4 35%,#faf8f4 100%);
   .base,
   .framework,
   .vite {
