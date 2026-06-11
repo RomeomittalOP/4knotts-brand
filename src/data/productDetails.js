@@ -12,11 +12,11 @@
 // Defaults per category — agar product-specific entry na ho toh ye chalte hain
 export const CATEGORY_DEFAULTS = {
   "Notebook": {
-    material: "100 GSM premium bleed-proof paper",
+    material: "Premium bleed-proof paper",
     dimensions: "A5 · 14.8 × 21 cm · 160 pages",
     description:
       "A premium notebook built for everyday writing — buttery smooth pages, a sturdy bound spine, and a cover that survives the daily grind.",
-    features: ["100 GSM paper", "160 pages", "Lay-flat binding", "Smudge-free"],
+    features: ["Bleed-proof paper", "160 pages", "Lay-flat binding", "Smudge-free"],
   },
   "Folder": {
     material: "Durable translucent polypropylene",

@@ -12,7 +12,7 @@ function Legacy() {
   const cards = [
     {
       icon: <FileText size={22} />,
-      title: "Buttery 100 GSM Paper",
+      title: "Buttery-Smooth Paper",
       desc:
         "Zero bleed-through. Smooth pages your pen will be obsessed with."
     },

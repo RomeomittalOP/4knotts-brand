@@ -55,7 +55,7 @@ function Hero() {
 
         {/* trust chips */}
         <div style={styles.trustRow}>
-          {["buttery 100 GSM", "25+ aesthetics", "ships pan-india"].map((t) => (
+          {["buttery-smooth paper", "25+ aesthetics", "ships pan-india"].map((t) => (
             <span key={t} style={styles.chip}>
               <span style={styles.dot} /> {t}
             </span>

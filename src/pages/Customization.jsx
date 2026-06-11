@@ -219,7 +219,7 @@ function Customization() {
                 <p style={styles.smallTag}>WHAT YOU GET</p>
 
                 <ul style={styles.list}>
-                  <li>✓ Premium 100 GSM paper</li>
+                  <li>✓ Premium thick paper</li>
                   <li>✓ Matte / Gloss finish</li>
                   <li>✓ Logo embossing</li>
                   <li>✓ Fast production timeline</li>

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ALL_PRODUCTS } from "../data/catalog";
-import collage from "../assets/products/catalog-collage.png";
+import HeroSlideshow from "../components/HeroSlideshow";
 import Mascot3D from "../components/Mascot3D";
 import ReviewBoard from "../components/ReviewBoard";
+import logo from "../assets/logo-cutout.png";
+import mascot from "../assets/products/hero-cutout.png";
 
 const pick = (cat) => ALL_PRODUCTS.find((p) => p.category === cat);
 
@@ -46,34 +48,45 @@ function Home() {
       {/* HERO */}
       <section className="hero">
         <div className="wrap hero-pad">
-          <div className="hero-copy">
-            <span className="eyebrow hero-eyebrow">
-              Notebooks &amp; custom stationery
-            </span>
-            <h1 className="display">
-              <em>
-                Every ambition<br />needs preparation.
-              </em>
-            </h1>
-            <p className="lede">
-              Premium notebooks, executive diaries and custom-branded
-              stationery — made in India on proper 100&nbsp;GSM paper,
-              finished to last the year you bought them.
-            </p>
-            <div className="cta-row">
-              <Link className="alink" to="/catalog">
-                Shop the collection <span className="arr">›</span>
-              </Link>
-              <Link className="alink" to="/customization">
-                Customise yours <span className="arr">›</span>
-              </Link>
+          <div className="brand-hero">
+            <div className="col brand-logo-col">
+              <img src={logo} alt="4 Knotts logo" className="brand-logo-big" />
+            </div>
+
+            <div className="brand-center">
+              <span className="eyebrow">Noted by 4 Knotts</span>
+              <h1 className="display">
+                <em>
+                  Every ambition<br />needs preparation.
+                </em>
+              </h1>
+              <p className="lede">
+                India's premium notebook &amp; custom-stationery house —
+                buttery-smooth paper, bold design and a finish built to
+                last the year you bought it.
+              </p>
+              <div className="cta-row">
+                <Link className="alink" to="/catalog">
+                  Shop the collection <span className="arr">›</span>
+                </Link>
+                <Link className="alink" to="/customization">
+                  Customise yours <span className="arr">›</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="col">
+              <img
+                src={mascot}
+                alt="Noted by 4 Knotts mascot"
+                className="brand-mascot"
+              />
             </div>
           </div>
-
-          <div className="stage">
-            <img src={collage} alt="Noted by 4 Knotts product range" />
-          </div>
         </div>
+
+        {/* full-bleed 16:9 slideshow */}
+        <HeroSlideshow />
       </section>
 
       {/* ABOUT */}
@@ -189,7 +202,7 @@ function Home() {
           </div>
           <div className="diff-grid">
             {[
-              ["📄", "100 GSM paper", "Zero bleed-through. Smooth, fountain-pen friendly, on every page."],
+              ["📄", "Buttery-smooth paper", "Zero bleed-through. Fountain-pen friendly, on every single page."],
               ["🎨", "25+ designs", "From quiet and minimal to bold and statement — a finish for every shelf."],
               ["✦", "Custom branding", "Logos, monograms and full-cover prints, produced to spec."],
               ["📦", "Bulk-ready", "Schools, offices and corporates supplied at scale — on time, on spec."],

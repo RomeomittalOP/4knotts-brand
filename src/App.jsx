@@ -30,6 +30,7 @@ import Terms from "./pages/Terms"; // ✅ ADD THIS
 
 // 🔥 COMPONENTS
 import CartToast from "./components/CartToast";
+import InkTrail from "./components/InkTrail";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -219,12 +220,15 @@ function PageTransition({ children }) {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <AnimatedRoutes />
-        <CartToast />
-      </AuthProvider>
-    </Router>
+    <>
+      <InkTrail />
+      <Router>
+        <AuthProvider>
+          <AnimatedRoutes />
+          <CartToast />
+        </AuthProvider>
+      </Router>
+    </>
   );
 }
 

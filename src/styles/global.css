@@ -27,6 +27,7 @@ a{color:inherit;text-decoration:none}
 img,svg{display:block;max-width:100%}
 ::selection{background:var(--blue);color:#fff}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 h1,h2,h3,h4{font-weight:700;letter-spacing:-.022em;line-height:1.06;color:var(--ink)}
 .display{font-size:clamp(2.9rem,7vw,5.6rem);font-weight:700;letter-spacing:-.035em;line-height:1.02}
@@ -54,12 +55,13 @@ h3{font-size:1.18rem;font-weight:600;letter-spacing:-.012em}
 
 /* ===== Nav ===== */
 header{position:fixed;inset:0 0 auto 0;z-index:100;background:rgba(251,251,253,.78);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:48px;font-size:.86rem;font-weight:400}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;font-size:1rem;font-weight:400}
 .nav-logo{display:flex;align-items:center;gap:9px;flex:none}
-.nav-logo .lmark{width:28px;height:28px;flex:none;object-fit:contain;border-radius:7px;background:#fff}
-.nav-logo b{font-weight:600;letter-spacing:-.005em;font-size:.93rem;color:var(--ink)}
-.nav-brandtext{display:flex;flex-direction:column;line-height:1}
-.nav-brandtext small{font-size:.6rem;font-weight:500;color:var(--muted);letter-spacing:.03em;margin-top:1px}
+.nav-logo .lmark{width:44px;height:44px;flex:none;object-fit:contain;border-radius:11px;background:#fff;border:1px solid var(--line-soft);padding:3px;box-sizing:border-box}
+.nav-logo b{font-weight:700;letter-spacing:-.005em;font-size:1.28rem;color:var(--ink);font-family:var(--serif)}
+.nav-brandtext{display:flex;flex-direction:column;line-height:1.05}
+.nav-brandtext small{font-size:.72rem;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.nav-links{font-weight:500}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{color:var(--ink);opacity:.85;transition:opacity .2s}
 .nav-links a:hover{opacity:1}
@@ -78,6 +80,23 @@ header{position:fixed;inset:0 0 auto 0;z-index:100;background:rgba(251,251,253,.
 .hero .lede{margin:0 auto;text-align:center}
 .hero-copy{text-align:center;max-width:920px;margin:0 auto}
 .hero .cta-row{justify-content:center;margin-top:22px}
+
+/* 3-part branding hero: logo · text · mascot */
+.brand-hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(16px,3vw,44px)}
+.brand-hero .col{display:flex;justify-content:center}
+.brand-logo-big{width:clamp(96px,9vw,148px);height:auto;filter:drop-shadow(0 16px 30px rgba(0,0,0,.1))}
+.brand-mascot{width:clamp(160px,16vw,260px);height:auto;animation:floaty 5s ease-in-out infinite;filter:drop-shadow(0 22px 34px rgba(0,0,0,.2))}
+.brand-center{text-align:center}
+.brand-center .eyebrow{display:block;margin-bottom:12px;color:var(--ink)}
+.brand-center h1{font-size:clamp(1.9rem,3vw,3.1rem);margin-bottom:14px}
+.brand-center .lede{margin:0 auto;font-size:clamp(1rem,1.2vw,1.12rem)}
+.brand-center .cta-row{justify-content:center;margin-top:22px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media(max-width:900px){
+  .brand-hero{grid-template-columns:1fr;gap:22px}
+  .brand-logo-col{display:none}
+  .brand-mascot{width:160px}
+}
 .stage{margin-top:46px;display:flex;justify-content:center}
 .stage img{width:min(820px,100%);border-radius:24px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.14))}
 
