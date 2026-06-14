@@ -26,6 +26,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 import Terms from "./pages/Terms"; // ✅ ADD THIS
 
 // 🔥 COMPONENTS
@@ -123,6 +125,24 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <Cart />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/checkout"
+          element={
+            <PageTransition>
+              <Checkout />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/order-success/:id"
+          element={
+            <PageTransition>
+              <OrderSuccess />
             </PageTransition>
           }
         />

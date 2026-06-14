@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuth } from "../context/AuthContext";
+import { getOrders } from "../lib/orders";
 
 function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const orders = getOrders();
 
   const logoutUser = async () => {
     await signOut(auth);
@@ -47,6 +49,31 @@ function Dashboard() {
             <h3>Account</h3>
             <p>Profile & vibe settings.</p>
           </div>
+        </div>
+
+        {/* ORDER HISTORY */}
+        <div style={styles.ordersWrap}>
+          <h3 style={styles.ordersTitle}>Order history</h3>
+          {orders.length === 0 ? (
+            <p style={styles.noOrders}>
+              No orders yet. <Link to="/catalog" style={styles.link}>Start shopping →</Link>
+            </p>
+          ) : (
+            orders.map((o) => (
+              <div key={o.id} style={styles.orderRow}>
+                <div>
+                  <div style={styles.oid}>{o.id}</div>
+                  <div style={styles.odate}>
+                    {new Date(o.createdAt).toLocaleDateString()} · {o.items.length} item(s) · {o.payment.method}
+                  </div>
+                </div>
+                <div style={styles.oright}>
+                  <span style={styles.ostatus}>{o.status}</span>
+                  <b>₹{o.total}</b>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         <button
@@ -120,11 +147,38 @@ const styles = {
     border: "none",
     borderRadius: "10px",
     background:
-      "linear-gradient(135deg,#5B60C0,#2C2E6B,#21224F)",
-    color: "#111",
+      "linear-gradient(135deg,#3A3D85,#2C2E6B,#21224F)",
+    color: "#fff",
     fontWeight: 700,
     cursor: "pointer"
-  }
+  },
+
+  ordersWrap: { marginTop: "36px", textAlign: "left" },
+  ordersTitle: { fontSize: "22px", marginBottom: "14px", color: "#221F1A" },
+  noOrders: { color: "#7C766B" },
+  link: { color: "#2C2E6B", fontWeight: 600, textDecoration: "none" },
+  orderRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "14px",
+    padding: "14px 16px",
+    background: "#fff",
+    border: "1px solid #EDE7DA",
+    borderRadius: "12px",
+    marginBottom: "10px",
+  },
+  oid: { fontWeight: 700, color: "#2C2E6B" },
+  odate: { fontSize: "13px", color: "#7C766B", marginTop: "2px" },
+  oright: { display: "flex", alignItems: "center", gap: "14px" },
+  ostatus: {
+    fontSize: "12px",
+    fontWeight: 600,
+    color: "#1F5D4C",
+    background: "#e6f2ec",
+    padding: "4px 10px",
+    borderRadius: "999px",
+  },
 };
 
 export default Dashboard;

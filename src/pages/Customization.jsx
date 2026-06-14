@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import NotebookBuilder from "../components/NotebookBuilder";
 import { API_BASE } from "../api";
 
 function Customization() {
@@ -100,6 +101,14 @@ function Customization() {
               </div>
             ))}
           </div>
+
+          {/* LIVE NOTEBOOK BUILDER */}
+          <NotebookBuilder />
+
+          {/* BULK / CORPORATE ENQUIRY */}
+          <h2 style={{ ...styles.formTitle, textAlign: "center", marginTop: "90px" }}>
+            Bulk or corporate? Tell us more.
+          </h2>
 
           {/* MAIN GRID */}
           <div style={styles.grid}>

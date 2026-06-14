@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import { auth } from "../firebase"; // 🔥 ADD
 import { API_BASE } from "../api";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const {
     cart,
     removeFromCart,
@@ -98,9 +100,9 @@ export default function Cart() {
 
             <button
               style={styles.orderBtn}
-              onClick={() => setShowPayment(true)}
+              onClick={() => navigate("/checkout")}
             >
-              Place Order
+              Checkout →
             </button>
           </>
         )}
