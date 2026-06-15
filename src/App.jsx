@@ -29,6 +29,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import Terms from "./pages/Terms"; // ✅ ADD THIS
+import Admin from "./pages/Admin";
 
 // 🔥 COMPONENTS
 import CartToast from "./components/CartToast";
@@ -153,6 +154,16 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <Terms />
+            </PageTransition>
+          }
+        />
+
+        {/* ADMIN DASHBOARD */}
+        <Route
+          path="/admin"
+          element={
+            <PageTransition>
+              <Admin />
             </PageTransition>
           }
         />

@@ -12,6 +12,9 @@ const catalogRoutes = require("./routes/catalogRoutes");
 const app = express();
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const userRoutes = require("./routes/userRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const customRequestRoutes = require("./routes/customRequestRoutes");
 
 connectDB();
 
@@ -32,6 +35,9 @@ app.use("/api/customization", customizationRoutes);
 app.use("/api/catalog", catalogRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/custom-requests", customRequestRoutes);
 app.get("/", (req, res) => {
   res.send("4 KNOTTS Backend Running 🚀");
 });

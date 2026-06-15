@@ -7,7 +7,8 @@ const wholesaleSchema = new mongoose.Schema({
   phone: String,
   product: String,
   quantity: String,
-  message: String
+  message: String,
+  status: { type: String, default: "new" } // new | contacted | closed
 }, { timestamps: true });
 
 const Wholesale = mongoose.model("Wholesale", wholesaleSchema);
